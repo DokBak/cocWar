@@ -1,34 +1,30 @@
 import 'dart:io';
 
+import 'package:server/src/app.dart';
+import 'package:server/src/coc_api_client.dart';
+import 'package:server/src/env.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart';
-import 'package:shelf_router/shelf_router.dart';
 
-// Configure routes.
-final _router = Router()
-  ..get('/', _rootHandler)
-  ..get('/echo/<message>', _echoHandler);
+Future<void> main(List<String> args) async {
+  // 환경변수가 우선이고, 없으면 개발용 .env 파일을 사용한다.
+  final env = {...loadDotEnv('.env'), ...Platform.environment};
+  final token = env['COC_API_TOKEN'];
+  if (token == null || token.isEmpty) {
+    stderr.writeln('COC_API_TOKEN 환경변수(또는 .env)가 필요합니다.');
+    exit(64);
+  }
 
-Response _rootHandler(Request req) {
-  return Response.ok('Hello, World!\n');
-}
-
-Response _echoHandler(Request request) {
-  final message = request.params['message'];
-  return Response.ok('$message\n');
-}
-
-void main(List<String> args) async {
-  // Use any available host or container IP (usually `0.0.0.0`).
-  final ip = InternetAddress.anyIPv4;
-
-  // Configure a pipeline that logs requests.
-  final handler = Pipeline()
+  final handler = const Pipeline()
       .addMiddleware(logRequests())
-      .addHandler(_router.call);
+      .addHandler(
+        buildHandler(
+          HttpCocApiClient(token: token),
+          log: (m) => stderr.writeln(m),
+        ),
+      );
 
-  // For running in containers, we respect the PORT environment variable.
-  final port = int.parse(Platform.environment['PORT'] ?? '8080');
-  final server = await serve(handler, ip, port);
+  final port = int.parse(env['PORT'] ?? '8080');
+  final server = await serve(handler, InternetAddress.anyIPv4, port);
   print('Server listening on port ${server.port}');
 }

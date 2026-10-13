@@ -8,12 +8,7 @@ part 'war_log.freezed.dart';
 part 'war_log.g.dart';
 
 @JsonEnum(fieldRename: FieldRename.none)
-enum WarResult {
-  win,
-  lose,
-  tie,
-  unknown;
-}
+enum WarResult { win, lose, tie, unknown }
 
 @freezed
 abstract class WarClan with _$WarClan {
