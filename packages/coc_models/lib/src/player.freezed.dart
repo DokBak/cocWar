@@ -898,7 +898,7 @@ as String?,
 /// @nodoc
 mixin _$Player {
 
- String get tag; String? get name; int? get townHallLevel; int? get townHallWeaponLevel; int? get expLevel; int? get trophies; int? get bestTrophies; int? get warStars; int? get attackWins; int? get defenseWins; int? get builderHallLevel; int? get builderBaseTrophies; int? get bestBuilderBaseTrophies; String? get role; String? get warPreference; int? get donations; int? get donationsReceived; int? get clanCapitalContributions; PlayerClan? get clan; League? get league; League? get builderBaseLeague; List<Label> get labels; List<Achievement> get achievements; List<PlayerItem> get troops; List<PlayerItem> get heroes; List<PlayerItem> get heroEquipment; List<PlayerItem> get spells;
+ String get tag; String? get name; int? get townHallLevel; int? get townHallWeaponLevel; int? get expLevel; int? get trophies; int? get bestTrophies; int? get warStars; int? get attackWins; int? get defenseWins; int? get builderHallLevel; int? get builderBaseTrophies; int? get bestBuilderBaseTrophies; String? get role; String? get warPreference; int? get donations; int? get donationsReceived; int? get clanCapitalContributions; PlayerClan? get clan; League? get league; League? get leagueTier; League? get builderBaseLeague; List<Label> get labels; List<Achievement> get achievements; List<PlayerItem> get troops; List<PlayerItem> get heroes; List<PlayerItem> get heroEquipment; List<PlayerItem> get spells;
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -912,20 +912,20 @@ $PlayerCopyWith<Player> get copyWith => _$PlayerCopyWithImpl<Player>(this as Pla
 @override
 bool operator ==(Object other) {
   final _this = this as Player;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Player&&(identical(other.tag, _this.tag) || other.tag == _this.tag)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.townHallLevel, _this.townHallLevel) || other.townHallLevel == _this.townHallLevel)&&(identical(other.townHallWeaponLevel, _this.townHallWeaponLevel) || other.townHallWeaponLevel == _this.townHallWeaponLevel)&&(identical(other.expLevel, _this.expLevel) || other.expLevel == _this.expLevel)&&(identical(other.trophies, _this.trophies) || other.trophies == _this.trophies)&&(identical(other.bestTrophies, _this.bestTrophies) || other.bestTrophies == _this.bestTrophies)&&(identical(other.warStars, _this.warStars) || other.warStars == _this.warStars)&&(identical(other.attackWins, _this.attackWins) || other.attackWins == _this.attackWins)&&(identical(other.defenseWins, _this.defenseWins) || other.defenseWins == _this.defenseWins)&&(identical(other.builderHallLevel, _this.builderHallLevel) || other.builderHallLevel == _this.builderHallLevel)&&(identical(other.builderBaseTrophies, _this.builderBaseTrophies) || other.builderBaseTrophies == _this.builderBaseTrophies)&&(identical(other.bestBuilderBaseTrophies, _this.bestBuilderBaseTrophies) || other.bestBuilderBaseTrophies == _this.bestBuilderBaseTrophies)&&(identical(other.role, _this.role) || other.role == _this.role)&&(identical(other.warPreference, _this.warPreference) || other.warPreference == _this.warPreference)&&(identical(other.donations, _this.donations) || other.donations == _this.donations)&&(identical(other.donationsReceived, _this.donationsReceived) || other.donationsReceived == _this.donationsReceived)&&(identical(other.clanCapitalContributions, _this.clanCapitalContributions) || other.clanCapitalContributions == _this.clanCapitalContributions)&&(identical(other.clan, _this.clan) || other.clan == _this.clan)&&(identical(other.league, _this.league) || other.league == _this.league)&&(identical(other.builderBaseLeague, _this.builderBaseLeague) || other.builderBaseLeague == _this.builderBaseLeague)&&const DeepCollectionEquality().equals(other.labels, _this.labels)&&const DeepCollectionEquality().equals(other.achievements, _this.achievements)&&const DeepCollectionEquality().equals(other.troops, _this.troops)&&const DeepCollectionEquality().equals(other.heroes, _this.heroes)&&const DeepCollectionEquality().equals(other.heroEquipment, _this.heroEquipment)&&const DeepCollectionEquality().equals(other.spells, _this.spells));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Player&&(identical(other.tag, _this.tag) || other.tag == _this.tag)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.townHallLevel, _this.townHallLevel) || other.townHallLevel == _this.townHallLevel)&&(identical(other.townHallWeaponLevel, _this.townHallWeaponLevel) || other.townHallWeaponLevel == _this.townHallWeaponLevel)&&(identical(other.expLevel, _this.expLevel) || other.expLevel == _this.expLevel)&&(identical(other.trophies, _this.trophies) || other.trophies == _this.trophies)&&(identical(other.bestTrophies, _this.bestTrophies) || other.bestTrophies == _this.bestTrophies)&&(identical(other.warStars, _this.warStars) || other.warStars == _this.warStars)&&(identical(other.attackWins, _this.attackWins) || other.attackWins == _this.attackWins)&&(identical(other.defenseWins, _this.defenseWins) || other.defenseWins == _this.defenseWins)&&(identical(other.builderHallLevel, _this.builderHallLevel) || other.builderHallLevel == _this.builderHallLevel)&&(identical(other.builderBaseTrophies, _this.builderBaseTrophies) || other.builderBaseTrophies == _this.builderBaseTrophies)&&(identical(other.bestBuilderBaseTrophies, _this.bestBuilderBaseTrophies) || other.bestBuilderBaseTrophies == _this.bestBuilderBaseTrophies)&&(identical(other.role, _this.role) || other.role == _this.role)&&(identical(other.warPreference, _this.warPreference) || other.warPreference == _this.warPreference)&&(identical(other.donations, _this.donations) || other.donations == _this.donations)&&(identical(other.donationsReceived, _this.donationsReceived) || other.donationsReceived == _this.donationsReceived)&&(identical(other.clanCapitalContributions, _this.clanCapitalContributions) || other.clanCapitalContributions == _this.clanCapitalContributions)&&(identical(other.clan, _this.clan) || other.clan == _this.clan)&&(identical(other.league, _this.league) || other.league == _this.league)&&(identical(other.leagueTier, _this.leagueTier) || other.leagueTier == _this.leagueTier)&&(identical(other.builderBaseLeague, _this.builderBaseLeague) || other.builderBaseLeague == _this.builderBaseLeague)&&const DeepCollectionEquality().equals(other.labels, _this.labels)&&const DeepCollectionEquality().equals(other.achievements, _this.achievements)&&const DeepCollectionEquality().equals(other.troops, _this.troops)&&const DeepCollectionEquality().equals(other.heroes, _this.heroes)&&const DeepCollectionEquality().equals(other.heroEquipment, _this.heroEquipment)&&const DeepCollectionEquality().equals(other.spells, _this.spells));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Player;
-  return Object.hashAll([runtimeType,_this.tag,_this.name,_this.townHallLevel,_this.townHallWeaponLevel,_this.expLevel,_this.trophies,_this.bestTrophies,_this.warStars,_this.attackWins,_this.defenseWins,_this.builderHallLevel,_this.builderBaseTrophies,_this.bestBuilderBaseTrophies,_this.role,_this.warPreference,_this.donations,_this.donationsReceived,_this.clanCapitalContributions,_this.clan,_this.league,_this.builderBaseLeague,const DeepCollectionEquality().hash(_this.labels),const DeepCollectionEquality().hash(_this.achievements),const DeepCollectionEquality().hash(_this.troops),const DeepCollectionEquality().hash(_this.heroes),const DeepCollectionEquality().hash(_this.heroEquipment),const DeepCollectionEquality().hash(_this.spells)]);
+  return Object.hashAll([runtimeType,_this.tag,_this.name,_this.townHallLevel,_this.townHallWeaponLevel,_this.expLevel,_this.trophies,_this.bestTrophies,_this.warStars,_this.attackWins,_this.defenseWins,_this.builderHallLevel,_this.builderBaseTrophies,_this.bestBuilderBaseTrophies,_this.role,_this.warPreference,_this.donations,_this.donationsReceived,_this.clanCapitalContributions,_this.clan,_this.league,_this.leagueTier,_this.builderBaseLeague,const DeepCollectionEquality().hash(_this.labels),const DeepCollectionEquality().hash(_this.achievements),const DeepCollectionEquality().hash(_this.troops),const DeepCollectionEquality().hash(_this.heroes),const DeepCollectionEquality().hash(_this.heroEquipment),const DeepCollectionEquality().hash(_this.spells)]);
 }
 
 @override
 String toString() {
   final _this = this as Player;
-  return 'Player(tag: ${_this.tag}, name: ${_this.name}, townHallLevel: ${_this.townHallLevel}, townHallWeaponLevel: ${_this.townHallWeaponLevel}, expLevel: ${_this.expLevel}, trophies: ${_this.trophies}, bestTrophies: ${_this.bestTrophies}, warStars: ${_this.warStars}, attackWins: ${_this.attackWins}, defenseWins: ${_this.defenseWins}, builderHallLevel: ${_this.builderHallLevel}, builderBaseTrophies: ${_this.builderBaseTrophies}, bestBuilderBaseTrophies: ${_this.bestBuilderBaseTrophies}, role: ${_this.role}, warPreference: ${_this.warPreference}, donations: ${_this.donations}, donationsReceived: ${_this.donationsReceived}, clanCapitalContributions: ${_this.clanCapitalContributions}, clan: ${_this.clan}, league: ${_this.league}, builderBaseLeague: ${_this.builderBaseLeague}, labels: ${_this.labels}, achievements: ${_this.achievements}, troops: ${_this.troops}, heroes: ${_this.heroes}, heroEquipment: ${_this.heroEquipment}, spells: ${_this.spells})';
+  return 'Player(tag: ${_this.tag}, name: ${_this.name}, townHallLevel: ${_this.townHallLevel}, townHallWeaponLevel: ${_this.townHallWeaponLevel}, expLevel: ${_this.expLevel}, trophies: ${_this.trophies}, bestTrophies: ${_this.bestTrophies}, warStars: ${_this.warStars}, attackWins: ${_this.attackWins}, defenseWins: ${_this.defenseWins}, builderHallLevel: ${_this.builderHallLevel}, builderBaseTrophies: ${_this.builderBaseTrophies}, bestBuilderBaseTrophies: ${_this.bestBuilderBaseTrophies}, role: ${_this.role}, warPreference: ${_this.warPreference}, donations: ${_this.donations}, donationsReceived: ${_this.donationsReceived}, clanCapitalContributions: ${_this.clanCapitalContributions}, clan: ${_this.clan}, league: ${_this.league}, leagueTier: ${_this.leagueTier}, builderBaseLeague: ${_this.builderBaseLeague}, labels: ${_this.labels}, achievements: ${_this.achievements}, troops: ${_this.troops}, heroes: ${_this.heroes}, heroEquipment: ${_this.heroEquipment}, spells: ${_this.spells})';
 }
 
 
@@ -936,11 +936,11 @@ abstract mixin class $PlayerCopyWith<$Res>  {
   factory $PlayerCopyWith(Player value, $Res Function(Player) _then) = _$PlayerCopyWithImpl;
 @useResult
 $Res call({
- String tag, String? name, int? townHallLevel, int? townHallWeaponLevel, int? expLevel, int? trophies, int? bestTrophies, int? warStars, int? attackWins, int? defenseWins, int? builderHallLevel, int? builderBaseTrophies, int? bestBuilderBaseTrophies, String? role, String? warPreference, int? donations, int? donationsReceived, int? clanCapitalContributions, PlayerClan? clan, League? league, League? builderBaseLeague, List<Label> labels, List<Achievement> achievements, List<PlayerItem> troops, List<PlayerItem> heroes, List<PlayerItem> heroEquipment, List<PlayerItem> spells
+ String tag, String? name, int? townHallLevel, int? townHallWeaponLevel, int? expLevel, int? trophies, int? bestTrophies, int? warStars, int? attackWins, int? defenseWins, int? builderHallLevel, int? builderBaseTrophies, int? bestBuilderBaseTrophies, String? role, String? warPreference, int? donations, int? donationsReceived, int? clanCapitalContributions, PlayerClan? clan, League? league, League? leagueTier, League? builderBaseLeague, List<Label> labels, List<Achievement> achievements, List<PlayerItem> troops, List<PlayerItem> heroes, List<PlayerItem> heroEquipment, List<PlayerItem> spells
 });
 
 
-$PlayerClanCopyWith<$Res>? get clan;$LeagueCopyWith<$Res>? get league;$LeagueCopyWith<$Res>? get builderBaseLeague;
+$PlayerClanCopyWith<$Res>? get clan;$LeagueCopyWith<$Res>? get league;$LeagueCopyWith<$Res>? get leagueTier;$LeagueCopyWith<$Res>? get builderBaseLeague;
 
 }
 /// @nodoc
@@ -953,7 +953,7 @@ class _$PlayerCopyWithImpl<$Res>
 
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tag = null,Object? name = freezed,Object? townHallLevel = freezed,Object? townHallWeaponLevel = freezed,Object? expLevel = freezed,Object? trophies = freezed,Object? bestTrophies = freezed,Object? warStars = freezed,Object? attackWins = freezed,Object? defenseWins = freezed,Object? builderHallLevel = freezed,Object? builderBaseTrophies = freezed,Object? bestBuilderBaseTrophies = freezed,Object? role = freezed,Object? warPreference = freezed,Object? donations = freezed,Object? donationsReceived = freezed,Object? clanCapitalContributions = freezed,Object? clan = freezed,Object? league = freezed,Object? builderBaseLeague = freezed,Object? labels = null,Object? achievements = null,Object? troops = null,Object? heroes = null,Object? heroEquipment = null,Object? spells = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tag = null,Object? name = freezed,Object? townHallLevel = freezed,Object? townHallWeaponLevel = freezed,Object? expLevel = freezed,Object? trophies = freezed,Object? bestTrophies = freezed,Object? warStars = freezed,Object? attackWins = freezed,Object? defenseWins = freezed,Object? builderHallLevel = freezed,Object? builderBaseTrophies = freezed,Object? bestBuilderBaseTrophies = freezed,Object? role = freezed,Object? warPreference = freezed,Object? donations = freezed,Object? donationsReceived = freezed,Object? clanCapitalContributions = freezed,Object? clan = freezed,Object? league = freezed,Object? leagueTier = freezed,Object? builderBaseLeague = freezed,Object? labels = null,Object? achievements = null,Object? troops = null,Object? heroes = null,Object? heroEquipment = null,Object? spells = null,}) {
   return _then(Player(
 tag: null == tag ? _self.tag : tag // ignore: cast_nullable_to_non_nullable
 as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -975,6 +975,7 @@ as int?,donationsReceived: freezed == donationsReceived ? _self.donationsReceive
 as int?,clanCapitalContributions: freezed == clanCapitalContributions ? _self.clanCapitalContributions : clanCapitalContributions // ignore: cast_nullable_to_non_nullable
 as int?,clan: freezed == clan ? _self.clan : clan // ignore: cast_nullable_to_non_nullable
 as PlayerClan?,league: freezed == league ? _self.league : league // ignore: cast_nullable_to_non_nullable
+as League?,leagueTier: freezed == leagueTier ? _self.leagueTier : leagueTier // ignore: cast_nullable_to_non_nullable
 as League?,builderBaseLeague: freezed == builderBaseLeague ? _self.builderBaseLeague : builderBaseLeague // ignore: cast_nullable_to_non_nullable
 as League?,labels: null == labels ? _self.labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,achievements: null == achievements ? _self.achievements : achievements // ignore: cast_nullable_to_non_nullable
@@ -1008,6 +1009,18 @@ $LeagueCopyWith<$Res>? get league {
 
   return $LeagueCopyWith<$Res>(_self.league!, (value) {
     return _then(_self.copyWith(league: value));
+  });
+}/// Create a copy of Player
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get leagueTier {
+    if (_self.leagueTier == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.leagueTier!, (value) {
+    return _then(_self.copyWith(leagueTier: value));
   });
 }/// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
@@ -1103,10 +1116,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? leagueTier,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Player() when $default != null:
-return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
+return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.leagueTier,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
   return orElse();
 
 }
@@ -1124,10 +1137,10 @@ return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLev
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? leagueTier,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)  $default,) {final _that = this;
 switch (_that) {
 case _Player():
-return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
+return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.leagueTier,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1144,10 +1157,10 @@ return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLev
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tag,  String? name,  int? townHallLevel,  int? townHallWeaponLevel,  int? expLevel,  int? trophies,  int? bestTrophies,  int? warStars,  int? attackWins,  int? defenseWins,  int? builderHallLevel,  int? builderBaseTrophies,  int? bestBuilderBaseTrophies,  String? role,  String? warPreference,  int? donations,  int? donationsReceived,  int? clanCapitalContributions,  PlayerClan? clan,  League? league,  League? leagueTier,  League? builderBaseLeague,  List<Label> labels,  List<Achievement> achievements,  List<PlayerItem> troops,  List<PlayerItem> heroes,  List<PlayerItem> heroEquipment,  List<PlayerItem> spells)?  $default,) {final _that = this;
 switch (_that) {
 case _Player() when $default != null:
-return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
+return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLevel,_that.expLevel,_that.trophies,_that.bestTrophies,_that.warStars,_that.attackWins,_that.defenseWins,_that.builderHallLevel,_that.builderBaseTrophies,_that.bestBuilderBaseTrophies,_that.role,_that.warPreference,_that.donations,_that.donationsReceived,_that.clanCapitalContributions,_that.clan,_that.league,_that.leagueTier,_that.builderBaseLeague,_that.labels,_that.achievements,_that.troops,_that.heroes,_that.heroEquipment,_that.spells);case _:
   return null;
 
 }
@@ -1159,7 +1172,7 @@ return $default(_that.tag,_that.name,_that.townHallLevel,_that.townHallWeaponLev
 @JsonSerializable()
 
 class _Player implements Player {
-  const _Player({required this.tag, this.name, this.townHallLevel, this.townHallWeaponLevel, this.expLevel, this.trophies, this.bestTrophies, this.warStars, this.attackWins, this.defenseWins, this.builderHallLevel, this.builderBaseTrophies, this.bestBuilderBaseTrophies, this.role, this.warPreference, this.donations, this.donationsReceived, this.clanCapitalContributions, this.clan, this.league, this.builderBaseLeague,  List<Label> labels = const <Label>[],  List<Achievement> achievements = const <Achievement>[],  List<PlayerItem> troops = const <PlayerItem>[],  List<PlayerItem> heroes = const <PlayerItem>[],  List<PlayerItem> heroEquipment = const <PlayerItem>[],  List<PlayerItem> spells = const <PlayerItem>[]}): _labels = labels,_achievements = achievements,_troops = troops,_heroes = heroes,_heroEquipment = heroEquipment,_spells = spells;
+  const _Player({required this.tag, this.name, this.townHallLevel, this.townHallWeaponLevel, this.expLevel, this.trophies, this.bestTrophies, this.warStars, this.attackWins, this.defenseWins, this.builderHallLevel, this.builderBaseTrophies, this.bestBuilderBaseTrophies, this.role, this.warPreference, this.donations, this.donationsReceived, this.clanCapitalContributions, this.clan, this.league, this.leagueTier, this.builderBaseLeague,  List<Label> labels = const <Label>[],  List<Achievement> achievements = const <Achievement>[],  List<PlayerItem> troops = const <PlayerItem>[],  List<PlayerItem> heroes = const <PlayerItem>[],  List<PlayerItem> heroEquipment = const <PlayerItem>[],  List<PlayerItem> spells = const <PlayerItem>[]}): _labels = labels,_achievements = achievements,_troops = troops,_heroes = heroes,_heroEquipment = heroEquipment,_spells = spells;
   factory _Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);
 
 @override final  String tag;
@@ -1182,6 +1195,7 @@ class _Player implements Player {
 @override final  int? clanCapitalContributions;
 @override final  PlayerClan? clan;
 @override final  League? league;
+@override final  League? leagueTier;
 @override final  League? builderBaseLeague;
  final  List<Label> _labels;
 @override@JsonKey() List<Label> get labels {
@@ -1239,18 +1253,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Player&&(identical(other.tag, tag) || other.tag == tag)&&(identical(other.name, name) || other.name == name)&&(identical(other.townHallLevel, townHallLevel) || other.townHallLevel == townHallLevel)&&(identical(other.townHallWeaponLevel, townHallWeaponLevel) || other.townHallWeaponLevel == townHallWeaponLevel)&&(identical(other.expLevel, expLevel) || other.expLevel == expLevel)&&(identical(other.trophies, trophies) || other.trophies == trophies)&&(identical(other.bestTrophies, bestTrophies) || other.bestTrophies == bestTrophies)&&(identical(other.warStars, warStars) || other.warStars == warStars)&&(identical(other.attackWins, attackWins) || other.attackWins == attackWins)&&(identical(other.defenseWins, defenseWins) || other.defenseWins == defenseWins)&&(identical(other.builderHallLevel, builderHallLevel) || other.builderHallLevel == builderHallLevel)&&(identical(other.builderBaseTrophies, builderBaseTrophies) || other.builderBaseTrophies == builderBaseTrophies)&&(identical(other.bestBuilderBaseTrophies, bestBuilderBaseTrophies) || other.bestBuilderBaseTrophies == bestBuilderBaseTrophies)&&(identical(other.role, role) || other.role == role)&&(identical(other.warPreference, warPreference) || other.warPreference == warPreference)&&(identical(other.donations, donations) || other.donations == donations)&&(identical(other.donationsReceived, donationsReceived) || other.donationsReceived == donationsReceived)&&(identical(other.clanCapitalContributions, clanCapitalContributions) || other.clanCapitalContributions == clanCapitalContributions)&&(identical(other.clan, clan) || other.clan == clan)&&(identical(other.league, league) || other.league == league)&&(identical(other.builderBaseLeague, builderBaseLeague) || other.builderBaseLeague == builderBaseLeague)&&const DeepCollectionEquality().equals(other.labels, _labels)&&const DeepCollectionEquality().equals(other.achievements, _achievements)&&const DeepCollectionEquality().equals(other.troops, _troops)&&const DeepCollectionEquality().equals(other.heroes, _heroes)&&const DeepCollectionEquality().equals(other.heroEquipment, _heroEquipment)&&const DeepCollectionEquality().equals(other.spells, _spells));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Player&&(identical(other.tag, tag) || other.tag == tag)&&(identical(other.name, name) || other.name == name)&&(identical(other.townHallLevel, townHallLevel) || other.townHallLevel == townHallLevel)&&(identical(other.townHallWeaponLevel, townHallWeaponLevel) || other.townHallWeaponLevel == townHallWeaponLevel)&&(identical(other.expLevel, expLevel) || other.expLevel == expLevel)&&(identical(other.trophies, trophies) || other.trophies == trophies)&&(identical(other.bestTrophies, bestTrophies) || other.bestTrophies == bestTrophies)&&(identical(other.warStars, warStars) || other.warStars == warStars)&&(identical(other.attackWins, attackWins) || other.attackWins == attackWins)&&(identical(other.defenseWins, defenseWins) || other.defenseWins == defenseWins)&&(identical(other.builderHallLevel, builderHallLevel) || other.builderHallLevel == builderHallLevel)&&(identical(other.builderBaseTrophies, builderBaseTrophies) || other.builderBaseTrophies == builderBaseTrophies)&&(identical(other.bestBuilderBaseTrophies, bestBuilderBaseTrophies) || other.bestBuilderBaseTrophies == bestBuilderBaseTrophies)&&(identical(other.role, role) || other.role == role)&&(identical(other.warPreference, warPreference) || other.warPreference == warPreference)&&(identical(other.donations, donations) || other.donations == donations)&&(identical(other.donationsReceived, donationsReceived) || other.donationsReceived == donationsReceived)&&(identical(other.clanCapitalContributions, clanCapitalContributions) || other.clanCapitalContributions == clanCapitalContributions)&&(identical(other.clan, clan) || other.clan == clan)&&(identical(other.league, league) || other.league == league)&&(identical(other.leagueTier, leagueTier) || other.leagueTier == leagueTier)&&(identical(other.builderBaseLeague, builderBaseLeague) || other.builderBaseLeague == builderBaseLeague)&&const DeepCollectionEquality().equals(other.labels, _labels)&&const DeepCollectionEquality().equals(other.achievements, _achievements)&&const DeepCollectionEquality().equals(other.troops, _troops)&&const DeepCollectionEquality().equals(other.heroes, _heroes)&&const DeepCollectionEquality().equals(other.heroEquipment, _heroEquipment)&&const DeepCollectionEquality().equals(other.spells, _spells));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hashAll([runtimeType,tag,name,townHallLevel,townHallWeaponLevel,expLevel,trophies,bestTrophies,warStars,attackWins,defenseWins,builderHallLevel,builderBaseTrophies,bestBuilderBaseTrophies,role,warPreference,donations,donationsReceived,clanCapitalContributions,clan,league,builderBaseLeague,const DeepCollectionEquality().hash(_labels),const DeepCollectionEquality().hash(_achievements),const DeepCollectionEquality().hash(_troops),const DeepCollectionEquality().hash(_heroes),const DeepCollectionEquality().hash(_heroEquipment),const DeepCollectionEquality().hash(_spells)]);
+    return Object.hashAll([runtimeType,tag,name,townHallLevel,townHallWeaponLevel,expLevel,trophies,bestTrophies,warStars,attackWins,defenseWins,builderHallLevel,builderBaseTrophies,bestBuilderBaseTrophies,role,warPreference,donations,donationsReceived,clanCapitalContributions,clan,league,leagueTier,builderBaseLeague,const DeepCollectionEquality().hash(_labels),const DeepCollectionEquality().hash(_achievements),const DeepCollectionEquality().hash(_troops),const DeepCollectionEquality().hash(_heroes),const DeepCollectionEquality().hash(_heroEquipment),const DeepCollectionEquality().hash(_spells)]);
 }
 
 @override
 String toString() {
-    return 'Player(tag: $tag, name: $name, townHallLevel: $townHallLevel, townHallWeaponLevel: $townHallWeaponLevel, expLevel: $expLevel, trophies: $trophies, bestTrophies: $bestTrophies, warStars: $warStars, attackWins: $attackWins, defenseWins: $defenseWins, builderHallLevel: $builderHallLevel, builderBaseTrophies: $builderBaseTrophies, bestBuilderBaseTrophies: $bestBuilderBaseTrophies, role: $role, warPreference: $warPreference, donations: $donations, donationsReceived: $donationsReceived, clanCapitalContributions: $clanCapitalContributions, clan: $clan, league: $league, builderBaseLeague: $builderBaseLeague, labels: $labels, achievements: $achievements, troops: $troops, heroes: $heroes, heroEquipment: $heroEquipment, spells: $spells)';
+    return 'Player(tag: $tag, name: $name, townHallLevel: $townHallLevel, townHallWeaponLevel: $townHallWeaponLevel, expLevel: $expLevel, trophies: $trophies, bestTrophies: $bestTrophies, warStars: $warStars, attackWins: $attackWins, defenseWins: $defenseWins, builderHallLevel: $builderHallLevel, builderBaseTrophies: $builderBaseTrophies, bestBuilderBaseTrophies: $bestBuilderBaseTrophies, role: $role, warPreference: $warPreference, donations: $donations, donationsReceived: $donationsReceived, clanCapitalContributions: $clanCapitalContributions, clan: $clan, league: $league, leagueTier: $leagueTier, builderBaseLeague: $builderBaseLeague, labels: $labels, achievements: $achievements, troops: $troops, heroes: $heroes, heroEquipment: $heroEquipment, spells: $spells)';
 }
 
 
@@ -1261,11 +1275,11 @@ abstract mixin class _$PlayerCopyWith<$Res> implements $PlayerCopyWith<$Res> {
   factory _$PlayerCopyWith(_Player value, $Res Function(_Player) _then) = __$PlayerCopyWithImpl;
 @override @useResult
 $Res call({
- String tag, String? name, int? townHallLevel, int? townHallWeaponLevel, int? expLevel, int? trophies, int? bestTrophies, int? warStars, int? attackWins, int? defenseWins, int? builderHallLevel, int? builderBaseTrophies, int? bestBuilderBaseTrophies, String? role, String? warPreference, int? donations, int? donationsReceived, int? clanCapitalContributions, PlayerClan? clan, League? league, League? builderBaseLeague, List<Label> labels, List<Achievement> achievements, List<PlayerItem> troops, List<PlayerItem> heroes, List<PlayerItem> heroEquipment, List<PlayerItem> spells
+ String tag, String? name, int? townHallLevel, int? townHallWeaponLevel, int? expLevel, int? trophies, int? bestTrophies, int? warStars, int? attackWins, int? defenseWins, int? builderHallLevel, int? builderBaseTrophies, int? bestBuilderBaseTrophies, String? role, String? warPreference, int? donations, int? donationsReceived, int? clanCapitalContributions, PlayerClan? clan, League? league, League? leagueTier, League? builderBaseLeague, List<Label> labels, List<Achievement> achievements, List<PlayerItem> troops, List<PlayerItem> heroes, List<PlayerItem> heroEquipment, List<PlayerItem> spells
 });
 
 
-@override $PlayerClanCopyWith<$Res>? get clan;@override $LeagueCopyWith<$Res>? get league;@override $LeagueCopyWith<$Res>? get builderBaseLeague;
+@override $PlayerClanCopyWith<$Res>? get clan;@override $LeagueCopyWith<$Res>? get league;@override $LeagueCopyWith<$Res>? get leagueTier;@override $LeagueCopyWith<$Res>? get builderBaseLeague;
 
 }
 /// @nodoc
@@ -1278,7 +1292,7 @@ class __$PlayerCopyWithImpl<$Res>
 
 /// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tag = null,Object? name = freezed,Object? townHallLevel = freezed,Object? townHallWeaponLevel = freezed,Object? expLevel = freezed,Object? trophies = freezed,Object? bestTrophies = freezed,Object? warStars = freezed,Object? attackWins = freezed,Object? defenseWins = freezed,Object? builderHallLevel = freezed,Object? builderBaseTrophies = freezed,Object? bestBuilderBaseTrophies = freezed,Object? role = freezed,Object? warPreference = freezed,Object? donations = freezed,Object? donationsReceived = freezed,Object? clanCapitalContributions = freezed,Object? clan = freezed,Object? league = freezed,Object? builderBaseLeague = freezed,Object? labels = null,Object? achievements = null,Object? troops = null,Object? heroes = null,Object? heroEquipment = null,Object? spells = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tag = null,Object? name = freezed,Object? townHallLevel = freezed,Object? townHallWeaponLevel = freezed,Object? expLevel = freezed,Object? trophies = freezed,Object? bestTrophies = freezed,Object? warStars = freezed,Object? attackWins = freezed,Object? defenseWins = freezed,Object? builderHallLevel = freezed,Object? builderBaseTrophies = freezed,Object? bestBuilderBaseTrophies = freezed,Object? role = freezed,Object? warPreference = freezed,Object? donations = freezed,Object? donationsReceived = freezed,Object? clanCapitalContributions = freezed,Object? clan = freezed,Object? league = freezed,Object? leagueTier = freezed,Object? builderBaseLeague = freezed,Object? labels = null,Object? achievements = null,Object? troops = null,Object? heroes = null,Object? heroEquipment = null,Object? spells = null,}) {
   return _then(_Player(
 tag: null == tag ? _self.tag : tag // ignore: cast_nullable_to_non_nullable
 as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -1300,6 +1314,7 @@ as int?,donationsReceived: freezed == donationsReceived ? _self.donationsReceive
 as int?,clanCapitalContributions: freezed == clanCapitalContributions ? _self.clanCapitalContributions : clanCapitalContributions // ignore: cast_nullable_to_non_nullable
 as int?,clan: freezed == clan ? _self.clan : clan // ignore: cast_nullable_to_non_nullable
 as PlayerClan?,league: freezed == league ? _self.league : league // ignore: cast_nullable_to_non_nullable
+as League?,leagueTier: freezed == leagueTier ? _self.leagueTier : leagueTier // ignore: cast_nullable_to_non_nullable
 as League?,builderBaseLeague: freezed == builderBaseLeague ? _self.builderBaseLeague : builderBaseLeague // ignore: cast_nullable_to_non_nullable
 as League?,labels: null == labels ? _self._labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,achievements: null == achievements ? _self._achievements : achievements // ignore: cast_nullable_to_non_nullable
@@ -1334,6 +1349,18 @@ $LeagueCopyWith<$Res>? get league {
 
   return $LeagueCopyWith<$Res>(_self.league!, (value) {
     return _then(_self.copyWith(league: value));
+  });
+}/// Create a copy of Player
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get leagueTier {
+    if (_self.leagueTier == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.leagueTier!, (value) {
+    return _then(_self.copyWith(leagueTier: value));
   });
 }/// Create a copy of Player
 /// with the given fields replaced by the non-null parameter values.

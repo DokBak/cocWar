@@ -16,6 +16,8 @@ void main() {
       expect(clan.warWins, 120);
       expect(clan.isWarLogPublic, isTrue);
       expect(clan.memberList.single.league?.name, 'Legend League');
+      expect(clan.memberList.single.townHallLevel, 16);
+      expect(clan.memberList.single.leagueTier?.name, 'Electro League 33');
       expect(clan.labels.single.name, 'Clan Wars');
       expect(Clan.fromJson(clan.toJson()), clan);
     });
@@ -60,6 +62,8 @@ void main() {
     test('기본 정보와 영웅 장비', () {
       expect(player.townHallLevel, 16);
       expect(player.clan?.tag, '#2PP');
+      expect(player.leagueTier?.name, 'Electro League 33');
+      expect(player.league, isNull); // 새 리그 체계에서는 league가 비어 있을 수 있다
       expect(player.heroes.single.equipment.single.name, 'Giant Gauntlet');
     });
 

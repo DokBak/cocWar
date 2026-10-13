@@ -74,7 +74,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get disclaimer =>
-      '本アプリは非公式のファンプロジェクトであり、Supercell とは提携・後援・承認の関係になく、Supercell は本アプリについて責任を負いません。';
+      '本アプリは非公式のファンプロジェクトであり、Supercell とは提携・後援・承認の関係になく、Supercell は本アプリについて責任を負いません。 ファンコンテンツポリシー: https://supercell.com/en/fan-content-policy/';
 
   @override
   String get errorGeneric => '問題が発生しました。もう一度お試しください。';
@@ -155,4 +155,130 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get languageTooltip => '言語を変更';
+
+  @override
+  String townHallN(int level) {
+    return 'タウンホール $level';
+  }
+
+  @override
+  String expLevelN(int level) {
+    return '経験値レベル $level';
+  }
+
+  @override
+  String get statTrophies => 'トロフィー';
+
+  @override
+  String get statBestTrophies => '最高記録';
+
+  @override
+  String get statWarStars => '戦争の星';
+
+  @override
+  String get statAttackWins => '攻撃勝利';
+
+  @override
+  String get statDefenseWins => '防衛勝利';
+
+  @override
+  String get statDonations => '寄付';
+
+  @override
+  String get statDonationsReceived => '受け取り';
+
+  @override
+  String get statCapitalContributions => '首都への貢献';
+
+  @override
+  String get sectionHeroes => 'ヒーロー';
+
+  @override
+  String get sectionTroops => '兵';
+
+  @override
+  String get sectionSpells => '呪文';
+
+  @override
+  String get roleMember => 'メンバー';
+
+  @override
+  String get roleElder => '長老';
+
+  @override
+  String get roleCoLeader => 'サブリーダー';
+
+  @override
+  String get roleLeader => 'リーダー';
+
+  @override
+  String get warPrefIn => '戦争に参加';
+
+  @override
+  String get warPrefOut => '戦争に不参加';
+
+  @override
+  String get tabMembers => 'メンバー';
+
+  @override
+  String get noItems => '表示する項目がありません。';
+
+  @override
+  String progressPct(String pct) {
+    return '進捗率: $pct';
+  }
+
+  @override
+  String get groupElixir => 'エリクサー';
+
+  @override
+  String get groupDarkElixir => 'ダークエリクサー';
+
+  @override
+  String get groupSiege => '攻城兵器';
+
+  @override
+  String get groupPets => 'ペット';
+
+  @override
+  String get groupOther => 'その他';
+
+  @override
+  String equipmentProgressPct(String pct) {
+    return '装備の進捗率: $pct';
+  }
+
+  @override
+  String get copyTag => 'タグをコピー';
+
+  @override
+  String tagCopied(String tag) {
+    return '$tag をコピーしました';
+  }
+
+  @override
+  String get tabHomeVillage => 'ホームビレッジ';
+
+  @override
+  String get tabBuilderBase => 'ビルダーベース';
+
+  @override
+  String get sectionUnits => 'ユニット';
+
+  @override
+  String get noBuilderBase => 'ビルダーベースの情報がありません。';
+
+  @override
+  String get statLeague => 'リーグ';
+
+  @override
+  String builderHallN(int level) {
+    return 'ビルダーホール $level';
+  }
+
+  @override
+  String get splitView => '並べて表示';
+
+  @override
+  String get selectMemberHint => 'メンバーを選ぶとここにプロフィールが表示されます。';
 }

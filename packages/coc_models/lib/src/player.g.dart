@@ -92,6 +92,9 @@ _Player _$PlayerFromJson(Map<String, dynamic> json) => _Player(
   league: json['league'] == null
       ? null
       : League.fromJson(json['league'] as Map<String, dynamic>),
+  leagueTier: json['leagueTier'] == null
+      ? null
+      : League.fromJson(json['leagueTier'] as Map<String, dynamic>),
   builderBaseLeague: json['builderBaseLeague'] == null
       ? null
       : League.fromJson(json['builderBaseLeague'] as Map<String, dynamic>),
@@ -148,6 +151,7 @@ Map<String, dynamic> _$PlayerToJson(_Player instance) => <String, dynamic>{
   'clanCapitalContributions': instance.clanCapitalContributions,
   'clan': instance.clan?.toJson(),
   'league': instance.league?.toJson(),
+  'leagueTier': instance.leagueTier?.toJson(),
   'builderBaseLeague': instance.builderBaseLeague?.toJson(),
   'labels': instance.labels.map((e) => e.toJson()).toList(),
   'achievements': instance.achievements.map((e) => e.toJson()).toList(),

@@ -21,7 +21,7 @@
   "themeLight": "ライト",
   "themeDark": "ダーク",
   "comingSoon": "この画面は準備中です。",
-  "disclaimer": "本アプリは非公式のファンプロジェクトであり、Supercell とは提携・後援・承認の関係になく、Supercell は本アプリについて責任を負いません。",
+  "disclaimer": "本アプリは非公式のファンプロジェクトであり、Supercell とは提携・後援・承認の関係になく、Supercell は本アプリについて責任を負いません。 ファンコンテンツポリシー: https://supercell.com/en/fan-content-policy/",
   "errorGeneric": "問題が発生しました。もう一度お試しください。",
   "errorNotFound": "見つかりません。",
   "errorPrivateLog": "このクランの戦争ログは非公開です。",
@@ -73,5 +73,85 @@
       }
     }
   },
-  "languageTooltip": "言語を変更"
+  "languageTooltip": "言語を変更",
+  "townHallN": "タウンホール {level}",
+  "@townHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "expLevelN": "経験値レベル {level}",
+  "@expLevelN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "statTrophies": "トロフィー",
+  "statBestTrophies": "最高記録",
+  "statWarStars": "戦争の星",
+  "statAttackWins": "攻撃勝利",
+  "statDefenseWins": "防衛勝利",
+  "statDonations": "寄付",
+  "statDonationsReceived": "受け取り",
+  "statCapitalContributions": "首都への貢献",
+  "sectionHeroes": "ヒーロー",
+  "sectionTroops": "兵",
+  "sectionSpells": "呪文",
+  "roleMember": "メンバー",
+  "roleElder": "長老",
+  "roleCoLeader": "サブリーダー",
+  "roleLeader": "リーダー",
+  "warPrefIn": "戦争に参加",
+  "warPrefOut": "戦争に不参加",
+  "tabMembers": "メンバー",
+  "noItems": "表示する項目がありません。",
+  "progressPct": "進捗率: {pct}",
+  "@progressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "groupElixir": "エリクサー",
+  "groupDarkElixir": "ダークエリクサー",
+  "groupSiege": "攻城兵器",
+  "groupPets": "ペット",
+  "groupOther": "その他",
+  "equipmentProgressPct": "装備の進捗率: {pct}",
+  "@equipmentProgressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "copyTag": "タグをコピー",
+  "tagCopied": "{tag} をコピーしました",
+  "@tagCopied": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "tabHomeVillage": "ホームビレッジ",
+  "tabBuilderBase": "ビルダーベース",
+  "sectionUnits": "ユニット",
+  "noBuilderBase": "ビルダーベースの情報がありません。",
+  "statLeague": "リーグ",
+  "builderHallN": "ビルダーホール {level}",
+  "@builderHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "splitView": "並べて表示",
+  "selectMemberHint": "メンバーを選ぶとここにプロフィールが表示されます。"
 }

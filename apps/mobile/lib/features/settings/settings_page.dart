@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/layout.dart';
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
 import '../language_button.dart';
@@ -25,7 +26,7 @@ class SettingsPage extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.settings)),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 640),
+          constraints: const BoxConstraints(maxWidth: contentMaxWidth),
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [
