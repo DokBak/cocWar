@@ -28,5 +28,50 @@
   "errorRateLimited": "Too many requests. Please try again shortly.",
   "errorMaintenance": "The Clash of Clans API is under maintenance.",
   "errorNetwork": "Could not reach the server.",
-  "retry": "Retry"
+  "retry": "Retry",
+  "clanLevel": "Level {level}",
+  "@clanLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "memberCount": "{count} members",
+  "@memberCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "warWins": "Wins",
+  "warTies": "Ties",
+  "warLosses": "Losses",
+  "winStreak": "Win streak",
+  "warLog": "War log",
+  "noWarLog": "No war log entries yet.",
+  "resultWin": "Win",
+  "resultLose": "Loss",
+  "resultTie": "Draw",
+  "unknownOpponent": "Unknown clan",
+  "teamSizeVs": "{size} vs {size}",
+  "@teamSizeVs": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "previousPage": "Previous page",
+  "nextPage": "Next page",
+  "pageN": "Page {page}",
+  "@pageN": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "languageTooltip": "Change language"
 }

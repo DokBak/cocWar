@@ -273,6 +273,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get retry;
+
+  /// No description provided for @clanLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {level}'**
+  String clanLevel(int level);
+
+  /// No description provided for @memberCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} members'**
+  String memberCount(int count);
+
+  /// No description provided for @warWins.
+  ///
+  /// In en, this message translates to:
+  /// **'Wins'**
+  String get warWins;
+
+  /// No description provided for @warTies.
+  ///
+  /// In en, this message translates to:
+  /// **'Ties'**
+  String get warTies;
+
+  /// No description provided for @warLosses.
+  ///
+  /// In en, this message translates to:
+  /// **'Losses'**
+  String get warLosses;
+
+  /// No description provided for @winStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Win streak'**
+  String get winStreak;
+
+  /// No description provided for @warLog.
+  ///
+  /// In en, this message translates to:
+  /// **'War log'**
+  String get warLog;
+
+  /// No description provided for @noWarLog.
+  ///
+  /// In en, this message translates to:
+  /// **'No war log entries yet.'**
+  String get noWarLog;
+
+  /// No description provided for @resultWin.
+  ///
+  /// In en, this message translates to:
+  /// **'Win'**
+  String get resultWin;
+
+  /// No description provided for @resultLose.
+  ///
+  /// In en, this message translates to:
+  /// **'Loss'**
+  String get resultLose;
+
+  /// No description provided for @resultTie.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw'**
+  String get resultTie;
+
+  /// No description provided for @unknownOpponent.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown clan'**
+  String get unknownOpponent;
+
+  /// No description provided for @teamSizeVs.
+  ///
+  /// In en, this message translates to:
+  /// **'{size} vs {size}'**
+  String teamSizeVs(int size);
+
+  /// No description provided for @previousPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous page'**
+  String get previousPage;
+
+  /// No description provided for @nextPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Next page'**
+  String get nextPage;
+
+  /// No description provided for @pageN.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page}'**
+  String pageN(int page);
+
+  /// No description provided for @languageTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Change language'**
+  String get languageTooltip;
 }
 
 class _AppLocalizationsDelegate

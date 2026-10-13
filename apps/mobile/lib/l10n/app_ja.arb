@@ -28,5 +28,50 @@
   "errorRateLimited": "リクエストが多すぎます。しばらくしてからもう一度お試しください。",
   "errorMaintenance": "Clash of Clans API はメンテナンス中です。",
   "errorNetwork": "サーバーに接続できません。",
-  "retry": "再試行"
+  "retry": "再試行",
+  "clanLevel": "レベル {level}",
+  "@clanLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "memberCount": "メンバー {count}人",
+  "@memberCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "warWins": "勝",
+  "warTies": "分",
+  "warLosses": "敗",
+  "winStreak": "連勝",
+  "warLog": "戦争ログ",
+  "noWarLog": "まだ戦争の記録がありません。",
+  "resultWin": "勝利",
+  "resultLose": "敗北",
+  "resultTie": "引き分け",
+  "unknownOpponent": "不明なクラン",
+  "teamSizeVs": "{size} vs {size}",
+  "@teamSizeVs": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "previousPage": "前のページ",
+  "nextPage": "次のページ",
+  "pageN": "{page}ページ",
+  "@pageN": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "languageTooltip": "言語を変更"
 }
