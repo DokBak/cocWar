@@ -73,6 +73,8 @@ abstract class Player with _$Player {
     int? clanCapitalContributions,
     PlayerClan? clan,
     League? league,
+    // 새 리그 체계. 응답에 따라 `league`는 비어 있고 이쪽에만 값이 있다.
+    League? leagueTier,
     League? builderBaseLeague,
     @Default(<Label>[]) List<Label> labels,
     @Default(<Achievement>[]) List<Achievement> achievements,

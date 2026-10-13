@@ -74,7 +74,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get disclaimer =>
-      '이 앱은 비공식 팬 프로젝트이며 Supercell과 제휴, 후원, 승인 관계가 없고 Supercell은 이 앱에 책임을 지지 않습니다.';
+      '이 앱은 비공식 팬 프로젝트이며 Supercell과 제휴, 후원, 승인 관계가 없고 Supercell은 이 앱에 책임을 지지 않습니다. 팬 콘텐츠 정책: https://supercell.com/en/fan-content-policy/';
 
   @override
   String get errorGeneric => '문제가 발생했습니다. 다시 시도해 주세요.';
@@ -155,4 +155,130 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get languageTooltip => '언어 변경';
+
+  @override
+  String townHallN(int level) {
+    return '타운홀 $level';
+  }
+
+  @override
+  String expLevelN(int level) {
+    return '경험치 레벨 $level';
+  }
+
+  @override
+  String get statTrophies => '트로피';
+
+  @override
+  String get statBestTrophies => '최고 기록';
+
+  @override
+  String get statWarStars => '전쟁 별';
+
+  @override
+  String get statAttackWins => '공격 승리';
+
+  @override
+  String get statDefenseWins => '방어 승리';
+
+  @override
+  String get statDonations => '기부';
+
+  @override
+  String get statDonationsReceived => '받은 기부';
+
+  @override
+  String get statCapitalContributions => '캐피탈 기여';
+
+  @override
+  String get sectionHeroes => '영웅';
+
+  @override
+  String get sectionTroops => '부대';
+
+  @override
+  String get sectionSpells => '주문';
+
+  @override
+  String get roleMember => '멤버';
+
+  @override
+  String get roleElder => '장로';
+
+  @override
+  String get roleCoLeader => '공동 리더';
+
+  @override
+  String get roleLeader => '리더';
+
+  @override
+  String get warPrefIn => '전쟁 참여';
+
+  @override
+  String get warPrefOut => '전쟁 불참';
+
+  @override
+  String get tabMembers => '멤버';
+
+  @override
+  String get noItems => '표시할 항목이 없습니다.';
+
+  @override
+  String progressPct(String pct) {
+    return '진행률: $pct';
+  }
+
+  @override
+  String get groupElixir => '엘릭서';
+
+  @override
+  String get groupDarkElixir => '다크엘릭서';
+
+  @override
+  String get groupSiege => '시즈머신';
+
+  @override
+  String get groupPets => '펫';
+
+  @override
+  String get groupOther => '기타';
+
+  @override
+  String equipmentProgressPct(String pct) {
+    return '장비 진행률: $pct';
+  }
+
+  @override
+  String get copyTag => '태그 복사';
+
+  @override
+  String tagCopied(String tag) {
+    return '$tag 복사했습니다';
+  }
+
+  @override
+  String get tabHomeVillage => '본마을';
+
+  @override
+  String get tabBuilderBase => '장인기지';
+
+  @override
+  String get sectionUnits => '유닛';
+
+  @override
+  String get noBuilderBase => '장인기지 정보가 없습니다.';
+
+  @override
+  String get statLeague => '리그';
+
+  @override
+  String builderHallN(int level) {
+    return '장인 회관 $level';
+  }
+
+  @override
+  String get splitView => '나란히 보기';
+
+  @override
+  String get selectMemberHint => '멤버를 선택하면 여기에 프로필이 표시됩니다.';
 }

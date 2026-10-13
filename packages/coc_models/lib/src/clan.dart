@@ -11,8 +11,11 @@ abstract class ClanMember with _$ClanMember {
     String? tag,
     String? name,
     String? role,
+    int? townHallLevel,
     int? expLevel,
     League? league,
+    // 새 리그 체계. 구 `league`는 Unranked로만 내려오는 경우가 있다.
+    League? leagueTier,
     int? trophies,
     int? builderBaseTrophies,
     int? clanRank,

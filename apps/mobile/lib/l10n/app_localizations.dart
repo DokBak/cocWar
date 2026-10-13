@@ -229,7 +229,7 @@ abstract class AppLocalizations {
   /// No description provided for @disclaimer.
   ///
   /// In en, this message translates to:
-  /// **'This is an unofficial fan project. It is not affiliated with, endorsed, sponsored, or specifically approved by Supercell, and Supercell is not responsible for it.'**
+  /// **'This is an unofficial fan project. It is not affiliated with, endorsed, sponsored, or specifically approved by Supercell, and Supercell is not responsible for it. Fan Content Policy: https://supercell.com/en/fan-content-policy/'**
   String get disclaimer;
 
   /// No description provided for @errorGeneric.
@@ -375,6 +375,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Change language'**
   String get languageTooltip;
+
+  /// No description provided for @townHallN.
+  ///
+  /// In en, this message translates to:
+  /// **'Town Hall {level}'**
+  String townHallN(int level);
+
+  /// No description provided for @expLevelN.
+  ///
+  /// In en, this message translates to:
+  /// **'XP level {level}'**
+  String expLevelN(int level);
+
+  /// No description provided for @statTrophies.
+  ///
+  /// In en, this message translates to:
+  /// **'Trophies'**
+  String get statTrophies;
+
+  /// No description provided for @statBestTrophies.
+  ///
+  /// In en, this message translates to:
+  /// **'Best'**
+  String get statBestTrophies;
+
+  /// No description provided for @statWarStars.
+  ///
+  /// In en, this message translates to:
+  /// **'War stars'**
+  String get statWarStars;
+
+  /// No description provided for @statAttackWins.
+  ///
+  /// In en, this message translates to:
+  /// **'Attack wins'**
+  String get statAttackWins;
+
+  /// No description provided for @statDefenseWins.
+  ///
+  /// In en, this message translates to:
+  /// **'Defense wins'**
+  String get statDefenseWins;
+
+  /// No description provided for @statDonations.
+  ///
+  /// In en, this message translates to:
+  /// **'Donated'**
+  String get statDonations;
+
+  /// No description provided for @statDonationsReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get statDonationsReceived;
+
+  /// No description provided for @statCapitalContributions.
+  ///
+  /// In en, this message translates to:
+  /// **'Capital contributions'**
+  String get statCapitalContributions;
+
+  /// No description provided for @sectionHeroes.
+  ///
+  /// In en, this message translates to:
+  /// **'Heroes'**
+  String get sectionHeroes;
+
+  /// No description provided for @sectionTroops.
+  ///
+  /// In en, this message translates to:
+  /// **'Troops'**
+  String get sectionTroops;
+
+  /// No description provided for @sectionSpells.
+  ///
+  /// In en, this message translates to:
+  /// **'Spells'**
+  String get sectionSpells;
+
+  /// No description provided for @roleMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get roleMember;
+
+  /// No description provided for @roleElder.
+  ///
+  /// In en, this message translates to:
+  /// **'Elder'**
+  String get roleElder;
+
+  /// No description provided for @roleCoLeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Co-leader'**
+  String get roleCoLeader;
+
+  /// No description provided for @roleLeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Leader'**
+  String get roleLeader;
+
+  /// No description provided for @warPrefIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to wars'**
+  String get warPrefIn;
+
+  /// No description provided for @warPrefOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Not in wars'**
+  String get warPrefOut;
+
+  /// No description provided for @tabMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get tabMembers;
+
+  /// No description provided for @noItems.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to show.'**
+  String get noItems;
+
+  /// No description provided for @progressPct.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress: {pct}'**
+  String progressPct(String pct);
+
+  /// No description provided for @groupElixir.
+  ///
+  /// In en, this message translates to:
+  /// **'Elixir'**
+  String get groupElixir;
+
+  /// No description provided for @groupDarkElixir.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Elixir'**
+  String get groupDarkElixir;
+
+  /// No description provided for @groupSiege.
+  ///
+  /// In en, this message translates to:
+  /// **'Siege machines'**
+  String get groupSiege;
+
+  /// No description provided for @groupPets.
+  ///
+  /// In en, this message translates to:
+  /// **'Pets'**
+  String get groupPets;
+
+  /// No description provided for @groupOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get groupOther;
+
+  /// No description provided for @equipmentProgressPct.
+  ///
+  /// In en, this message translates to:
+  /// **'Equipment progress: {pct}'**
+  String equipmentProgressPct(String pct);
+
+  /// No description provided for @copyTag.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy tag'**
+  String get copyTag;
+
+  /// No description provided for @tagCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied {tag}'**
+  String tagCopied(String tag);
+
+  /// No description provided for @tabHomeVillage.
+  ///
+  /// In en, this message translates to:
+  /// **'Home Village'**
+  String get tabHomeVillage;
+
+  /// No description provided for @tabBuilderBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Builder Base'**
+  String get tabBuilderBase;
+
+  /// No description provided for @sectionUnits.
+  ///
+  /// In en, this message translates to:
+  /// **'Units'**
+  String get sectionUnits;
+
+  /// No description provided for @noBuilderBase.
+  ///
+  /// In en, this message translates to:
+  /// **'No Builder Base information.'**
+  String get noBuilderBase;
+
+  /// No description provided for @statLeague.
+  ///
+  /// In en, this message translates to:
+  /// **'League'**
+  String get statLeague;
+
+  /// No description provided for @builderHallN.
+  ///
+  /// In en, this message translates to:
+  /// **'Builder Hall {level}'**
+  String builderHallN(int level);
+
+  /// No description provided for @splitView.
+  ///
+  /// In en, this message translates to:
+  /// **'Side-by-side view'**
+  String get splitView;
+
+  /// No description provided for @selectMemberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a member to see their profile here.'**
+  String get selectMemberHint;
 }
 
 class _AppLocalizationsDelegate

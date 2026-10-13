@@ -21,7 +21,7 @@
   "themeLight": "Light",
   "themeDark": "Dark",
   "comingSoon": "This screen is coming soon.",
-  "disclaimer": "This is an unofficial fan project. It is not affiliated with, endorsed, sponsored, or specifically approved by Supercell, and Supercell is not responsible for it.",
+  "disclaimer": "This is an unofficial fan project. It is not affiliated with, endorsed, sponsored, or specifically approved by Supercell, and Supercell is not responsible for it. Fan Content Policy: https://supercell.com/en/fan-content-policy/",
   "errorGeneric": "Something went wrong. Please try again.",
   "errorNotFound": "Not found.",
   "errorPrivateLog": "This clan's war log is private.",
@@ -73,5 +73,85 @@
       }
     }
   },
-  "languageTooltip": "Change language"
+  "languageTooltip": "Change language",
+  "townHallN": "Town Hall {level}",
+  "@townHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "expLevelN": "XP level {level}",
+  "@expLevelN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "statTrophies": "Trophies",
+  "statBestTrophies": "Best",
+  "statWarStars": "War stars",
+  "statAttackWins": "Attack wins",
+  "statDefenseWins": "Defense wins",
+  "statDonations": "Donated",
+  "statDonationsReceived": "Received",
+  "statCapitalContributions": "Capital contributions",
+  "sectionHeroes": "Heroes",
+  "sectionTroops": "Troops",
+  "sectionSpells": "Spells",
+  "roleMember": "Member",
+  "roleElder": "Elder",
+  "roleCoLeader": "Co-leader",
+  "roleLeader": "Leader",
+  "warPrefIn": "Open to wars",
+  "warPrefOut": "Not in wars",
+  "tabMembers": "Members",
+  "noItems": "Nothing to show.",
+  "progressPct": "Progress: {pct}",
+  "@progressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "groupElixir": "Elixir",
+  "groupDarkElixir": "Dark Elixir",
+  "groupSiege": "Siege machines",
+  "groupPets": "Pets",
+  "groupOther": "Other",
+  "equipmentProgressPct": "Equipment progress: {pct}",
+  "@equipmentProgressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "copyTag": "Copy tag",
+  "tagCopied": "Copied {tag}",
+  "@tagCopied": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "tabHomeVillage": "Home Village",
+  "tabBuilderBase": "Builder Base",
+  "sectionUnits": "Units",
+  "noBuilderBase": "No Builder Base information.",
+  "statLeague": "League",
+  "builderHallN": "Builder Hall {level}",
+  "@builderHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "splitView": "Side-by-side view",
+  "selectMemberHint": "Select a member to see their profile here."
 }

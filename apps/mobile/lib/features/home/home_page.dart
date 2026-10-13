@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/layout.dart';
 import '../../core/providers.dart';
 import '../../core/saved_tag.dart';
 import '../../l10n/app_localizations.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 640),
+          constraints: const BoxConstraints(maxWidth: contentMaxWidth),
           child: ListView(
             padding: const EdgeInsets.all(16),
             children: [

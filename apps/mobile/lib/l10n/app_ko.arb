@@ -21,7 +21,7 @@
   "themeLight": "라이트",
   "themeDark": "다크",
   "comingSoon": "이 화면은 준비 중입니다.",
-  "disclaimer": "이 앱은 비공식 팬 프로젝트이며 Supercell과 제휴, 후원, 승인 관계가 없고 Supercell은 이 앱에 책임을 지지 않습니다.",
+  "disclaimer": "이 앱은 비공식 팬 프로젝트이며 Supercell과 제휴, 후원, 승인 관계가 없고 Supercell은 이 앱에 책임을 지지 않습니다. 팬 콘텐츠 정책: https://supercell.com/en/fan-content-policy/",
   "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요.",
   "errorNotFound": "찾을 수 없습니다.",
   "errorPrivateLog": "이 클랜의 전쟁 로그는 비공개입니다.",
@@ -73,5 +73,85 @@
       }
     }
   },
-  "languageTooltip": "언어 변경"
+  "languageTooltip": "언어 변경",
+  "townHallN": "타운홀 {level}",
+  "@townHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "expLevelN": "경험치 레벨 {level}",
+  "@expLevelN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "statTrophies": "트로피",
+  "statBestTrophies": "최고 기록",
+  "statWarStars": "전쟁 별",
+  "statAttackWins": "공격 승리",
+  "statDefenseWins": "방어 승리",
+  "statDonations": "기부",
+  "statDonationsReceived": "받은 기부",
+  "statCapitalContributions": "캐피탈 기여",
+  "sectionHeroes": "영웅",
+  "sectionTroops": "부대",
+  "sectionSpells": "주문",
+  "roleMember": "멤버",
+  "roleElder": "장로",
+  "roleCoLeader": "공동 리더",
+  "roleLeader": "리더",
+  "warPrefIn": "전쟁 참여",
+  "warPrefOut": "전쟁 불참",
+  "tabMembers": "멤버",
+  "noItems": "표시할 항목이 없습니다.",
+  "progressPct": "진행률: {pct}",
+  "@progressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "groupElixir": "엘릭서",
+  "groupDarkElixir": "다크엘릭서",
+  "groupSiege": "시즈머신",
+  "groupPets": "펫",
+  "groupOther": "기타",
+  "equipmentProgressPct": "장비 진행률: {pct}",
+  "@equipmentProgressPct": {
+    "placeholders": {
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "copyTag": "태그 복사",
+  "tagCopied": "{tag} 복사했습니다",
+  "@tagCopied": {
+    "placeholders": {
+      "tag": {
+        "type": "String"
+      }
+    }
+  },
+  "tabHomeVillage": "본마을",
+  "tabBuilderBase": "장인기지",
+  "sectionUnits": "유닛",
+  "noBuilderBase": "장인기지 정보가 없습니다.",
+  "statLeague": "리그",
+  "builderHallN": "장인 회관 {level}",
+  "@builderHallN": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "splitView": "나란히 보기",
+  "selectMemberHint": "멤버를 선택하면 여기에 프로필이 표시됩니다."
 }

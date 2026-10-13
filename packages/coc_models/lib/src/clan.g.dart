@@ -10,10 +10,14 @@ _ClanMember _$ClanMemberFromJson(Map<String, dynamic> json) => _ClanMember(
   tag: json['tag'] as String?,
   name: json['name'] as String?,
   role: json['role'] as String?,
+  townHallLevel: (json['townHallLevel'] as num?)?.toInt(),
   expLevel: (json['expLevel'] as num?)?.toInt(),
   league: json['league'] == null
       ? null
       : League.fromJson(json['league'] as Map<String, dynamic>),
+  leagueTier: json['leagueTier'] == null
+      ? null
+      : League.fromJson(json['leagueTier'] as Map<String, dynamic>),
   trophies: (json['trophies'] as num?)?.toInt(),
   builderBaseTrophies: (json['builderBaseTrophies'] as num?)?.toInt(),
   clanRank: (json['clanRank'] as num?)?.toInt(),
@@ -27,8 +31,10 @@ Map<String, dynamic> _$ClanMemberToJson(_ClanMember instance) =>
       'tag': instance.tag,
       'name': instance.name,
       'role': instance.role,
+      'townHallLevel': instance.townHallLevel,
       'expLevel': instance.expLevel,
       'league': instance.league?.toJson(),
+      'leagueTier': instance.leagueTier?.toJson(),
       'trophies': instance.trophies,
       'builderBaseTrophies': instance.builderBaseTrophies,
       'clanRank': instance.clanRank,

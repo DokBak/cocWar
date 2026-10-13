@@ -7,3 +7,6 @@ pubspec.lock
 *.env
 .idea/
 .vscode/
+
+# Supercell 게임 이미지는 저장소에 올리지 않는다 (tool/fetch_game_images.sh 로 받는다)
+apps/mobile/assets/game/**/*.webp

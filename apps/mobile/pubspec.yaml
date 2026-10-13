@@ -67,6 +67,20 @@ flutter:
   uses-material-design: true
   generate: true
 
+  # 영웅·장비·부대·주문 아이콘. 파일은 tool/fetch_game_images.sh 로 받는다(저장소에는 없음).
+  assets:
+    - assets/game/heroes/
+    - assets/game/equipment/
+    - assets/game/troops/
+    - assets/game/siege/
+    - assets/game/pets/
+    - assets/game/spells/
+    - assets/game/builder_heroes/
+    - assets/game/builder_troops/
+
+  # 타운홀별 최고 레벨 표 (tool/gen_game_data.sh 로 생성, 저장소에 포함)
+    - assets/data/
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
