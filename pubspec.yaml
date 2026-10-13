@@ -1,0 +1,8 @@
+name: cocwar_workspace
+publish_to: none
+environment:
+  sdk: ^3.13.5
+workspace:
+  - apps/mobile
+  - server
+  - packages/coc_models
