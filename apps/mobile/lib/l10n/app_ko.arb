@@ -93,8 +93,6 @@
   "statTrophies": "트로피",
   "statBestTrophies": "최고 기록",
   "statWarStars": "전쟁 별",
-  "statAttackWins": "공격 승리",
-  "statDefenseWins": "방어 승리",
   "statDonations": "기부",
   "statDonationsReceived": "받은 기부",
   "statCapitalContributions": "캐피탈 기여",
@@ -153,5 +151,187 @@
     }
   },
   "splitView": "나란히 보기",
-  "selectMemberHint": "멤버를 선택하면 여기에 프로필이 표시됩니다."
+  "selectMemberHint": "멤버를 선택하면 여기에 프로필이 표시됩니다.",
+  "warPageTitle": "클랜전",
+  "warInfoButton": "클랜전 정보 보기",
+  "warStatePreparation": "준비일",
+  "warStateInWar": "전투일",
+  "warStateEnded": "전쟁 종료",
+  "warNone": "진행 중인 전쟁이 없습니다.",
+  "warStartsIn": "시작까지 {time}",
+  "@warStartsIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "warEndsIn": "종료까지 {time}",
+  "@warEndsIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "durationHM": "{hours}시간 {minutes}분",
+  "@durationHM": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationM": "{minutes}분",
+  "@durationM": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "warAttacksPerMember": "1인당 공격 {count}회",
+  "@warAttacksPerMember": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tabOurClan": "우리 클랜",
+  "tabOpponentClan": "상대 클랜",
+  "warAttacksUsed": "공격 {used}/{total}",
+  "@warAttacksUsed": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "warUnused": "미사용",
+  "warDefense": "방어",
+  "warNoDefense": "공격받지 않음",
+  "outlookTitle": "승리 전망",
+  "outlookLeadingStars": "{n}별 앞서고 있습니다",
+  "@outlookLeadingStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookLeadingDestruction": "별 동점, 파괴율 {us}% 대 {them}%로 앞서고 있습니다",
+  "@outlookLeadingDestruction": {
+    "placeholders": {
+      "us": {
+        "type": "String"
+      },
+      "them": {
+        "type": "String"
+      }
+    }
+  },
+  "outlookTied": "별과 파괴율이 모두 같습니다",
+  "outlookTrailingStars": "앞서려면 {n}별이 더 필요합니다",
+  "@outlookTrailingStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookTrailingDestruction": "별 동점, 파괴율 {them}%를 넘어야 합니다 (현재 {us}%)",
+  "@outlookTrailingDestruction": {
+    "placeholders": {
+      "us": {
+        "type": "String"
+      },
+      "them": {
+        "type": "String"
+      }
+    }
+  },
+  "outlookRemainingAttacks": "남은 공격 {n}회",
+  "@outlookRemainingAttacks": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookAvailableStars": "남은 획득 가능 별 {n}개",
+  "@outlookAvailableStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookCannotWin": "남은 별로는 역전이 어렵습니다.",
+  "outlookNote": "상대의 남은 공격은 반영하지 않은 추정입니다.",
+  "capitalRaidCaption": "캐피탈 레이드 · {period} · {state}",
+  "@capitalRaidCaption": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "raidStateOngoing": "진행 중",
+  "raidStateEnded": "종료",
+  "capitalAttacksTooltip": "캐피탈 공격권 {used}/{total}",
+  "@capitalAttacksTooltip": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "historyClanSubtitle": "클랜 : {name}",
+  "@historyClanSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "historyPlayerSubtitle": "플레이어 : {name}",
+  "@historyPlayerSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "warLeagueTooltip": "클랜전 리그: {name}",
+  "@warLeagueTooltip": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "capitalLeagueTooltip": "캐피탈 리그: {name} · 캐피탈 트로피 {trophies}",
+  "@capitalLeagueTooltip": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "trophies": {
+        "type": "String"
+      }
+    }
+  }
 }

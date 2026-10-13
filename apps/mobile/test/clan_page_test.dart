@@ -3,9 +3,12 @@ import 'package:cocwar_mobile/core/api_client.dart';
 import 'package:cocwar_mobile/core/layout.dart';
 import 'package:cocwar_mobile/core/providers.dart';
 import 'package:cocwar_mobile/features/clan/clan_page.dart';
+import 'package:cocwar_mobile/features/player/game_assets.dart';
 import 'package:cocwar_mobile/features/player/item_groups.dart';
+import 'package:cocwar_mobile/features/remote_image.dart';
 import 'package:cocwar_mobile/features/player/level_caps.dart';
 import 'package:cocwar_mobile/features/player/player_page.dart';
+import 'package:cocwar_mobile/features/player/village_tabs.dart';
 import 'package:cocwar_mobile/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,6 +44,12 @@ Future<void> pumpClan(
   double textScale = 1.0,
   Size size = const Size(800, 1400),
   Widget? home,
+
+  /// 기본 탭이 멤버라서, 전쟁 로그를 확인하는 테스트는 `전쟁 로그` 탭을 먼저 연다.
+  bool openWarLog = true,
+
+  /// 번들된 에셋 목록을 고정한다(이미지를 받아 둔 환경과 아닌 환경에서 같게 동작하도록).
+  Set<String> assets = const {},
 }) async {
   SharedPreferences.setMockInitialValues({});
   final prefs = await SharedPreferences.getInstance();
@@ -49,9 +58,11 @@ Future<void> pumpClan(
   addTearDown(tester.view.reset);
   await tester.pumpWidget(
     ProviderScope(
+      retry: noAutoRetry,
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         apiClientProvider.overrideWithValue(api),
+        gameAssetsProvider.overrideWith((ref) async => assets),
         // 나란히 보기의 프로필 창이 쓰는 데이터를 비동기 로딩 타이밍과 무관하게 고정한다.
         levelCapsProvider.overrideWith((ref) async => const LevelCaps()),
         itemGroupsProvider.overrideWith((ref) async => ItemGroups.empty),
@@ -75,6 +86,13 @@ Future<void> pumpClan(
     ),
   );
   await tester.pumpAndSettle();
+  if (openWarLog) {
+    final label = (await AppLocalizations.delegate.load(Locale(locale))).warLog;
+    if (find.text(label).evaluate().isNotEmpty) {
+      await tester.tap(find.text(label));
+      await tester.pumpAndSettle();
+    }
+  }
 }
 
 const publicClan = Clan(
@@ -173,8 +191,11 @@ void main() {
       ..clan = publicClan;
     await tester.tap(find.text('Retry'));
     await tester.pumpAndSettle();
-    expect(find.text('Alpha'), findsOneWidget);
     expect(find.text('Test Clan'), findsWidgets);
+    // 오류가 풀리면 기본 탭(멤버)으로 열린다. 전쟁 로그는 탭을 열어야 보인다.
+    await tester.tap(find.text('War log'));
+    await tester.pumpAndSettle();
+    expect(find.text('Alpha'), findsOneWidget);
   });
 
   group('번호 페이지 (10개씩)', () {
@@ -386,6 +407,625 @@ void main() {
 
       expect(copied, '#2PP');
       expect(find.text('Copied #2PP'), findsOneWidget);
+    });
+  });
+
+  group('탭 순서와 기본 탭', () {
+    testWidgets('탭 순서는 멤버 | 전쟁 로그이고 처음에는 멤버가 열린다', (tester) async {
+      final api = FakeApi()
+        ..clan = publicClan.copyWith(
+          memberList: const [
+            ClanMember(tag: '#M1', name: 'Chief', clanRank: 1),
+          ],
+        )
+        ..log = [entry('Alpha')];
+      await pumpClan(tester, api, openWarLog: false);
+
+      // 멤버 버튼이 전쟁 로그 버튼의 왼쪽에 있다
+      expect(
+        tester.getCenter(find.text('Members')).dx,
+        lessThan(tester.getCenter(find.text('War log')).dx),
+      );
+      // 기본으로 멤버 목록이 보이고 전쟁 로그는 보이지 않는다
+      expect(find.text('Chief'), findsOneWidget);
+      expect(find.text('Alpha'), findsNothing);
+    });
+
+    testWidgets('전쟁 로그는 그 탭을 열 때만 요청한다', (tester) async {
+      final api = FakeApi()
+        ..clan = publicClan
+        ..log = [entry('Alpha')];
+      await pumpClan(tester, api, openWarLog: false);
+      expect(api.warLogCalls, 0);
+
+      await tester.tap(find.text('War log'));
+      await tester.pumpAndSettle();
+      expect(api.warLogCalls, 1);
+      expect(find.text('Alpha'), findsOneWidget);
+    });
+  });
+
+  group('캐피탈 공격권 (멤버 탭, 이름과 트로피 사이 가운데)', () {
+    final members = const [
+      ClanMember(
+        tag: '#P0Y2LQ9',
+        name: 'Chief',
+        role: 'coLeader',
+        townHallLevel: 18,
+        trophies: 1234,
+        clanRank: 1,
+      ),
+      ClanMember(
+        tag: '#PPYYLLQ',
+        name: 'Buddy',
+        role: 'admin',
+        townHallLevel: 17,
+        trophies: 4321,
+        clanRank: 2,
+      ),
+      ClanMember(
+        tag: '#PYLQGRJ',
+        name: 'Casual',
+        role: 'member',
+        townHallLevel: 16,
+        trophies: 777,
+        clanRank: 3,
+      ),
+    ];
+
+    CapitalRaidSeasons raidWith({
+      RaidState state = RaidState.ended,
+      List<CapitalRaidMember>? raidMembers,
+      int? totalAttacks,
+    }) => CapitalRaidSeasons(
+      items: [
+        CapitalRaidSeason(
+          state: state,
+          startTime: DateTime.utc(2026, 10, 9, 7),
+          endTime: DateTime.utc(2026, 10, 12, 7),
+          totalAttacks: totalAttacks ?? 8,
+          members:
+              raidMembers ??
+              const [
+                CapitalRaidMember(
+                  tag: '#P0Y2LQ9',
+                  attacks: 6,
+                  attackLimit: 5,
+                  bonusAttackLimit: 1,
+                ),
+                CapitalRaidMember(
+                  tag: '#PPYYLLQ',
+                  attacks: 2,
+                  attackLimit: 5,
+                  bonusAttackLimit: 0,
+                ),
+              ],
+        ),
+      ],
+    );
+
+    FakeApi api0([CapitalRaidSeasons? raid]) => FakeApi()
+      ..clan = publicClan.copyWith(memberList: members)
+      ..raid = raid
+      ..log = [];
+
+    testWidgets('사용/전체가 보이고, 목록에 없는 멤버는 0/5', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      expect(find.text('6/6'), findsOneWidget); // Chief: 5 + 보너스 1
+      expect(find.text('2/5'), findsOneWidget); // Buddy
+      expect(find.text('0/5'), findsOneWidget); // Casual: 레이드 목록에 없음 = 공격 안 함
+    });
+
+    testWidgets('이름과 트로피 사이 가운데에 있다 (같은 줄)', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      final nameRight = tester.getTopRight(find.text('Chief')).dx;
+      final cell = tester.getCenter(find.text('6/6'));
+      final trophyLeft = tester.getTopLeft(find.text('1234')).dx;
+      expect(cell.dx, greaterThan(nameRight));
+      expect(cell.dx, lessThan(trophyLeft));
+      // 같은 줄(이름과 세로 위치가 비슷)
+      expect(
+        (cell.dy - tester.getCenter(find.text('Chief')).dy).abs(),
+        lessThan(20),
+      );
+    });
+
+    testWidgets('모두 사용=초록, 일부=기본색, 하나도 안 씀=흐리게', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      Color? colorOf(String text) =>
+          tester.widget<Text>(find.text(text)).style?.color;
+
+      final theme = Theme.of(tester.element(find.byType(ClanPage)));
+      final muted = theme.colorScheme.outline;
+      const green = Color(0xFF43A047);
+
+      expect(colorOf('6/6'), green);
+      expect(colorOf('0/5'), muted);
+      // 일부만 사용: 초록도 흐린 색도 아닌 테마 기본 글자색
+      expect(colorOf('2/5'), theme.textTheme.bodyMedium?.color);
+      expect(colorOf('2/5'), isNot(green));
+      expect(colorOf('2/5'), isNot(muted));
+    });
+
+    testWidgets('툴팁으로 사용 현황을 알려 준다', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      expect(find.byTooltip('Capital raid attacks 6/6'), findsOneWidget);
+      expect(find.byTooltip('Capital raid attacks 0/5'), findsOneWidget);
+    });
+
+    testWidgets('어느 시즌인지 안내한다: 종료', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      String md(DateTime d) => '${d.toLocal().month}/${d.toLocal().day}';
+      final period =
+          '${md(DateTime.utc(2026, 10, 9, 7))}~${md(DateTime.utc(2026, 10, 12, 7))}';
+      expect(find.text('Capital Raid · $period · Ended'), findsOneWidget);
+    });
+
+    testWidgets('기간 안내는 멤버 카드·공격권 칸과 같은 가로 중심(가운데)에 있다', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false);
+      final caption = find.textContaining('Capital Raid');
+      final card = find
+          .ancestor(of: find.text('Chief'), matching: find.byType(Card))
+          .first;
+      final cellCenter = tester
+          .getCenter(find.byTooltip('Capital raid attacks 6/6'))
+          .dx;
+
+      expect(
+        tester.getCenter(caption).dx,
+        closeTo(tester.getCenter(card).dx, 1),
+      );
+      expect(tester.getCenter(caption).dx, closeTo(cellCenter, 1));
+    });
+
+    testWidgets('진행 중인 시즌이면 진행 중이라고 안내한다', (tester) async {
+      await pumpClan(
+        tester,
+        api0(raidWith(state: RaidState.ongoing)),
+        openWarLog: false,
+      );
+      expect(find.textContaining('In progress'), findsOneWidget);
+    });
+
+    testWidgets('한국어 안내', (tester) async {
+      await pumpClan(tester, api0(raidWith()), openWarLog: false, locale: 'ko');
+      expect(find.textContaining('캐피탈 레이드 ·'), findsOneWidget);
+      expect(find.textContaining('· 종료'), findsOneWidget);
+      expect(find.byTooltip('캐피탈 공격권 6/6'), findsOneWidget);
+    });
+
+    testWidgets('아직 공격이 없는 시즌은 모두 0/5', (tester) async {
+      await pumpClan(
+        tester,
+        api0(raidWith(raidMembers: const [], totalAttacks: 0)),
+        openWarLog: false,
+      );
+      expect(find.text('0/5'), findsNWidgets(3));
+    });
+
+    testWidgets('시즌이 없으면 칸과 안내를 그리지 않는다', (tester) async {
+      await pumpClan(tester, api0(), openWarLog: false);
+      expect(find.byIcon(Icons.account_balance), findsNothing);
+      expect(find.textContaining('Capital Raid'), findsNothing);
+      expect(find.text('Chief'), findsOneWidget); // 멤버 목록은 정상
+    });
+
+    testWidgets('조회 오류여도 멤버 목록은 정상이고 칸만 없다', (tester) async {
+      final api = api0()
+        ..raidError = const ApiException(
+          ApiErrorKind.privateLog,
+          statusCode: 403,
+        );
+      await pumpClan(tester, api, openWarLog: false);
+      expect(find.byIcon(Icons.account_balance), findsNothing);
+      expect(find.text('Chief'), findsOneWidget);
+      expect(api.raidCalls, 1); // 자동 재시도 없음
+    });
+
+    testWidgets('멤버 목록이 비어 있는데 공격 기록만 있으면(과거 시즌) 쓰지 않는다', (tester) async {
+      await pumpClan(
+        tester,
+        api0(raidWith(raidMembers: const [], totalAttacks: 126)),
+        openWarLog: false,
+      );
+      expect(find.text('0/5'), findsNothing);
+      expect(find.textContaining('Capital Raid'), findsNothing);
+    });
+
+    testWidgets('가장 최근 시즌 한 건만 요청한다', (tester) async {
+      final api = api0(raidWith());
+      await pumpClan(tester, api, openWarLog: false);
+      expect(api.raidLimit, 1);
+    });
+
+    testWidgets('공격권 칸이 있어도 멤버를 누르면 선택/이동 동작은 그대로다', (tester) async {
+      final api =
+          _PlayersApi({
+              '#P0Y2LQ9': const Player(tag: '#P0Y2LQ9', name: 'Chief'),
+            })
+            ..clan = publicClan.copyWith(memberList: members)
+            ..raid = raidWith()
+            ..log = [];
+      await pumpClan(
+        tester,
+        api,
+        size: const Size(splitViewMinWidth + 100, 1000),
+        openWarLog: false,
+      );
+      await tester.tap(find.byTooltip('Side-by-side view'));
+      await tester.pumpAndSettle();
+      // 공격권 칸(6/6)을 눌러도 그 멤버가 선택된다 (행 전체가 눌린다)
+      await tester.tap(find.text('6/6'));
+      await tester.pumpAndSettle();
+      expect(api.playerCalls, ['#P0Y2LQ9']);
+    });
+  });
+
+  group('멤버 줄 레이아웃: 번호 삭제, 캐피탈 공격권 정중앙', () {
+    // 트로피·기부 글자 길이가 서로 다른 멤버들. 예전에는 이 길이 때문에 공격권 칸이 줄마다 밀렸다.
+    final members = const [
+      ClanMember(
+        tag: '#M1',
+        name: 'Alpha',
+        role: 'leader',
+        townHallLevel: 18,
+        trophies: 0,
+        clanRank: 6,
+        donations: 467,
+        donationsReceived: 2461,
+      ),
+      ClanMember(
+        tag: '#M2',
+        name: 'Bravo',
+        role: 'coLeader',
+        townHallLevel: 18,
+        trophies: 92,
+        clanRank: 9,
+        donations: 3215,
+        donationsReceived: 0,
+      ),
+      ClanMember(
+        tag: '#M3',
+        name: 'Charlie',
+        role: 'admin',
+        townHallLevel: 17,
+        trophies: 1234,
+        clanRank: 2,
+        donations: 5,
+        donationsReceived: 5,
+      ),
+      ClanMember(
+        tag: '#M4',
+        name: 'Delta',
+        role: 'member',
+        townHallLevel: 16,
+        trophies: 30,
+        clanRank: 10,
+        donations: 2372,
+        donationsReceived: 825,
+      ),
+    ];
+    final raid = CapitalRaidSeasons(
+      items: [
+        CapitalRaidSeason(
+          state: RaidState.ended,
+          startTime: DateTime.utc(2026, 10, 9, 7),
+          endTime: DateTime.utc(2026, 10, 12, 7),
+          totalAttacks: 18,
+          members: const [
+            CapitalRaidMember(
+              tag: '#M2',
+              attacks: 6,
+              attackLimit: 5,
+              bonusAttackLimit: 1,
+            ),
+            CapitalRaidMember(
+              tag: '#M3',
+              attacks: 3,
+              attackLimit: 5,
+              bonusAttackLimit: 0,
+            ),
+            CapitalRaidMember(
+              tag: '#M4',
+              attacks: 6,
+              attackLimit: 5,
+              bonusAttackLimit: 1,
+            ),
+          ],
+        ),
+      ],
+    );
+
+    FakeApi api0() => FakeApi()
+      ..clan = publicClan.copyWith(memberList: members)
+      ..raid = raid
+      ..log = [];
+
+    Finder cell(String usage) => find.byWidgetPredicate(
+      (w) => w is Tooltip && w.message == 'Capital raid attacks $usage',
+    );
+
+    // 정렬 순서: Alpha(리더), Bravo, Charlie, Delta. 공격권: 0/5, 6/6, 3/5, 6/6
+    final usages = {
+      'Alpha': '0/5',
+      'Bravo': '6/6',
+      'Charlie': '3/5',
+      'Delta': '6/6',
+    };
+
+    testWidgets('맨 왼쪽 클랜 순위 번호가 없다', (tester) async {
+      await pumpClan(tester, api0(), openWarLog: false);
+      // (헤더의 승/무/패 숫자와 겹치지 않도록 멤버 카드 안에서만 찾는다.)
+      final rankByName = {
+        'Alpha': '6',
+        'Bravo': '9',
+        'Charlie': '2',
+        'Delta': '10',
+      };
+      for (final MapEntry(key: name, value: rank) in rankByName.entries) {
+        final card = find
+            .ancestor(of: find.text(name), matching: find.byType(Card))
+            .first;
+        expect(
+          find.descendant(of: card, matching: find.text(rank)),
+          findsNothing,
+          reason: '$name의 순위 번호 $rank',
+        );
+      }
+      // 이름은 카드 왼쪽 가장자리 가까이에서 시작한다 (번호 칸 분량만큼 밀려 있지 않다)
+      final card = find
+          .ancestor(of: find.text('Alpha'), matching: find.byType(Card))
+          .first;
+      expect(
+        tester.getTopLeft(find.text('Alpha')).dx - tester.getTopLeft(card).dx,
+        lessThan(24),
+      );
+    });
+
+    testWidgets('공격권 칸이 모든 줄에서 같은 위치이고 카드 가로 정중앙이다', (tester) async {
+      await pumpClan(tester, api0(), openWarLog: false);
+
+      final centers = <double>[];
+      for (final MapEntry(key: name, value: usage) in usages.entries) {
+        final card = find
+            .ancestor(of: find.text(name), matching: find.byType(Card))
+            .first;
+        final cardCenter = tester.getCenter(card).dx;
+        final cellCenter = tester
+            .getCenter(
+              cell(usage).evaluate().length > 1
+                  ? cell(usage)
+                        .at(usages.keys.toList().indexOf(name) == 3 ? 1 : 0)
+                  : cell(usage),
+            )
+            .dx;
+        expect(cellCenter, closeTo(cardCenter, 1), reason: '$name: 카드 정중앙');
+        centers.add(cellCenter);
+      }
+      // 모든 줄에서 같은 x
+      for (final c in centers) {
+        expect(c, closeTo(centers.first, 1));
+      }
+    });
+
+    testWidgets('좁은 화면에서는 이름이 좁아지지 않도록 열을 고정 정렬한다', (tester) async {
+      await pumpClan(
+        tester,
+        api0(),
+        openWarLog: false,
+        size: const Size(400, 1400),
+      );
+
+      final xs = <double>[
+        tester.getCenter(cell('0/5')).dx,
+        tester.getCenter(cell('3/5')).dx,
+        tester.getCenter(cell('6/6').at(0)).dx,
+        tester.getCenter(cell('6/6').at(1)).dx,
+      ];
+      for (final x in xs) {
+        expect(x, closeTo(xs.first, 1));
+      }
+      // 글자 길이가 달라도 이름은 잘리지 않고 보인다
+      expect(find.text('Charlie'), findsOneWidget);
+    });
+
+    testWidgets('공격권 데이터가 없으면 칸 없이 기존 레이아웃', (tester) async {
+      final api = FakeApi()
+        ..clan = publicClan.copyWith(memberList: members)
+        ..log = [];
+      await pumpClan(tester, api, openWarLog: false);
+      expect(find.byIcon(Icons.account_balance), findsNothing);
+      expect(find.text('Alpha'), findsOneWidget);
+      expect(find.text('1234'), findsOneWidget); // 트로피는 그대로 보인다
+    });
+  });
+
+  group('헤더: 클랜전 리그·캐피탈 리그(캐피탈 트로피)', () {
+    const champion3 = 'https://example.com/leagues/champion3.png';
+    const league = League(id: 48000016, name: 'Champion League III');
+
+    FakeApi apiWith(Clan clan) => FakeApi()
+      ..clan = clan
+      ..leagues = const [
+        League(
+          id: 29000016,
+          name: 'Champion League III',
+          iconUrls: IconUrls(small: champion3),
+        ),
+      ]
+      ..log = [];
+
+    final full = publicClan.copyWith(
+      warLeague: league,
+      capitalLeague: league,
+      clanCapitalPoints: 3254,
+    );
+    Finder header() => find.byType(Card).first;
+    Finder inHeader(Finder f) => find.descendant(of: header(), matching: f);
+
+    testWidgets('클랜전 리그 이름과 캐피탈 리그 이름·캐피탈 트로피를 보여준다', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false);
+      expect(
+        inHeader(find.text('Champion League III')),
+        findsOneWidget,
+      ); // 클랜전 리그
+      expect(
+        inHeader(find.text('Champion League III · 3,254')),
+        findsOneWidget,
+      ); // 캐피탈 리그 + 트로피(천 단위 쉼표)
+    });
+
+    testWidgets('클랜전 리그 아이콘은 이름이 같은 리그의 API 아이콘', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false);
+      final icons = tester.widgetList<RemoteImage>(
+        find.descendant(
+          of: header(),
+          matching: find.byWidgetPredicate(
+            (w) => w is RemoteImage && w.size == 24,
+          ),
+        ),
+      );
+      expect(icons.map((i) => i.url), [champion3]);
+    });
+
+    // 헤더에는 클랜전 리그의 네트워크 이미지도 있으므로, 번들된 에셋 이미지(캐피탈 리그)만 찾는다.
+    final assetImage = find.byWidgetPredicate(
+      (w) =>
+          w is Image &&
+          w.image is ResizeImage &&
+          (w.image as ResizeImage).imageProvider is AssetImage,
+    );
+
+    testWidgets('캐피탈 리그 아이콘: 이미지를 받지 않았으면 대체 아이콘', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false);
+      expect(inHeader(find.byIcon(Icons.account_balance)), findsOneWidget);
+      expect(inHeader(assetImage), findsNothing);
+    });
+
+    testWidgets('캐피탈 리그 아이콘: 이미지를 받아 뒀으면 그 이미지', (tester) async {
+      await pumpClan(
+        tester,
+        apiWith(full),
+        openWarLog: false,
+        assets: const {'assets/game/capital_leagues/champion-iii.webp'},
+      );
+      expect(inHeader(assetImage), findsOneWidget);
+      final image = tester.widget<Image>(inHeader(assetImage));
+      expect(
+        ((image.image as ResizeImage).imageProvider as AssetImage).assetName,
+        'assets/game/capital_leagues/champion-iii.webp',
+      );
+      expect(inHeader(find.byIcon(Icons.account_balance)), findsNothing);
+    });
+
+    testWidgets('위치: 이름·태그 오른쪽, 나란히 보기 토글 왼쪽, 같은 줄', (tester) async {
+      await pumpClan(
+        tester,
+        apiWith(full),
+        size: const Size(1400, 1000),
+        openWarLog: false,
+      );
+      final leagueText = inHeader(find.text('Champion League III · 3,254'));
+      final tag = inHeader(find.text('#2PP'));
+      final toggle = find.byTooltip('Side-by-side view');
+
+      expect(
+        tester.getTopLeft(leagueText).dx,
+        greaterThan(tester.getTopRight(tag).dx),
+      );
+      expect(
+        tester.getTopRight(leagueText).dx,
+        lessThan(tester.getTopLeft(toggle).dx),
+      );
+      // 헤더 윗부분(이름과 같은 줄 근처)에 있다 — 승/무/패 줄보다 위
+      expect(
+        tester.getTopLeft(leagueText).dy,
+        lessThan(tester.getTopLeft(find.text('Wins')).dy),
+      );
+    });
+
+    testWidgets('나란히 보기 토글이 없는 화면에서도 같은 자리에 보인다', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false); // 800 너비: 토글 없음
+      expect(find.byTooltip('Side-by-side view'), findsNothing);
+      expect(
+        inHeader(find.text('Champion League III · 3,254')),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('좁은 화면에서는 이름 없이 아이콘과 캐피탈 트로피만', (tester) async {
+      await pumpClan(
+        tester,
+        apiWith(full),
+        openWarLog: false,
+        size: const Size(400, 1400),
+      );
+      expect(inHeader(find.text('Champion League III')), findsNothing);
+      expect(inHeader(find.text('3,254')), findsOneWidget);
+      // 이름은 툴팁으로 확인할 수 있다
+      expect(
+        find.byTooltip('Clan war league: Champion League III'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('툴팁으로 설명한다', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false);
+      expect(
+        find.byTooltip('Clan war league: Champion League III'),
+        findsOneWidget,
+      );
+      expect(
+        find.byTooltip(
+          'Capital league: Champion League III · 3,254 capital trophies',
+        ),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('정보가 없는 줄은 그리지 않는다', (tester) async {
+      // 캐피탈 정보 없음: 클랜전 리그만
+      await pumpClan(
+        tester,
+        apiWith(publicClan.copyWith(warLeague: league)),
+        openWarLog: false,
+      );
+      expect(inHeader(find.text('Champion League III')), findsOneWidget);
+      expect(inHeader(find.byIcon(Icons.account_balance)), findsNothing);
+
+      // 둘 다 없음: 리그 영역 자체가 없다
+      await pumpClan(tester, apiWith(publicClan), openWarLog: false);
+      expect(inHeader(find.byIcon(Icons.military_tech)), findsNothing);
+      expect(inHeader(find.byIcon(Icons.account_balance)), findsNothing);
+    });
+
+    testWidgets('캐피탈 트로피만 있어도 보인다', (tester) async {
+      await pumpClan(
+        tester,
+        apiWith(publicClan.copyWith(clanCapitalPoints: 12345)),
+        openWarLog: false,
+      );
+      expect(inHeader(find.text('12,345')), findsOneWidget);
+    });
+
+    testWidgets('리그 목록을 받지 못해도 이름은 보이고 기본 아이콘', (tester) async {
+      final api = apiWith(full)
+        ..leaguesError = const ApiException(
+          ApiErrorKind.maintenance,
+          statusCode: 503,
+        );
+      await pumpClan(tester, api, openWarLog: false);
+      expect(inHeader(find.text('Champion League III')), findsOneWidget);
+      expect(inHeader(find.byIcon(Icons.military_tech)), findsOneWidget);
+    });
+
+    testWidgets('한국어 툴팁', (tester) async {
+      await pumpClan(tester, apiWith(full), openWarLog: false, locale: 'ko');
+      expect(find.byTooltip('클랜전 리그: Champion League III'), findsOneWidget);
+      expect(
+        find.byTooltip('캐피탈 리그: Champion League III · 캐피탈 트로피 3,254'),
+        findsOneWidget,
+      );
     });
   });
 
@@ -725,17 +1365,49 @@ void main() {
       );
     });
 
+    testWidgets('오른쪽 프로필 창에서도 본마을/장인기지 탭 버튼이 창의 가운데에 있다', (tester) async {
+      final api = apiWithPlayers();
+      await pumpClan(tester, api, size: wide);
+      await tester.tap(find.byTooltip('Side-by-side view'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Chief'));
+      await tester.pumpAndSettle();
+
+      final profile = find.byType(PlayerProfileView);
+      final tabs = find.descendant(
+        of: profile,
+        matching: find.byType(SegmentedButton<Village>),
+      );
+      final body = find.descendant(
+        of: profile,
+        matching: find.byType(ListView),
+      );
+      expect(tabs, findsOneWidget);
+      expect(
+        tester.getCenter(tabs).dx,
+        closeTo(tester.getCenter(body.first).dx, 1),
+      );
+    });
+
     testWidgets('선택한 멤버가 강조되고, 다른 멤버를 누르면 프로필이 바뀐다', (tester) async {
       final api = apiWithPlayers();
       await pumpClan(tester, api, size: wide);
       await tester.tap(find.byTooltip('Side-by-side view'));
       await tester.pumpAndSettle();
 
-      bool selected(String name) => tester
-          .widget<ListTile>(
-            find.ancestor(of: find.text(name), matching: find.byType(ListTile)),
-          )
-          .selected;
+      // 선택된 멤버는 Card가 primaryContainer 색으로 강조된다.
+      final highlight = Theme.of(tester.element(find.byType(ClanPage)))
+          .colorScheme
+          .primaryContainer;
+      bool selected(String name) =>
+          tester
+              .widget<Card>(
+                find
+                    .ancestor(of: find.text(name), matching: find.byType(Card))
+                    .first,
+              )
+              .color ==
+          highlight;
 
       await tester.tap(find.text('Chief'));
       await tester.pumpAndSettle();

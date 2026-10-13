@@ -30,6 +30,12 @@ abstract class CocApiClient {
 
   Future<Map<String, dynamic>> getCurrentWar(String tag);
 
+  /// 캐피탈 레이드 시즌 목록(최근 시즌부터). 멤버별 공격 수는 최근 시즌에만 들어 있다.
+  Future<Map<String, dynamic>> getCapitalRaidSeasons(String tag, {int? limit});
+
+  /// 리그 목록(아이콘 주소 포함). 클랜전 리그는 이름이 같은 이 목록의 아이콘을 쓴다.
+  Future<Map<String, dynamic>> getLeagues();
+
   Future<Map<String, dynamic>> getPlayer(String tag);
 }
 
@@ -66,6 +72,19 @@ class HttpCocApiClient implements CocApiClient {
   @override
   Future<Map<String, dynamic>> getCurrentWar(String tag) =>
       _get('/clans/${_enc(tag)}/currentwar');
+
+  @override
+  Future<Map<String, dynamic>> getCapitalRaidSeasons(
+    String tag, {
+    int? limit,
+  }) => _get(
+    '/clans/${_enc(tag)}/capitalraidseasons',
+    query: {if (limit != null) 'limit': '$limit'},
+  );
+
+  @override
+  Future<Map<String, dynamic>> getLeagues() =>
+      _get('/leagues', query: {'limit': '100'});
 
   @override
   Future<Map<String, dynamic>> getPlayer(String tag) =>

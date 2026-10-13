@@ -22,7 +22,7 @@ SRC="$TMP/package/images/home"
 [ -d "$SRC" ] || { echo "이미지 폴더를 찾을 수 없습니다: $SRC" >&2; exit 1; }
 
 # 이전 결과를 지우고 다시 만든다 (.gitkeep은 남긴다).
-for d in heroes equipment troops siege pets spells builder_heroes builder_troops; do
+for d in heroes equipment troops siege pets spells builder_heroes builder_troops capital_leagues; do
   mkdir -p "$DEST/$d"
   find "$DEST/$d" -type f ! -name '.gitkeep' -delete
 done
@@ -53,6 +53,12 @@ copy_builder_icons() {
 copy_builder_icons heroes builder_heroes
 copy_builder_icons troops builder_troops
 
+# 캐피탈 리그 아이콘: clan-capital/leagues/<이름>.png → capital_leagues/<이름>.webp
+# 공식 API는 캐피탈 리그 이름만 주고 아이콘은 주지 않는다. 파일 이름은 champion-iii, legend, unranked 같은 규칙이다.
+for f in "$TMP"/package/images/clan-capital/leagues/*.png; do
+  [ -f "$f" ] && cp "$f" "$DEST/capital_leagues/$(basename "$f" .png).webp"
+done
+
 # 슈퍼 부대: troops/<기본 부대>/super/icon.png → troops/<기본 부대>-super.webp
 for dir in "$SRC"/troops/*/super; do
   [ -f "$dir/icon.png" ] || continue
@@ -61,7 +67,7 @@ for dir in "$SRC"/troops/*/super; do
 done
 
 echo "완료:"
-for d in heroes equipment troops siege pets spells builder_heroes builder_troops; do
+for d in heroes equipment troops siege pets spells builder_heroes builder_troops capital_leagues; do
   printf "  %-10s %s개\n" "$d" "$(find "$DEST/$d" -name '*.webp' | wc -l | tr -d ' ')"
 done
 du -sh "$DEST" | awk '{print "  전체 크기 " $1}'

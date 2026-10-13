@@ -10,6 +10,13 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
   (ref) => throw UnimplementedError('sharedPreferencesProvider를 override하세요'),
 );
 
+/// 실패한 프로바이더를 자동으로 다시 시도하지 않는다(`ProviderScope(retry: noAutoRetry)`).
+///
+/// Riverpod 3의 기본값은 오류가 나면 최대 10번(0.2초~6.4초 간격) 자동 재시도다. 그러면
+/// 404·403(전쟁 로그 비공개) 같은 재시도해도 소용없는 오류에도 같은 요청이 열한 번 나가고,
+/// 오류 화면도 수십 초 늦게 뜬다. 화면마다 "다시 시도" 버튼이 있으므로 사용자가 직접 다시 시도한다.
+Duration? noAutoRetry(int retryCount, Object error) => null;
+
 /// 빌드 시 `--dart-define=API_BASE_URL=...`로 바꾼다.
 const apiBaseUrl = String.fromEnvironment(
   'API_BASE_URL',

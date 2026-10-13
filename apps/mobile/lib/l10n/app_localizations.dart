@@ -406,18 +406,6 @@ abstract class AppLocalizations {
   /// **'War stars'**
   String get statWarStars;
 
-  /// No description provided for @statAttackWins.
-  ///
-  /// In en, this message translates to:
-  /// **'Attack wins'**
-  String get statAttackWins;
-
-  /// No description provided for @statDefenseWins.
-  ///
-  /// In en, this message translates to:
-  /// **'Defense wins'**
-  String get statDefenseWins;
-
   /// No description provided for @statDonations.
   ///
   /// In en, this message translates to:
@@ -603,6 +591,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a member to see their profile here.'**
   String get selectMemberHint;
+
+  /// No description provided for @warPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clan war'**
+  String get warPageTitle;
+
+  /// No description provided for @warInfoButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View clan war info'**
+  String get warInfoButton;
+
+  /// No description provided for @warStatePreparation.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparation day'**
+  String get warStatePreparation;
+
+  /// No description provided for @warStateInWar.
+  ///
+  /// In en, this message translates to:
+  /// **'Battle day'**
+  String get warStateInWar;
+
+  /// No description provided for @warStateEnded.
+  ///
+  /// In en, this message translates to:
+  /// **'War ended'**
+  String get warStateEnded;
+
+  /// No description provided for @warNone.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no ongoing war.'**
+  String get warNone;
+
+  /// No description provided for @warStartsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Starts in {time}'**
+  String warStartsIn(String time);
+
+  /// No description provided for @warEndsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Ends in {time}'**
+  String warEndsIn(String time);
+
+  /// No description provided for @durationHM.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours}h {minutes}m'**
+  String durationHM(int hours, int minutes);
+
+  /// No description provided for @durationM.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m'**
+  String durationM(int minutes);
+
+  /// No description provided for @warAttacksPerMember.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} attacks each'**
+  String warAttacksPerMember(int count);
+
+  /// No description provided for @tabOurClan.
+  ///
+  /// In en, this message translates to:
+  /// **'Our clan'**
+  String get tabOurClan;
+
+  /// No description provided for @tabOpponentClan.
+  ///
+  /// In en, this message translates to:
+  /// **'Opponent'**
+  String get tabOpponentClan;
+
+  /// No description provided for @warAttacksUsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Attacks {used}/{total}'**
+  String warAttacksUsed(int used, int total);
+
+  /// No description provided for @warUnused.
+  ///
+  /// In en, this message translates to:
+  /// **'Unused'**
+  String get warUnused;
+
+  /// No description provided for @warDefense.
+  ///
+  /// In en, this message translates to:
+  /// **'Defense'**
+  String get warDefense;
+
+  /// No description provided for @warNoDefense.
+  ///
+  /// In en, this message translates to:
+  /// **'Not attacked'**
+  String get warNoDefense;
+
+  /// No description provided for @outlookTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Outlook'**
+  String get outlookTitle;
+
+  /// No description provided for @outlookLeadingStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Leading by {n} stars'**
+  String outlookLeadingStars(int n);
+
+  /// No description provided for @outlookLeadingDestruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tied on stars, leading on destruction ({us}% vs {them}%)'**
+  String outlookLeadingDestruction(String us, String them);
+
+  /// No description provided for @outlookTied.
+  ///
+  /// In en, this message translates to:
+  /// **'Tied on both stars and destruction'**
+  String get outlookTied;
+
+  /// No description provided for @outlookTrailingStars.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} more stars needed to take the lead'**
+  String outlookTrailingStars(int n);
+
+  /// No description provided for @outlookTrailingDestruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Tied on stars, needs more than {them}% destruction (now {us}%)'**
+  String outlookTrailingDestruction(String us, String them);
+
+  /// No description provided for @outlookRemainingAttacks.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining attacks: {n}'**
+  String outlookRemainingAttacks(int n);
+
+  /// No description provided for @outlookAvailableStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars still available: {n}'**
+  String outlookAvailableStars(int n);
+
+  /// No description provided for @outlookCannotWin.
+  ///
+  /// In en, this message translates to:
+  /// **'The remaining stars are not enough to catch up.'**
+  String get outlookCannotWin;
+
+  /// No description provided for @outlookNote.
+  ///
+  /// In en, this message translates to:
+  /// **'An estimate that does not include the opponent remaining attacks.'**
+  String get outlookNote;
+
+  /// No description provided for @capitalRaidCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'Capital Raid · {period} · {state}'**
+  String capitalRaidCaption(String period, String state);
+
+  /// No description provided for @raidStateOngoing.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get raidStateOngoing;
+
+  /// No description provided for @raidStateEnded.
+  ///
+  /// In en, this message translates to:
+  /// **'Ended'**
+  String get raidStateEnded;
+
+  /// No description provided for @capitalAttacksTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Capital raid attacks {used}/{total}'**
+  String capitalAttacksTooltip(int used, int total);
+
+  /// No description provided for @historyClanSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clan : {name}'**
+  String historyClanSubtitle(String name);
+
+  /// No description provided for @historyPlayerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Player : {name}'**
+  String historyPlayerSubtitle(String name);
+
+  /// No description provided for @warLeagueTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Clan war league: {name}'**
+  String warLeagueTooltip(String name);
+
+  /// No description provided for @capitalLeagueTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Capital league: {name} · {trophies} capital trophies'**
+  String capitalLeagueTooltip(String name, String trophies);
 }
 
 class _AppLocalizationsDelegate

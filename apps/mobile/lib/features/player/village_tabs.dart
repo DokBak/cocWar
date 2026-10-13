@@ -29,21 +29,24 @@ class _VillageTabsState extends State<VillageTabs> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SegmentedButton<Village>(
-          segments: [
-            ButtonSegment(
-              value: Village.home,
-              label: Text(l10n.tabHomeVillage),
-              icon: const Icon(Icons.home_outlined),
-            ),
-            ButtonSegment(
-              value: Village.builder,
-              label: Text(l10n.tabBuilderBase),
-              icon: const Icon(Icons.construction),
-            ),
-          ],
-          selected: {_village},
-          onSelectionChanged: (s) => setState(() => _village = s.first),
+        // 탭 버튼은 창의 가운데에 둔다.
+        Center(
+          child: SegmentedButton<Village>(
+            segments: [
+              ButtonSegment(
+                value: Village.home,
+                label: Text(l10n.tabHomeVillage),
+                icon: const Icon(Icons.home_outlined),
+              ),
+              ButtonSegment(
+                value: Village.builder,
+                label: Text(l10n.tabBuilderBase),
+                icon: const Icon(Icons.construction),
+              ),
+            ],
+            selected: {_village},
+            onSelectionChanged: (s) => setState(() => _village = s.first),
+          ),
         ),
         const SizedBox(height: 12),
         if (_village == Village.home) ...[

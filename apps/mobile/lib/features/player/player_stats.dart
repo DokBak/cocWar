@@ -28,30 +28,16 @@ class Stat {
 const _gold = Color(0xFFFFB300);
 const _orange = Color(0xFFFB8C00);
 const _yellow = Color(0xFFFFC107);
-const _red = Color(0xFFE53935);
 const _blue = Color(0xFF1E88E5);
 const _green = Color(0xFF43A047);
 const _teal = Color(0xFF00897B);
 const _purple = Color(0xFF8E24AA);
 const _brown = Color(0xFF8D6E63);
 
-/// 본마을 통계. (Material 아이콘에는 칼 모양이 없어 공격 승리는 불꽃으로 나타낸다.)
+/// 본마을 통계. 트로피·전쟁 별·기부·받은 기부·캐피탈 기여.
 List<Stat> homeStats(AppLocalizations l10n, Player p) => [
   Stat(Icons.emoji_events, _gold, l10n.statTrophies, formatCount(p.trophies)),
-  Stat(
-    Icons.workspace_premium,
-    _orange,
-    l10n.statBestTrophies,
-    formatCount(p.bestTrophies),
-  ),
   Stat(Icons.star, _yellow, l10n.statWarStars, formatCount(p.warStars)),
-  Stat(
-    Icons.local_fire_department,
-    _red,
-    l10n.statAttackWins,
-    formatCount(p.attackWins),
-  ),
-  Stat(Icons.shield, _blue, l10n.statDefenseWins, formatCount(p.defenseWins)),
   Stat(
     Icons.volunteer_activism,
     _green,

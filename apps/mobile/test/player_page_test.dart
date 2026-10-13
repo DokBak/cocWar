@@ -8,6 +8,8 @@ import 'package:cocwar_mobile/core/providers.dart';
 import 'package:cocwar_mobile/features/player/item_groups.dart';
 import 'package:cocwar_mobile/features/player/item_tile.dart';
 import 'package:cocwar_mobile/features/player/level_caps.dart';
+import 'package:cocwar_mobile/features/player/player_stats.dart';
+import 'package:cocwar_mobile/features/player/village_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -129,6 +131,7 @@ Future<void> pumpApp(
   addTearDown(tester.view.reset);
   await tester.pumpWidget(
     ProviderScope(
+      retry: noAutoRetry,
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         apiClientProvider.overrideWithValue(api),
@@ -174,8 +177,11 @@ void main() {
     expect(find.text('Electro League 33'), findsOneWidget);
     expect(find.text('3,161'), findsOneWidget); // 전쟁 별 (천 단위 구분)
     expect(find.text('3,331,946'), findsOneWidget);
-    expect(find.text('6,171'), findsOneWidget);
-    expect(find.text('0'), findsNWidgets(2)); // 공격/방어 승리
+    // 삭제한 통계(최고 기록, 공격 승리, 방어 승리)는 본마을 탭에 나오지 않는다.
+    expect(find.text('6,171'), findsNothing);
+    expect(find.text('Best'), findsNothing);
+    expect(find.text('Attack wins'), findsNothing);
+    expect(find.text('Defense wins'), findsNothing);
     expect(find.textContaining('Co-leader'), findsOneWidget);
     expect(find.textContaining('Open to wars'), findsOneWidget);
   });
@@ -194,18 +200,53 @@ void main() {
       await openPlayer(tester, '#P0Y2LQ9');
 
       expect(statIcon('Trophies', Icons.emoji_events), findsOneWidget);
-      expect(statIcon('Best', Icons.workspace_premium), findsOneWidget);
       expect(statIcon('War stars', Icons.star), findsOneWidget);
-      expect(
-        statIcon('Attack wins', Icons.local_fire_department),
-        findsOneWidget,
-      );
-      expect(statIcon('Defense wins', Icons.shield), findsOneWidget);
       expect(statIcon('Donated', Icons.volunteer_activism), findsOneWidget);
       expect(statIcon('Received', Icons.call_received), findsOneWidget);
       expect(
         statIcon('Capital contributions', Icons.account_balance),
         findsOneWidget,
+      );
+      // 본마을 통계는 이 다섯 칸뿐이다 (최고 기록·공격 승리·방어 승리는 삭제).
+      expect(find.byType(StatGrid), findsOneWidget);
+      expect(
+        find.descendant(
+          of: find.byType(StatGrid),
+          matching: find.byIcon(Icons.workspace_premium),
+        ),
+        findsNothing,
+      );
+      expect(find.byIcon(Icons.local_fire_department), findsNothing);
+    });
+  });
+
+  group('탭 버튼 위치', () {
+    testWidgets('본마을/장인기지 탭 버튼은 프로필 본문의 가운데에 있다', (tester) async {
+      final api = FakeApi()..player = testPlayer;
+      await pumpApp(tester, api);
+      await openPlayer(tester, '#P0Y2LQ9');
+
+      final tabs = find.byType(SegmentedButton<Village>);
+      final body = find.byType(ListView).first;
+      expect(tester.getCenter(tabs).dx, closeTo(tester.getCenter(body).dx, 1));
+      // 왼쪽에 붙어 있지 않다 (본문 왼쪽 끝과 충분히 떨어져 있다).
+      expect(
+        tester.getTopLeft(tabs).dx - tester.getTopLeft(body).dx,
+        greaterThan(40),
+      );
+    });
+
+    testWidgets('장인기지 탭을 선택해도 가운데에 있다', (tester) async {
+      final api = FakeApi()..player = testPlayer;
+      await pumpApp(tester, api);
+      await openPlayer(tester, '#P0Y2LQ9');
+      await tester.tap(find.text('Builder Base'));
+      await tester.pumpAndSettle();
+
+      final tabs = find.byType(SegmentedButton<Village>);
+      expect(
+        tester.getCenter(tabs).dx,
+        closeTo(tester.getCenter(find.byType(ListView).first).dx, 1),
       );
     });
   });
@@ -247,6 +288,7 @@ void main() {
       expect(find.text('Builder Hall 9'), findsOneWidget);
       expect(find.text('4,874'), findsOneWidget);
       expect(find.text('4,906'), findsOneWidget);
+      expect(find.text('Best'), findsOneWidget); // 장인기지의 최고 기록은 그대로 둔다
       expect(find.text('Platinum League I'), findsOneWidget);
       // 본마을 통계(전쟁 별 등)는 보이지 않는다
       expect(find.text('War stars'), findsNothing);

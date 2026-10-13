@@ -93,8 +93,6 @@
   "statTrophies": "Trophies",
   "statBestTrophies": "Best",
   "statWarStars": "War stars",
-  "statAttackWins": "Attack wins",
-  "statDefenseWins": "Defense wins",
   "statDonations": "Donated",
   "statDonationsReceived": "Received",
   "statCapitalContributions": "Capital contributions",
@@ -153,5 +151,187 @@
     }
   },
   "splitView": "Side-by-side view",
-  "selectMemberHint": "Select a member to see their profile here."
+  "selectMemberHint": "Select a member to see their profile here.",
+  "warPageTitle": "Clan war",
+  "warInfoButton": "View clan war info",
+  "warStatePreparation": "Preparation day",
+  "warStateInWar": "Battle day",
+  "warStateEnded": "War ended",
+  "warNone": "There is no ongoing war.",
+  "warStartsIn": "Starts in {time}",
+  "@warStartsIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "warEndsIn": "Ends in {time}",
+  "@warEndsIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "durationHM": "{hours}h {minutes}m",
+  "@durationHM": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationM": "{minutes}m",
+  "@durationM": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "warAttacksPerMember": "{count} attacks each",
+  "@warAttacksPerMember": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tabOurClan": "Our clan",
+  "tabOpponentClan": "Opponent",
+  "warAttacksUsed": "Attacks {used}/{total}",
+  "@warAttacksUsed": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "warUnused": "Unused",
+  "warDefense": "Defense",
+  "warNoDefense": "Not attacked",
+  "outlookTitle": "Outlook",
+  "outlookLeadingStars": "Leading by {n} stars",
+  "@outlookLeadingStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookLeadingDestruction": "Tied on stars, leading on destruction ({us}% vs {them}%)",
+  "@outlookLeadingDestruction": {
+    "placeholders": {
+      "us": {
+        "type": "String"
+      },
+      "them": {
+        "type": "String"
+      }
+    }
+  },
+  "outlookTied": "Tied on both stars and destruction",
+  "outlookTrailingStars": "{n} more stars needed to take the lead",
+  "@outlookTrailingStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookTrailingDestruction": "Tied on stars, needs more than {them}% destruction (now {us}%)",
+  "@outlookTrailingDestruction": {
+    "placeholders": {
+      "us": {
+        "type": "String"
+      },
+      "them": {
+        "type": "String"
+      }
+    }
+  },
+  "outlookRemainingAttacks": "Remaining attacks: {n}",
+  "@outlookRemainingAttacks": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookAvailableStars": "Stars still available: {n}",
+  "@outlookAvailableStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "outlookCannotWin": "The remaining stars are not enough to catch up.",
+  "outlookNote": "An estimate that does not include the opponent remaining attacks.",
+  "capitalRaidCaption": "Capital Raid · {period} · {state}",
+  "@capitalRaidCaption": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "raidStateOngoing": "In progress",
+  "raidStateEnded": "Ended",
+  "capitalAttacksTooltip": "Capital raid attacks {used}/{total}",
+  "@capitalAttacksTooltip": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "historyClanSubtitle": "Clan : {name}",
+  "@historyClanSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "historyPlayerSubtitle": "Player : {name}",
+  "@historyPlayerSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "warLeagueTooltip": "Clan war league: {name}",
+  "@warLeagueTooltip": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "capitalLeagueTooltip": "Capital league: {name} · {trophies} capital trophies",
+  "@capitalLeagueTooltip": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "trophies": {
+        "type": "String"
+      }
+    }
+  }
 }

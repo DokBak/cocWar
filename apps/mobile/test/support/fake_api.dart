@@ -10,12 +10,24 @@ class FakeApi extends ApiClient {
   Player? player;
   Object? playerError;
   Object? logError;
+  CurrentWar? war;
+  Object? warError;
+  int warCalls = 0;
+  CapitalRaidSeasons? raid;
+  Object? raidError;
+  int raidCalls = 0;
+  int? raidLimit;
+  List<League>? leagues;
+  Object? leaguesError;
+  int leagueCalls = 0;
   List<ClanWarLogEntry> log = [];
   int warLogCalls = 0;
   final playerCalls = <String>[];
+  final clanCalls = <String>[];
 
   @override
   Future<Clan> getClan(String tag) async {
+    clanCalls.add(tag);
     if (clanError != null) throw clanError!;
     return clan!;
   }
@@ -25,6 +37,31 @@ class FakeApi extends ApiClient {
     warLogCalls++;
     if (logError != null) throw logError!;
     return ClanWarLog(items: log);
+  }
+
+  @override
+  Future<CurrentWar> getCurrentWar(String tag) async {
+    warCalls++;
+    if (warError != null) throw warError!;
+    return war ?? const CurrentWar(state: WarState.notInWar);
+  }
+
+  @override
+  Future<CapitalRaidSeasons> getCapitalRaidSeasons(
+    String tag, {
+    int? limit,
+  }) async {
+    raidCalls++;
+    raidLimit = limit;
+    if (raidError != null) throw raidError!;
+    return raid ?? const CapitalRaidSeasons();
+  }
+
+  @override
+  Future<List<League>> getLeagues() async {
+    leagueCalls++;
+    if (leaguesError != null) throw leaguesError!;
+    return leagues ?? const [];
   }
 
   @override
