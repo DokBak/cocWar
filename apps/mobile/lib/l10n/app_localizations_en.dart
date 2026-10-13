@@ -96,4 +96,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get retry => 'Retry';
+
+  @override
+  String clanLevel(int level) {
+    return 'Level $level';
+  }
+
+  @override
+  String memberCount(int count) {
+    return '$count members';
+  }
+
+  @override
+  String get warWins => 'Wins';
+
+  @override
+  String get warTies => 'Ties';
+
+  @override
+  String get warLosses => 'Losses';
+
+  @override
+  String get winStreak => 'Win streak';
+
+  @override
+  String get warLog => 'War log';
+
+  @override
+  String get noWarLog => 'No war log entries yet.';
+
+  @override
+  String get resultWin => 'Win';
+
+  @override
+  String get resultLose => 'Loss';
+
+  @override
+  String get resultTie => 'Draw';
+
+  @override
+  String get unknownOpponent => 'Unknown clan';
+
+  @override
+  String teamSizeVs(int size) {
+    return '$size vs $size';
+  }
+
+  @override
+  String get previousPage => 'Previous page';
+
+  @override
+  String get nextPage => 'Next page';
+
+  @override
+  String pageN(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String get languageTooltip => 'Change language';
 }

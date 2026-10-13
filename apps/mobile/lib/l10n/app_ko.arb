@@ -28,5 +28,50 @@
   "errorRateLimited": "요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.",
   "errorMaintenance": "Clash of Clans API가 점검 중입니다.",
   "errorNetwork": "서버에 연결할 수 없습니다.",
-  "retry": "다시 시도"
+  "retry": "다시 시도",
+  "clanLevel": "레벨 {level}",
+  "@clanLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "memberCount": "멤버 {count}명",
+  "@memberCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "warWins": "승",
+  "warTies": "무",
+  "warLosses": "패",
+  "winStreak": "연승",
+  "warLog": "전쟁 로그",
+  "noWarLog": "아직 전쟁 기록이 없습니다.",
+  "resultWin": "승리",
+  "resultLose": "패배",
+  "resultTie": "무승부",
+  "unknownOpponent": "알 수 없는 클랜",
+  "teamSizeVs": "{size} vs {size}",
+  "@teamSizeVs": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "previousPage": "이전 페이지",
+  "nextPage": "다음 페이지",
+  "pageN": "{page}페이지",
+  "@pageN": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "languageTooltip": "언어 변경"
 }

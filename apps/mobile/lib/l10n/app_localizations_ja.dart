@@ -96,4 +96,63 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get retry => '再試行';
+
+  @override
+  String clanLevel(int level) {
+    return 'レベル $level';
+  }
+
+  @override
+  String memberCount(int count) {
+    return 'メンバー $count人';
+  }
+
+  @override
+  String get warWins => '勝';
+
+  @override
+  String get warTies => '分';
+
+  @override
+  String get warLosses => '敗';
+
+  @override
+  String get winStreak => '連勝';
+
+  @override
+  String get warLog => '戦争ログ';
+
+  @override
+  String get noWarLog => 'まだ戦争の記録がありません。';
+
+  @override
+  String get resultWin => '勝利';
+
+  @override
+  String get resultLose => '敗北';
+
+  @override
+  String get resultTie => '引き分け';
+
+  @override
+  String get unknownOpponent => '不明なクラン';
+
+  @override
+  String teamSizeVs(int size) {
+    return '$size vs $size';
+  }
+
+  @override
+  String get previousPage => '前のページ';
+
+  @override
+  String get nextPage => '次のページ';
+
+  @override
+  String pageN(int page) {
+    return '$pageページ';
+  }
+
+  @override
+  String get languageTooltip => '言語を変更';
 }

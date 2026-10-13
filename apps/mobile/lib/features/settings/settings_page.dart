@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers.dart';
 import '../../l10n/app_localizations.dart';
+import '../language_button.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -13,13 +14,7 @@ class SettingsPage extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     final notifier = ref.read(settingsProvider.notifier);
 
-    // 언어 이름은 해당 언어로 표기한다 (현재 언어와 무관하게 알아볼 수 있도록).
-    final languages = <(Locale?, String)>[
-      (null, l10n.languageSystem),
-      (const Locale('ko'), '한국어'),
-      (const Locale('en'), 'English'),
-      (const Locale('ja'), '日本語'),
-    ];
+    final languages = languageOptions(l10n);
     final themes = <(ThemeMode, String)>[
       (ThemeMode.system, l10n.themeSystem),
       (ThemeMode.light, l10n.themeLight),

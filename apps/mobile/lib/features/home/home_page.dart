@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/providers.dart';
 import '../../core/saved_tag.dart';
 import '../../l10n/app_localizations.dart';
+import '../language_button.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -47,6 +48,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       appBar: AppBar(
         title: Text(l10n.appTitle),
         actions: [
+          const LanguageButton(),
           IconButton(
             tooltip: l10n.settings,
             icon: const Icon(Icons.settings_outlined),

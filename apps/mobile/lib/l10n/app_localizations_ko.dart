@@ -96,4 +96,63 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get retry => '다시 시도';
+
+  @override
+  String clanLevel(int level) {
+    return '레벨 $level';
+  }
+
+  @override
+  String memberCount(int count) {
+    return '멤버 $count명';
+  }
+
+  @override
+  String get warWins => '승';
+
+  @override
+  String get warTies => '무';
+
+  @override
+  String get warLosses => '패';
+
+  @override
+  String get winStreak => '연승';
+
+  @override
+  String get warLog => '전쟁 로그';
+
+  @override
+  String get noWarLog => '아직 전쟁 기록이 없습니다.';
+
+  @override
+  String get resultWin => '승리';
+
+  @override
+  String get resultLose => '패배';
+
+  @override
+  String get resultTie => '무승부';
+
+  @override
+  String get unknownOpponent => '알 수 없는 클랜';
+
+  @override
+  String teamSizeVs(int size) {
+    return '$size vs $size';
+  }
+
+  @override
+  String get previousPage => '이전 페이지';
+
+  @override
+  String get nextPage => '다음 페이지';
+
+  @override
+  String pageN(int page) {
+    return '$page페이지';
+  }
+
+  @override
+  String get languageTooltip => '언어 변경';
 }
