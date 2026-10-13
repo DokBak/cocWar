@@ -15,6 +15,10 @@ void main() {
       expect(clan.tag, '#2PP');
       expect(clan.warWins, 120);
       expect(clan.isWarLogPublic, isTrue);
+      expect(clan.warLeague?.name, 'Champion League III');
+      expect(clan.capitalLeague?.id, 85000016);
+      expect(clan.clanCapitalPoints, 3254);
+      expect(clan.clanBuilderBasePoints, 33188);
       expect(clan.memberList.single.league?.name, 'Legend League');
       expect(clan.memberList.single.townHallLevel, 16);
       expect(clan.memberList.single.leagueTier?.name, 'Electro League 33');

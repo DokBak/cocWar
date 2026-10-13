@@ -56,6 +56,8 @@ _Clan _$ClanFromJson(Map<String, dynamic> json) => _Clan(
       : BadgeUrls.fromJson(json['badgeUrls'] as Map<String, dynamic>),
   clanLevel: (json['clanLevel'] as num?)?.toInt(),
   clanPoints: (json['clanPoints'] as num?)?.toInt(),
+  clanBuilderBasePoints: (json['clanBuilderBasePoints'] as num?)?.toInt(),
+  clanCapitalPoints: (json['clanCapitalPoints'] as num?)?.toInt(),
   requiredTrophies: (json['requiredTrophies'] as num?)?.toInt(),
   warFrequency: json['warFrequency'] as String?,
   warWinStreak: (json['warWinStreak'] as num?)?.toInt(),
@@ -64,6 +66,12 @@ _Clan _$ClanFromJson(Map<String, dynamic> json) => _Clan(
   warLosses: (json['warLosses'] as num?)?.toInt(),
   isWarLogPublic: json['isWarLogPublic'] as bool?,
   members: (json['members'] as num?)?.toInt(),
+  warLeague: json['warLeague'] == null
+      ? null
+      : League.fromJson(json['warLeague'] as Map<String, dynamic>),
+  capitalLeague: json['capitalLeague'] == null
+      ? null
+      : League.fromJson(json['capitalLeague'] as Map<String, dynamic>),
   memberList:
       (json['memberList'] as List<dynamic>?)
           ?.map((e) => ClanMember.fromJson(e as Map<String, dynamic>))
@@ -85,6 +93,8 @@ Map<String, dynamic> _$ClanToJson(_Clan instance) => <String, dynamic>{
   'badgeUrls': instance.badgeUrls?.toJson(),
   'clanLevel': instance.clanLevel,
   'clanPoints': instance.clanPoints,
+  'clanBuilderBasePoints': instance.clanBuilderBasePoints,
+  'clanCapitalPoints': instance.clanCapitalPoints,
   'requiredTrophies': instance.requiredTrophies,
   'warFrequency': instance.warFrequency,
   'warWinStreak': instance.warWinStreak,
@@ -93,6 +103,8 @@ Map<String, dynamic> _$ClanToJson(_Clan instance) => <String, dynamic>{
   'warLosses': instance.warLosses,
   'isWarLogPublic': instance.isWarLogPublic,
   'members': instance.members,
+  'warLeague': instance.warLeague?.toJson(),
+  'capitalLeague': instance.capitalLeague?.toJson(),
   'memberList': instance.memberList.map((e) => e.toJson()).toList(),
   'labels': instance.labels.map((e) => e.toJson()).toList(),
 };

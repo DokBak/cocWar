@@ -8,6 +8,8 @@ import '../../core/providers.dart';
 import '../../core/saved_tag.dart';
 import '../../l10n/app_localizations.dart';
 import '../language_button.dart';
+import '../remote_image.dart';
+import 'history_info.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -109,7 +111,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               if (favorites.isNotEmpty) ...[
                 _SectionHeader(title: l10n.favorites),
-                for (final t in favorites) _TagTile(tag: t),
+                for (final t in favorites)
+                  _TagTile(key: ValueKey('fav-${t.encoded}'), tag: t),
               ],
               if (recent.isNotEmpty) ...[
                 _SectionHeader(
@@ -119,7 +122,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                     child: Text(l10n.clearAll),
                   ),
                 ),
-                for (final t in recent) _TagTile(tag: t),
+                for (final t in recent)
+                  _TagTile(key: ValueKey('recent-${t.encoded}'), tag: t),
               ],
               const SizedBox(height: 32),
               Text(
@@ -156,7 +160,7 @@ class _SectionHeader extends StatelessWidget {
 }
 
 class _TagTile extends ConsumerWidget {
-  const _TagTile({required this.tag});
+  const _TagTile({super.key, required this.tag});
 
   final SavedTag tag;
 
@@ -164,14 +168,25 @@ class _TagTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final isFavorite = ref.watch(favoritesProvider).contains(tag);
+    final isClan = tag.kind == TagKind.clan;
+    // 이름과 리그 아이콘. 받아 오는 동안·실패했을 때는 기본 아이콘과 종류 라벨을 보여준다.
+    final info = ref.watch(historyInfoProvider(tag)).value;
+    final name = info?.name;
+
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(
-        tag.kind == TagKind.clan ? Icons.shield_outlined : Icons.person_outline,
+      leading: RemoteImage(
+        url: info?.iconUrl,
+        size: 40,
+        fallback: isClan ? Icons.shield_outlined : Icons.person_outline,
       ),
       title: Text(tag.tag),
       subtitle: Text(
-        tag.kind == TagKind.clan ? l10n.kindClan : l10n.kindPlayer,
+        name == null
+            ? (isClan ? l10n.kindClan : l10n.kindPlayer)
+            : (isClan
+                  ? l10n.historyClanSubtitle(name)
+                  : l10n.historyPlayerSubtitle(name)),
       ),
       trailing: IconButton(
         tooltip: isFavorite ? l10n.removeFavorite : l10n.addFavorite,

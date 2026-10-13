@@ -75,3 +75,21 @@ String? resolveAsset(Set<String> available, ItemKind kind, String? name) {
   }
   return null;
 }
+
+/// 캐피탈 리그 이름을 에셋 파일 이름으로 바꾼다.
+/// `Champion League III` → `champion-iii`, `Legend League` → `legend`, `Unranked` → `unranked`.
+///
+/// 공식 API는 캐피탈 리그의 이름만 주고 아이콘은 주지 않는다.
+String capitalLeagueSlug(String name) => name
+    .toLowerCase()
+    .replaceAll(' league', '')
+    .replaceAll(RegExp(r'[^a-z0-9]+'), '-')
+    .replaceAll(RegExp(r'^-+|-+$'), '');
+
+/// 캐피탈 리그 아이콘의 에셋 경로. 이미지를 받지 않았거나(`tool/fetch_game_images.sh`) 이름에 맞는
+/// 파일이 없으면 null이라 호출하는 쪽에서 대체 아이콘을 쓴다.
+String? capitalLeagueAsset(Set<String> available, String? name) {
+  if (name == null) return null;
+  final path = 'assets/game/capital_leagues/${capitalLeagueSlug(name)}.webp';
+  return available.contains(path) ? path : null;
+}
