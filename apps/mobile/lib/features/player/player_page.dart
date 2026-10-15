@@ -11,6 +11,7 @@ import '../copyable_tag.dart';
 import '../error_view.dart';
 import '../favorite_button.dart';
 import '../language_button.dart';
+import '../war/war_info_button.dart';
 import '../remote_image.dart';
 import 'player_providers.dart';
 import 'village_tabs.dart';
@@ -53,27 +54,33 @@ class PlayerProfileView extends ConsumerWidget {
         error: e,
         onRetry: () => ref.invalidate(playerProvider(tag)),
       ),
-      data: (p) => RefreshIndicator(
-        onRefresh: () async {
-          ref.invalidate(playerProvider(tag));
-          await ref
-              .read(playerProvider(tag).future)
-              .then<void>((_) {}, onError: (_) {});
-        },
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: contentMaxWidth),
-            child: ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: const EdgeInsets.all(16),
-              children: [
-                _Header(player: p),
-                const SizedBox(height: 12),
-                VillageTabs(player: p),
-              ],
+      // 소속 클랜이 클랜전 중이면 창 아래 가운데에 "클랜전 정보 보기" 버튼이 뜬다.
+      data: (p) => Stack(
+        children: [
+          RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(playerProvider(tag));
+              await ref
+                  .read(playerProvider(tag).future)
+                  .then<void>((_) {}, onError: (_) {});
+            },
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: contentMaxWidth),
+                child: ListView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    _Header(player: p),
+                    const SizedBox(height: 12),
+                    VillageTabs(player: p),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
+          if (p.clan?.tag != null) WarInfoButton(clanTag: p.clan!.tag!),
+        ],
       ),
     );
   }

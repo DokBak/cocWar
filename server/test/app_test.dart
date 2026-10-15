@@ -36,6 +36,19 @@ class FakeApi implements CocApiClient {
       _ok('currentwar $tag', {'state': 'notInWar'});
 
   @override
+  Future<Map<String, dynamic>> getCapitalRaidSeasons(
+    String tag, {
+    int? limit,
+  }) => _ok('capitalraid $tag limit=$limit', {'items': []});
+
+  @override
+  Future<Map<String, dynamic>> getLeagues() => _ok('leagues', {
+    'items': [
+      {'id': 1, 'name': 'Bronze League III'},
+    ],
+  });
+
+  @override
   Future<Map<String, dynamic>> getPlayer(String tag) =>
       _ok('player $tag', {'tag': tag});
 }
@@ -83,6 +96,51 @@ void main() {
   test('전쟁 로그: limit/after 쿼리를 전달한다', () async {
     await get('/clans/%232PP/warlog?limit=10&after=abc');
     expect(api.calls, ['warlog #2PP limit=10 after=abc']);
+  });
+
+  test('캐피탈 레이드: 태그를 정규화하고 limit을 전달한다', () async {
+    final res = await get('/clans/%232pp/capitalraidseasons?limit=1');
+    expect(res.statusCode, 200);
+    expect(api.calls, ['capitalraid #2PP limit=1']);
+  });
+
+  test('캐피탈 레이드: 같은 요청은 캐시된다', () async {
+    await get('/clans/%232PP/capitalraidseasons?limit=1');
+    await get('/clans/%232PP/capitalraidseasons?limit=1');
+    expect(api.calls, hasLength(1));
+  });
+
+  test('캐피탈 레이드: 잘못된 태그는 400이고 업스트림을 호출하지 않는다', () async {
+    final res = await get('/clans/%23ABC/capitalraidseasons');
+    expect(res.statusCode, 400);
+    expect(api.calls, isEmpty);
+  });
+
+  test('캐피탈 레이드: 전쟁 로그 비공개(403 accessDenied)는 403으로 전달한다', () async {
+    api.error = CocApiException(403, reason: 'accessDenied');
+    final res = await get('/clans/%232PP/capitalraidseasons');
+    expect(res.statusCode, 403);
+  });
+
+  test('리그 목록: 그대로 전달하고 하루 캐시 헤더를 붙인다', () async {
+    final res = await get('/leagues');
+    expect(res.statusCode, 200);
+    expect((await json(res))['items'], isNotEmpty);
+    expect(res.headers['cache-control'], 'public, max-age=86400');
+  });
+
+  test('리그 목록: 두 번째 요청은 캐시에서 응답한다', () async {
+    await get('/leagues');
+    await get('/leagues');
+    expect(api.calls, ['leagues']);
+  });
+
+  test('리그 목록: 업스트림 오류는 매핑해서 전달하고 캐시하지 않는다', () async {
+    api.error = CocApiException(503, reason: 'inMaintenance');
+    expect((await get('/leagues')).statusCode, 503);
+    api.error = null;
+    expect((await get('/leagues')).statusCode, 200);
+    expect(api.calls, hasLength(2));
   });
 
   test('같은 요청은 캐시되고 쿼리가 다르면 따로 저장된다', () async {

@@ -49,6 +49,30 @@ class ApiClient {
         ),
       );
 
+  /// 진행 중이거나 막 끝난 클랜전. 전쟁 중이 아니면 `state`만 `notInWar`로 온다.
+  Future<CurrentWar> getCurrentWar(String tag) async =>
+      CurrentWar.fromJson(await _get('/clans/${_enc(tag)}/currentwar'));
+
+  /// 캐피탈 레이드 시즌 목록(최근 시즌부터). 멤버별 공격 수는 최근 시즌에만 들어 있다.
+  Future<CapitalRaidSeasons> getCapitalRaidSeasons(
+    String tag, {
+    int? limit,
+  }) async => CapitalRaidSeasons.fromJson(
+    await _get(
+      '/clans/${_enc(tag)}/capitalraidseasons',
+      query: {'limit': ?limit},
+    ),
+  );
+
+  /// 리그 목록(아이콘 주소 포함). 클랜전 리그는 이름이 같은 이 목록의 아이콘을 쓴다.
+  Future<List<League>> getLeagues() async {
+    final data = await _get('/leagues');
+    return [
+      for (final item in (data['items'] as List? ?? const []))
+        League.fromJson(item as Map<String, dynamic>),
+    ];
+  }
+
   Future<Player> getPlayer(String tag) async =>
       Player.fromJson(await _get('/players/${_enc(tag)}'));
 

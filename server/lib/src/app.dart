@@ -84,6 +84,40 @@ Handler buildHandler(
       ),
     )
     ..get(
+      '/clans/<tag>/capitalraidseasons',
+      (Request r, String tag) => cached(
+        r,
+        tag,
+        'capitalraid',
+        // 레이드 주말에는 공격이 계속 쌓이므로 짧게 캐시한다.
+        const Duration(minutes: 2),
+        (t) => api.getCapitalRaidSeasons(
+          t,
+          limit: int.tryParse(r.url.queryParameters['limit'] ?? ''),
+        ),
+      ),
+    )
+    ..get('/leagues', (Request r) async {
+      // 리그 목록은 거의 바뀌지 않으므로 하루 동안 캐시한다.
+      const ttl = Duration(hours: 24);
+      var data = store.get('leagues');
+      if (data == null) {
+        try {
+          data = await api.getLeagues();
+        } on CocApiException catch (e) {
+          return _fromUpstream(e, warn);
+        }
+        store.set('leagues', data, ttl);
+      }
+      return Response.ok(
+        jsonEncode(data),
+        headers: {
+          ..._json,
+          'cache-control': 'public, max-age=${ttl.inSeconds}',
+        },
+      );
+    })
+    ..get(
       '/players/<tag>',
       (Request r, String tag) =>
           cached(r, tag, 'player', const Duration(minutes: 2), api.getPlayer),

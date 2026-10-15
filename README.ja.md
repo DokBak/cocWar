@@ -1,0 +1,84 @@
+# cocWar
+
+[한국어](README.md) | **日本語**
+
+Clash of Clans のクラン戦統計アプリ (War Report に近い機能)。Flutter(iOS/Android/Web) + Dart shelf プロキシサーバー。
+
+## 機能
+- **ホーム**: クラン・プレイヤーのタグ検索、最近の検索(リーグアイコン付き)、お気に入り、韓国語・英語・日本語、ライト/ダークテーマ
+- **クラン**: バッジ・レベル・勝敗・連勝、クラン戦リーグ・キャピタルリーグ、メンバー一覧(クランキャピタル襲撃の攻撃権使用数)、戦争ログ(10件ずつのページ)
+- **プレイヤー**: リーグ・タウンホール・所属クラン、統計、ホームビレッジ/ビルダーベースのヒーロー・装備・兵・呪文のレベル(タウンホール別の最高レベルを表示)
+- **現在のクラン戦**: 準備日・戦闘日・終了の状態、残り時間、両クランのスコア比較、メンバー別の攻撃一覧、勝敗の見通し
+- **サーバー**: CoC 公式 API のプロキシ(トークンはサーバーのみ)、TTL キャッシュ、エラー種別の変換
+
+## 進捗
+| Phase | 内容 | 状態 |
+|---|---|---|
+| 0 | モノレポの骨組み (Flutter アプリ、shelf サーバー、共通モデル) | ✅ |
+| 1 | 共通モデル (`coc_models`) | ✅ |
+| 2 | プロキシサーバー | ✅ |
+| 3 | アプリの基本構成 (多言語、テーマ、ホーム検索・お気に入り) | ✅ |
+| 4 | クラン画面と戦争ログ | ✅ |
+| 5 | プレイヤープロフィールとクラン画面の改善 | ✅ |
+| 6 | 現在のクラン戦画面とクラン画面の改善 | 🟡 レビュー中 |
+
+次のステップ
+1. Phase 7: クラン戦リーグ(CWL) — グループ順位、ラウンド別の結果、メンバーの成績
+2. ゲーム画像を公式 Fan Kit の画像に置き換え (下記 TODO)
+3. デプロイ — サーバーは固定 IP の VPS(Docker)、アプリは Web ホスティング・ストア
+4. 今後の候補: 戦争記録の収集(DB)、レジェンドリーグの追跡、プッシュ通知、ホームウィジェット
+
+## 構成
+- `apps/mobile` — Flutter アプリ
+- `server` — CoC 公式 API のプロキシ (固定 IP が必要、トークンは環境変数 `COC_API_TOKEN`)
+- `packages/coc_models` — アプリ・サーバー共通のモデル
+
+## 開発
+```
+dart pub get          # ワークスペース全体の依存関係
+dart analyze
+```
+
+## 実行
+```
+# 1) プロキシサーバー (server/.env に COC_API_TOKEN が必要、トークンは許可された IP からのみ動作)
+cd server && dart run bin/server.dart          # http://localhost:8080
+
+# 2) アプリ
+cd apps/mobile
+flutter run -d chrome                           # Web
+flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8080   # Android エミュレーター
+flutter gen-l10n                                # ARB(ko/en/ja) を変更した後
+```
+サーバーイメージ: `docker build -f server/Dockerfile -t cocwar-server .` (リポジトリのルートで実行)
+
+## ゲーム画像とレベル表
+ヒーロー・装備・兵・呪文・キャピタルリーグのアイコンは Supercell の著作物のため、**リポジトリには含めません。** アプリを実行する前に一度取得してください。
+```
+./tool/fetch_game_images.sh     # apps/mobile/assets/game/ にアイコンをダウンロード (git から除外)
+```
+- 画像がなくてもアプリは動作し、該当する項目は「画像なし」の代替画像で表示されます。
+- 取得元は `clash-of-clans-data`(MIT) パッケージです。新しい装備・兵が出たのに画像がない場合は、パッケージの更新を待ってからスクリプトの `VERSION` を上げて再実行してください。
+- 画像は加工せず表示のみ行います。[Supercell ファンコンテンツポリシー](https://supercell.com/en/fan-content-policy/)に従います。
+
+公式 API が提供しない情報(タウンホール別の最高レベル、装備が属するヒーロー、兵・呪文の資源区分)は、同じパッケージのデータから計算した表を使います。画像ではなく数値・分類のため、リポジトリに含めています(`apps/mobile/assets/data/level_caps.json`、`item_groups.json`)。
+```
+./tool/gen_game_data.sh         # 新しいタウンホール・装備が出たら VERSION を上げて再生成
+```
+- パッケージにまだない新しい装備は、`tool/gen_game_data.mjs` の `EXTRA_EQUIPMENT_HERO` で手動でヒーローを指定できます(例: Portal Pendant)。
+
+## TODO: ゲーム画像を公式 Fan Kit の画像に置き換え
+現在の画像はコミュニティパッケージ(元の出典は Fandom wiki)から取得しています。アプリをデプロイする前に Supercell 公式 Fan Kit の画像に置き換えます。
+- [ ] [Fan Kit](https://fankit.supercell.com/) で規約を確認し、Clash of Clans の画像を **PNG(ORIGINAL)**、最大解像度で一括ダウンロード
+      (透過背景を保持した無変換の原本。JPEG は透過背景なし、AVIF・HEIF は Flutter の対応がプラットフォームごとに異なる)
+- [ ] 解凍して `~/Downloads/fankit` に置く (プロジェクトの外、サブフォルダ・ファイル名はダウンロードしたまま)
+- [ ] アプリで使う項目と照合し、ある/ない項目の表を作成 (ヒーロー・装備・兵・攻城兵器・ペット・呪文・ビルダーベース・キャピタルリーグ)
+- [ ] `tool/import_fankit_images.sh <フォルダ>` を作成: Fan Kit のファイル名 → アプリの命名規則(`gameSlug()`)に対応させ、`apps/mobile/assets/game/<種類>/<名前>.png` に**変換せずコピー**
+- [ ] アプリのパス規則(`game_assets.dart`)を `.png`(Fan Kit) 優先 → `.webp`(パッケージ) を代替に変更 + テスト
+- [ ] `.gitignore` に `apps/mobile/assets/game/**/*.png` を追加 (画像は引き続きリポジトリに含めない)
+- [ ] アプリ画面に「非公式であり、Supercell の承認を受けていません」という表記を追加 (ファンコンテンツポリシーの要件)
+- [ ] Fan Kit にない項目は、パッケージの画像を使い続けるか、テキスト・代替アイコンにするかを決める
+
+参考: Fan Kit ポータルはログインと規約への同意が必要なため、自動ダウンロードはしません。
+
+Supercell とは無関係の非公式ファンプロジェクトです。

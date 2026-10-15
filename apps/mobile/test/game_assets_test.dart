@@ -4,6 +4,7 @@ import 'package:cocwar_mobile/features/player/item_tile.dart';
 import 'package:cocwar_mobile/features/player/level_caps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cocwar_mobile/core/providers.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -130,6 +131,81 @@ void main() {
     });
   });
 
+  group('캐피탈 리그 이미지 경로', () {
+    const names = [
+      'Unranked',
+      'Bronze League III',
+      'Bronze League II',
+      'Bronze League I',
+      'Silver League III',
+      'Silver League II',
+      'Silver League I',
+      'Gold League III',
+      'Gold League II',
+      'Gold League I',
+      'Crystal League III',
+      'Crystal League II',
+      'Crystal League I',
+      'Master League III',
+      'Master League II',
+      'Master League I',
+      'Champion League III',
+      'Champion League II',
+      'Champion League I',
+      'Titan League III',
+      'Titan League II',
+      'Titan League I',
+      'Legend League',
+    ];
+    // tool/fetch_game_images.sh가 만드는 파일 이름 (패키지의 clan-capital/leagues 파일 23개)
+    const files = [
+      'unranked',
+      'bronze-iii',
+      'bronze-ii',
+      'bronze-i',
+      'silver-iii',
+      'silver-ii',
+      'silver-i',
+      'gold-iii',
+      'gold-ii',
+      'gold-i',
+      'crystal-iii',
+      'crystal-ii',
+      'crystal-i',
+      'master-iii',
+      'master-ii',
+      'master-i',
+      'champion-iii',
+      'champion-ii',
+      'champion-i',
+      'titan-iii',
+      'titan-ii',
+      'titan-i',
+      'legend',
+    ];
+
+    test('캐피탈 리그 이름 23개가 모두 파일 이름 규칙에 대응한다', () {
+      expect([for (final n in names) capitalLeagueSlug(n)], files);
+    });
+
+    test('특수한 이름', () {
+      expect(capitalLeagueSlug('Legend League'), 'legend');
+      expect(capitalLeagueSlug('Unranked'), 'unranked');
+      expect(capitalLeagueSlug('Champion League III'), 'champion-iii');
+    });
+
+    test('경로: 받아 둔 이미지가 있을 때만 돌려준다', () {
+      const available = {'assets/game/capital_leagues/champion-iii.webp'};
+      expect(
+        capitalLeagueAsset(available, 'Champion League III'),
+        'assets/game/capital_leagues/champion-iii.webp',
+      );
+      expect(capitalLeagueAsset(available, 'Legend League'), isNull);
+      expect(capitalLeagueAsset(const {}, 'Champion League III'), isNull);
+      expect(capitalLeagueAsset(available, null), isNull);
+    });
+  });
+
   group('superTroopBaseName', () {
     test('Super X는 X, 이름이 다른 슈퍼 부대는 예외 표로', () {
       expect(superTroopBaseName('Super Barbarian'), 'Barbarian');
@@ -165,6 +241,7 @@ void main() {
     }) async {
       await tester.pumpWidget(
         ProviderScope(
+          retry: noAutoRetry,
           // 같은 테스트에서 여러 번 그려도 override가 새로 적용되도록 매번 새 스코프를 만든다.
           key: UniqueKey(),
           overrides: [

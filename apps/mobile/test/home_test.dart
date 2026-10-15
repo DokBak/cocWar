@@ -24,6 +24,7 @@ Future<void> pumpApp(
   final prefs = await SharedPreferences.getInstance();
   await tester.pumpWidget(
     ProviderScope(
+      retry: noAutoRetry,
       overrides: [
         sharedPreferencesProvider.overrideWithValue(prefs),
         apiClientProvider.overrideWithValue(_FakeApi()),
@@ -82,6 +83,12 @@ void main() {
 
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getString('settings.locale'), 'ja');
+  });
+
+  testWidgets('언어 버튼은 지구본 모양이다', (tester) async {
+    await pumpApp(tester, {'settings.locale': 'en'});
+    expect(find.byIcon(Icons.language), findsOneWidget);
+    expect(find.byIcon(Icons.translate), findsNothing);
   });
 
   testWidgets('언어 버튼으로 홈 화면에서 바로 언어를 바꾼다', (tester) async {

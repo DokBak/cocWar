@@ -176,12 +176,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get statWarStars => '전쟁 별';
 
   @override
-  String get statAttackWins => '공격 승리';
-
-  @override
-  String get statDefenseWins => '방어 승리';
-
-  @override
   String get statDonations => '기부';
 
   @override
@@ -281,4 +275,145 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get selectMemberHint => '멤버를 선택하면 여기에 프로필이 표시됩니다.';
+
+  @override
+  String get warPageTitle => '클랜전';
+
+  @override
+  String get warInfoButton => '클랜전 정보 보기';
+
+  @override
+  String get warStatePreparation => '준비일';
+
+  @override
+  String get warStateInWar => '전투일';
+
+  @override
+  String get warStateEnded => '전쟁 종료';
+
+  @override
+  String get warNone => '진행 중인 전쟁이 없습니다.';
+
+  @override
+  String warStartsIn(String time) {
+    return '시작까지 $time';
+  }
+
+  @override
+  String warEndsIn(String time) {
+    return '종료까지 $time';
+  }
+
+  @override
+  String durationHM(int hours, int minutes) {
+    return '$hours시간 $minutes분';
+  }
+
+  @override
+  String durationM(int minutes) {
+    return '$minutes분';
+  }
+
+  @override
+  String warAttacksPerMember(int count) {
+    return '1인당 공격 $count회';
+  }
+
+  @override
+  String get tabOurClan => '우리 클랜';
+
+  @override
+  String get tabOpponentClan => '상대 클랜';
+
+  @override
+  String warAttacksUsed(int used, int total) {
+    return '공격 $used/$total';
+  }
+
+  @override
+  String get warUnused => '미사용';
+
+  @override
+  String get warDefense => '방어';
+
+  @override
+  String get warNoDefense => '공격받지 않음';
+
+  @override
+  String get outlookTitle => '승리 전망';
+
+  @override
+  String outlookLeadingStars(int n) {
+    return '$n별 앞서고 있습니다';
+  }
+
+  @override
+  String outlookLeadingDestruction(String us, String them) {
+    return '별 동점, 파괴율 $us% 대 $them%로 앞서고 있습니다';
+  }
+
+  @override
+  String get outlookTied => '별과 파괴율이 모두 같습니다';
+
+  @override
+  String outlookTrailingStars(int n) {
+    return '앞서려면 $n별이 더 필요합니다';
+  }
+
+  @override
+  String outlookTrailingDestruction(String us, String them) {
+    return '별 동점, 파괴율 $them%를 넘어야 합니다 (현재 $us%)';
+  }
+
+  @override
+  String outlookRemainingAttacks(int n) {
+    return '남은 공격 $n회';
+  }
+
+  @override
+  String outlookAvailableStars(int n) {
+    return '남은 획득 가능 별 $n개';
+  }
+
+  @override
+  String get outlookCannotWin => '남은 별로는 역전이 어렵습니다.';
+
+  @override
+  String get outlookNote => '상대의 남은 공격은 반영하지 않은 추정입니다.';
+
+  @override
+  String capitalRaidCaption(String period, String state) {
+    return '캐피탈 레이드 · $period · $state';
+  }
+
+  @override
+  String get raidStateOngoing => '진행 중';
+
+  @override
+  String get raidStateEnded => '종료';
+
+  @override
+  String capitalAttacksTooltip(int used, int total) {
+    return '캐피탈 공격권 $used/$total';
+  }
+
+  @override
+  String historyClanSubtitle(String name) {
+    return '클랜 : $name';
+  }
+
+  @override
+  String historyPlayerSubtitle(String name) {
+    return '플레이어 : $name';
+  }
+
+  @override
+  String warLeagueTooltip(String name) {
+    return '클랜전 리그: $name';
+  }
+
+  @override
+  String capitalLeagueTooltip(String name, String trophies) {
+    return '캐피탈 리그: $name · 캐피탈 트로피 $trophies';
+  }
 }

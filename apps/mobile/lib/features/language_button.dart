@@ -22,7 +22,7 @@ class LanguageButton extends ConsumerWidget {
     final current = ref.watch(settingsProvider).locale;
     return PopupMenuButton<Locale?>(
       tooltip: l10n.languageTooltip,
-      icon: const Icon(Icons.translate),
+      icon: const Icon(Icons.language),
       initialValue: current,
       onSelected: ref.read(settingsProvider.notifier).setLocale,
       itemBuilder: (_) => [

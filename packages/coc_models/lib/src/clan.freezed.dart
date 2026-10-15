@@ -370,7 +370,9 @@ $LeagueCopyWith<$Res>? get leagueTier {
 /// @nodoc
 mixin _$Clan {
 
- String get tag; String? get name; String? get type; String? get description; Location? get location; BadgeUrls? get badgeUrls; int? get clanLevel; int? get clanPoints; int? get requiredTrophies; String? get warFrequency; int? get warWinStreak; int? get warWins; int? get warTies; int? get warLosses; bool? get isWarLogPublic; int? get members; List<ClanMember> get memberList; List<Label> get labels;
+ String get tag; String? get name; String? get type; String? get description; Location? get location; BadgeUrls? get badgeUrls; int? get clanLevel; int? get clanPoints; int? get clanBuilderBasePoints;/// 캐피탈 트로피.
+ int? get clanCapitalPoints; int? get requiredTrophies; String? get warFrequency; int? get warWinStreak; int? get warWins; int? get warTies; int? get warLosses; bool? get isWarLogPublic; int? get members;/// 클랜전(리그전) 리그. 이름만 오고 아이콘 주소는 없다 — 이름이 같은 기존 리그(`/leagues`)의 아이콘을 쓴다.
+ League? get warLeague; League? get capitalLeague; List<ClanMember> get memberList; List<Label> get labels;
 /// Create a copy of Clan
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -384,20 +386,20 @@ $ClanCopyWith<Clan> get copyWith => _$ClanCopyWithImpl<Clan>(this as Clan, _$ide
 @override
 bool operator ==(Object other) {
   final _this = this as Clan;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Clan&&(identical(other.tag, _this.tag) || other.tag == _this.tag)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.location, _this.location) || other.location == _this.location)&&(identical(other.badgeUrls, _this.badgeUrls) || other.badgeUrls == _this.badgeUrls)&&(identical(other.clanLevel, _this.clanLevel) || other.clanLevel == _this.clanLevel)&&(identical(other.clanPoints, _this.clanPoints) || other.clanPoints == _this.clanPoints)&&(identical(other.requiredTrophies, _this.requiredTrophies) || other.requiredTrophies == _this.requiredTrophies)&&(identical(other.warFrequency, _this.warFrequency) || other.warFrequency == _this.warFrequency)&&(identical(other.warWinStreak, _this.warWinStreak) || other.warWinStreak == _this.warWinStreak)&&(identical(other.warWins, _this.warWins) || other.warWins == _this.warWins)&&(identical(other.warTies, _this.warTies) || other.warTies == _this.warTies)&&(identical(other.warLosses, _this.warLosses) || other.warLosses == _this.warLosses)&&(identical(other.isWarLogPublic, _this.isWarLogPublic) || other.isWarLogPublic == _this.isWarLogPublic)&&(identical(other.members, _this.members) || other.members == _this.members)&&const DeepCollectionEquality().equals(other.memberList, _this.memberList)&&const DeepCollectionEquality().equals(other.labels, _this.labels));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Clan&&(identical(other.tag, _this.tag) || other.tag == _this.tag)&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.description, _this.description) || other.description == _this.description)&&(identical(other.location, _this.location) || other.location == _this.location)&&(identical(other.badgeUrls, _this.badgeUrls) || other.badgeUrls == _this.badgeUrls)&&(identical(other.clanLevel, _this.clanLevel) || other.clanLevel == _this.clanLevel)&&(identical(other.clanPoints, _this.clanPoints) || other.clanPoints == _this.clanPoints)&&(identical(other.clanBuilderBasePoints, _this.clanBuilderBasePoints) || other.clanBuilderBasePoints == _this.clanBuilderBasePoints)&&(identical(other.clanCapitalPoints, _this.clanCapitalPoints) || other.clanCapitalPoints == _this.clanCapitalPoints)&&(identical(other.requiredTrophies, _this.requiredTrophies) || other.requiredTrophies == _this.requiredTrophies)&&(identical(other.warFrequency, _this.warFrequency) || other.warFrequency == _this.warFrequency)&&(identical(other.warWinStreak, _this.warWinStreak) || other.warWinStreak == _this.warWinStreak)&&(identical(other.warWins, _this.warWins) || other.warWins == _this.warWins)&&(identical(other.warTies, _this.warTies) || other.warTies == _this.warTies)&&(identical(other.warLosses, _this.warLosses) || other.warLosses == _this.warLosses)&&(identical(other.isWarLogPublic, _this.isWarLogPublic) || other.isWarLogPublic == _this.isWarLogPublic)&&(identical(other.members, _this.members) || other.members == _this.members)&&(identical(other.warLeague, _this.warLeague) || other.warLeague == _this.warLeague)&&(identical(other.capitalLeague, _this.capitalLeague) || other.capitalLeague == _this.capitalLeague)&&const DeepCollectionEquality().equals(other.memberList, _this.memberList)&&const DeepCollectionEquality().equals(other.labels, _this.labels));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Clan;
-  return Object.hash(runtimeType,_this.tag,_this.name,_this.type,_this.description,_this.location,_this.badgeUrls,_this.clanLevel,_this.clanPoints,_this.requiredTrophies,_this.warFrequency,_this.warWinStreak,_this.warWins,_this.warTies,_this.warLosses,_this.isWarLogPublic,_this.members,const DeepCollectionEquality().hash(_this.memberList),const DeepCollectionEquality().hash(_this.labels));
+  return Object.hashAll([runtimeType,_this.tag,_this.name,_this.type,_this.description,_this.location,_this.badgeUrls,_this.clanLevel,_this.clanPoints,_this.clanBuilderBasePoints,_this.clanCapitalPoints,_this.requiredTrophies,_this.warFrequency,_this.warWinStreak,_this.warWins,_this.warTies,_this.warLosses,_this.isWarLogPublic,_this.members,_this.warLeague,_this.capitalLeague,const DeepCollectionEquality().hash(_this.memberList),const DeepCollectionEquality().hash(_this.labels)]);
 }
 
 @override
 String toString() {
   final _this = this as Clan;
-  return 'Clan(tag: ${_this.tag}, name: ${_this.name}, type: ${_this.type}, description: ${_this.description}, location: ${_this.location}, badgeUrls: ${_this.badgeUrls}, clanLevel: ${_this.clanLevel}, clanPoints: ${_this.clanPoints}, requiredTrophies: ${_this.requiredTrophies}, warFrequency: ${_this.warFrequency}, warWinStreak: ${_this.warWinStreak}, warWins: ${_this.warWins}, warTies: ${_this.warTies}, warLosses: ${_this.warLosses}, isWarLogPublic: ${_this.isWarLogPublic}, members: ${_this.members}, memberList: ${_this.memberList}, labels: ${_this.labels})';
+  return 'Clan(tag: ${_this.tag}, name: ${_this.name}, type: ${_this.type}, description: ${_this.description}, location: ${_this.location}, badgeUrls: ${_this.badgeUrls}, clanLevel: ${_this.clanLevel}, clanPoints: ${_this.clanPoints}, clanBuilderBasePoints: ${_this.clanBuilderBasePoints}, clanCapitalPoints: ${_this.clanCapitalPoints}, requiredTrophies: ${_this.requiredTrophies}, warFrequency: ${_this.warFrequency}, warWinStreak: ${_this.warWinStreak}, warWins: ${_this.warWins}, warTies: ${_this.warTies}, warLosses: ${_this.warLosses}, isWarLogPublic: ${_this.isWarLogPublic}, members: ${_this.members}, warLeague: ${_this.warLeague}, capitalLeague: ${_this.capitalLeague}, memberList: ${_this.memberList}, labels: ${_this.labels})';
 }
 
 
@@ -408,11 +410,11 @@ abstract mixin class $ClanCopyWith<$Res>  {
   factory $ClanCopyWith(Clan value, $Res Function(Clan) _then) = _$ClanCopyWithImpl;
 @useResult
 $Res call({
- String tag, String? name, String? type, String? description, Location? location, BadgeUrls? badgeUrls, int? clanLevel, int? clanPoints, int? requiredTrophies, String? warFrequency, int? warWinStreak, int? warWins, int? warTies, int? warLosses, bool? isWarLogPublic, int? members, List<ClanMember> memberList, List<Label> labels
+ String tag, String? name, String? type, String? description, Location? location, BadgeUrls? badgeUrls, int? clanLevel, int? clanPoints, int? clanBuilderBasePoints, int? clanCapitalPoints, int? requiredTrophies, String? warFrequency, int? warWinStreak, int? warWins, int? warTies, int? warLosses, bool? isWarLogPublic, int? members, League? warLeague, League? capitalLeague, List<ClanMember> memberList, List<Label> labels
 });
 
 
-$LocationCopyWith<$Res>? get location;$BadgeUrlsCopyWith<$Res>? get badgeUrls;
+$LocationCopyWith<$Res>? get location;$BadgeUrlsCopyWith<$Res>? get badgeUrls;$LeagueCopyWith<$Res>? get warLeague;$LeagueCopyWith<$Res>? get capitalLeague;
 
 }
 /// @nodoc
@@ -425,7 +427,7 @@ class _$ClanCopyWithImpl<$Res>
 
 /// Create a copy of Clan
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? tag = null,Object? name = freezed,Object? type = freezed,Object? description = freezed,Object? location = freezed,Object? badgeUrls = freezed,Object? clanLevel = freezed,Object? clanPoints = freezed,Object? requiredTrophies = freezed,Object? warFrequency = freezed,Object? warWinStreak = freezed,Object? warWins = freezed,Object? warTies = freezed,Object? warLosses = freezed,Object? isWarLogPublic = freezed,Object? members = freezed,Object? memberList = null,Object? labels = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? tag = null,Object? name = freezed,Object? type = freezed,Object? description = freezed,Object? location = freezed,Object? badgeUrls = freezed,Object? clanLevel = freezed,Object? clanPoints = freezed,Object? clanBuilderBasePoints = freezed,Object? clanCapitalPoints = freezed,Object? requiredTrophies = freezed,Object? warFrequency = freezed,Object? warWinStreak = freezed,Object? warWins = freezed,Object? warTies = freezed,Object? warLosses = freezed,Object? isWarLogPublic = freezed,Object? members = freezed,Object? warLeague = freezed,Object? capitalLeague = freezed,Object? memberList = null,Object? labels = null,}) {
   return _then(Clan(
 tag: null == tag ? _self.tag : tag // ignore: cast_nullable_to_non_nullable
 as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -435,6 +437,8 @@ as String?,location: freezed == location ? _self.location : location // ignore: 
 as Location?,badgeUrls: freezed == badgeUrls ? _self.badgeUrls : badgeUrls // ignore: cast_nullable_to_non_nullable
 as BadgeUrls?,clanLevel: freezed == clanLevel ? _self.clanLevel : clanLevel // ignore: cast_nullable_to_non_nullable
 as int?,clanPoints: freezed == clanPoints ? _self.clanPoints : clanPoints // ignore: cast_nullable_to_non_nullable
+as int?,clanBuilderBasePoints: freezed == clanBuilderBasePoints ? _self.clanBuilderBasePoints : clanBuilderBasePoints // ignore: cast_nullable_to_non_nullable
+as int?,clanCapitalPoints: freezed == clanCapitalPoints ? _self.clanCapitalPoints : clanCapitalPoints // ignore: cast_nullable_to_non_nullable
 as int?,requiredTrophies: freezed == requiredTrophies ? _self.requiredTrophies : requiredTrophies // ignore: cast_nullable_to_non_nullable
 as int?,warFrequency: freezed == warFrequency ? _self.warFrequency : warFrequency // ignore: cast_nullable_to_non_nullable
 as String?,warWinStreak: freezed == warWinStreak ? _self.warWinStreak : warWinStreak // ignore: cast_nullable_to_non_nullable
@@ -443,7 +447,9 @@ as int?,warTies: freezed == warTies ? _self.warTies : warTies // ignore: cast_nu
 as int?,warLosses: freezed == warLosses ? _self.warLosses : warLosses // ignore: cast_nullable_to_non_nullable
 as int?,isWarLogPublic: freezed == isWarLogPublic ? _self.isWarLogPublic : isWarLogPublic // ignore: cast_nullable_to_non_nullable
 as bool?,members: freezed == members ? _self.members : members // ignore: cast_nullable_to_non_nullable
-as int?,memberList: null == memberList ? _self.memberList : memberList // ignore: cast_nullable_to_non_nullable
+as int?,warLeague: freezed == warLeague ? _self.warLeague : warLeague // ignore: cast_nullable_to_non_nullable
+as League?,capitalLeague: freezed == capitalLeague ? _self.capitalLeague : capitalLeague // ignore: cast_nullable_to_non_nullable
+as League?,memberList: null == memberList ? _self.memberList : memberList // ignore: cast_nullable_to_non_nullable
 as List<ClanMember>,labels: null == labels ? _self.labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,
   ));
@@ -471,6 +477,30 @@ $BadgeUrlsCopyWith<$Res>? get badgeUrls {
 
   return $BadgeUrlsCopyWith<$Res>(_self.badgeUrls!, (value) {
     return _then(_self.copyWith(badgeUrls: value));
+  });
+}/// Create a copy of Clan
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get warLeague {
+    if (_self.warLeague == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.warLeague!, (value) {
+    return _then(_self.copyWith(warLeague: value));
+  });
+}/// Create a copy of Clan
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get capitalLeague {
+    if (_self.capitalLeague == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.capitalLeague!, (value) {
+    return _then(_self.copyWith(capitalLeague: value));
   });
 }
 }
@@ -554,10 +584,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  List<ClanMember> memberList,  List<Label> labels)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? clanBuilderBasePoints,  int? clanCapitalPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  League? warLeague,  League? capitalLeague,  List<ClanMember> memberList,  List<Label> labels)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Clan() when $default != null:
-return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.memberList,_that.labels);case _:
+return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.clanBuilderBasePoints,_that.clanCapitalPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.warLeague,_that.capitalLeague,_that.memberList,_that.labels);case _:
   return orElse();
 
 }
@@ -575,10 +605,10 @@ return $default(_that.tag,_that.name,_that.type,_that.description,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  List<ClanMember> memberList,  List<Label> labels)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? clanBuilderBasePoints,  int? clanCapitalPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  League? warLeague,  League? capitalLeague,  List<ClanMember> memberList,  List<Label> labels)  $default,) {final _that = this;
 switch (_that) {
 case _Clan():
-return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.memberList,_that.labels);case _:
+return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.clanBuilderBasePoints,_that.clanCapitalPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.warLeague,_that.capitalLeague,_that.memberList,_that.labels);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -595,10 +625,10 @@ return $default(_that.tag,_that.name,_that.type,_that.description,_that.location
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  List<ClanMember> memberList,  List<Label> labels)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String tag,  String? name,  String? type,  String? description,  Location? location,  BadgeUrls? badgeUrls,  int? clanLevel,  int? clanPoints,  int? clanBuilderBasePoints,  int? clanCapitalPoints,  int? requiredTrophies,  String? warFrequency,  int? warWinStreak,  int? warWins,  int? warTies,  int? warLosses,  bool? isWarLogPublic,  int? members,  League? warLeague,  League? capitalLeague,  List<ClanMember> memberList,  List<Label> labels)?  $default,) {final _that = this;
 switch (_that) {
 case _Clan() when $default != null:
-return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.memberList,_that.labels);case _:
+return $default(_that.tag,_that.name,_that.type,_that.description,_that.location,_that.badgeUrls,_that.clanLevel,_that.clanPoints,_that.clanBuilderBasePoints,_that.clanCapitalPoints,_that.requiredTrophies,_that.warFrequency,_that.warWinStreak,_that.warWins,_that.warTies,_that.warLosses,_that.isWarLogPublic,_that.members,_that.warLeague,_that.capitalLeague,_that.memberList,_that.labels);case _:
   return null;
 
 }
@@ -610,7 +640,7 @@ return $default(_that.tag,_that.name,_that.type,_that.description,_that.location
 @JsonSerializable()
 
 class _Clan implements Clan {
-  const _Clan({required this.tag, this.name, this.type, this.description, this.location, this.badgeUrls, this.clanLevel, this.clanPoints, this.requiredTrophies, this.warFrequency, this.warWinStreak, this.warWins, this.warTies, this.warLosses, this.isWarLogPublic, this.members,  List<ClanMember> memberList = const <ClanMember>[],  List<Label> labels = const <Label>[]}): _memberList = memberList,_labels = labels;
+  const _Clan({required this.tag, this.name, this.type, this.description, this.location, this.badgeUrls, this.clanLevel, this.clanPoints, this.clanBuilderBasePoints, this.clanCapitalPoints, this.requiredTrophies, this.warFrequency, this.warWinStreak, this.warWins, this.warTies, this.warLosses, this.isWarLogPublic, this.members, this.warLeague, this.capitalLeague,  List<ClanMember> memberList = const <ClanMember>[],  List<Label> labels = const <Label>[]}): _memberList = memberList,_labels = labels;
   factory _Clan.fromJson(Map<String, dynamic> json) => _$ClanFromJson(json);
 
 @override final  String tag;
@@ -621,6 +651,9 @@ class _Clan implements Clan {
 @override final  BadgeUrls? badgeUrls;
 @override final  int? clanLevel;
 @override final  int? clanPoints;
+@override final  int? clanBuilderBasePoints;
+/// 캐피탈 트로피.
+@override final  int? clanCapitalPoints;
 @override final  int? requiredTrophies;
 @override final  String? warFrequency;
 @override final  int? warWinStreak;
@@ -629,6 +662,9 @@ class _Clan implements Clan {
 @override final  int? warLosses;
 @override final  bool? isWarLogPublic;
 @override final  int? members;
+/// 클랜전(리그전) 리그. 이름만 오고 아이콘 주소는 없다 — 이름이 같은 기존 리그(`/leagues`)의 아이콘을 쓴다.
+@override final  League? warLeague;
+@override final  League? capitalLeague;
  final  List<ClanMember> _memberList;
 @override@JsonKey() List<ClanMember> get memberList {
   if (_memberList is EqualUnmodifiableListView) return _memberList;
@@ -657,18 +693,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Clan&&(identical(other.tag, tag) || other.tag == tag)&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.description, description) || other.description == description)&&(identical(other.location, location) || other.location == location)&&(identical(other.badgeUrls, badgeUrls) || other.badgeUrls == badgeUrls)&&(identical(other.clanLevel, clanLevel) || other.clanLevel == clanLevel)&&(identical(other.clanPoints, clanPoints) || other.clanPoints == clanPoints)&&(identical(other.requiredTrophies, requiredTrophies) || other.requiredTrophies == requiredTrophies)&&(identical(other.warFrequency, warFrequency) || other.warFrequency == warFrequency)&&(identical(other.warWinStreak, warWinStreak) || other.warWinStreak == warWinStreak)&&(identical(other.warWins, warWins) || other.warWins == warWins)&&(identical(other.warTies, warTies) || other.warTies == warTies)&&(identical(other.warLosses, warLosses) || other.warLosses == warLosses)&&(identical(other.isWarLogPublic, isWarLogPublic) || other.isWarLogPublic == isWarLogPublic)&&(identical(other.members, members) || other.members == members)&&const DeepCollectionEquality().equals(other.memberList, _memberList)&&const DeepCollectionEquality().equals(other.labels, _labels));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Clan&&(identical(other.tag, tag) || other.tag == tag)&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.description, description) || other.description == description)&&(identical(other.location, location) || other.location == location)&&(identical(other.badgeUrls, badgeUrls) || other.badgeUrls == badgeUrls)&&(identical(other.clanLevel, clanLevel) || other.clanLevel == clanLevel)&&(identical(other.clanPoints, clanPoints) || other.clanPoints == clanPoints)&&(identical(other.clanBuilderBasePoints, clanBuilderBasePoints) || other.clanBuilderBasePoints == clanBuilderBasePoints)&&(identical(other.clanCapitalPoints, clanCapitalPoints) || other.clanCapitalPoints == clanCapitalPoints)&&(identical(other.requiredTrophies, requiredTrophies) || other.requiredTrophies == requiredTrophies)&&(identical(other.warFrequency, warFrequency) || other.warFrequency == warFrequency)&&(identical(other.warWinStreak, warWinStreak) || other.warWinStreak == warWinStreak)&&(identical(other.warWins, warWins) || other.warWins == warWins)&&(identical(other.warTies, warTies) || other.warTies == warTies)&&(identical(other.warLosses, warLosses) || other.warLosses == warLosses)&&(identical(other.isWarLogPublic, isWarLogPublic) || other.isWarLogPublic == isWarLogPublic)&&(identical(other.members, members) || other.members == members)&&(identical(other.warLeague, warLeague) || other.warLeague == warLeague)&&(identical(other.capitalLeague, capitalLeague) || other.capitalLeague == capitalLeague)&&const DeepCollectionEquality().equals(other.memberList, _memberList)&&const DeepCollectionEquality().equals(other.labels, _labels));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,tag,name,type,description,location,badgeUrls,clanLevel,clanPoints,requiredTrophies,warFrequency,warWinStreak,warWins,warTies,warLosses,isWarLogPublic,members,const DeepCollectionEquality().hash(_memberList),const DeepCollectionEquality().hash(_labels));
+    return Object.hashAll([runtimeType,tag,name,type,description,location,badgeUrls,clanLevel,clanPoints,clanBuilderBasePoints,clanCapitalPoints,requiredTrophies,warFrequency,warWinStreak,warWins,warTies,warLosses,isWarLogPublic,members,warLeague,capitalLeague,const DeepCollectionEquality().hash(_memberList),const DeepCollectionEquality().hash(_labels)]);
 }
 
 @override
 String toString() {
-    return 'Clan(tag: $tag, name: $name, type: $type, description: $description, location: $location, badgeUrls: $badgeUrls, clanLevel: $clanLevel, clanPoints: $clanPoints, requiredTrophies: $requiredTrophies, warFrequency: $warFrequency, warWinStreak: $warWinStreak, warWins: $warWins, warTies: $warTies, warLosses: $warLosses, isWarLogPublic: $isWarLogPublic, members: $members, memberList: $memberList, labels: $labels)';
+    return 'Clan(tag: $tag, name: $name, type: $type, description: $description, location: $location, badgeUrls: $badgeUrls, clanLevel: $clanLevel, clanPoints: $clanPoints, clanBuilderBasePoints: $clanBuilderBasePoints, clanCapitalPoints: $clanCapitalPoints, requiredTrophies: $requiredTrophies, warFrequency: $warFrequency, warWinStreak: $warWinStreak, warWins: $warWins, warTies: $warTies, warLosses: $warLosses, isWarLogPublic: $isWarLogPublic, members: $members, warLeague: $warLeague, capitalLeague: $capitalLeague, memberList: $memberList, labels: $labels)';
 }
 
 
@@ -679,11 +715,11 @@ abstract mixin class _$ClanCopyWith<$Res> implements $ClanCopyWith<$Res> {
   factory _$ClanCopyWith(_Clan value, $Res Function(_Clan) _then) = __$ClanCopyWithImpl;
 @override @useResult
 $Res call({
- String tag, String? name, String? type, String? description, Location? location, BadgeUrls? badgeUrls, int? clanLevel, int? clanPoints, int? requiredTrophies, String? warFrequency, int? warWinStreak, int? warWins, int? warTies, int? warLosses, bool? isWarLogPublic, int? members, List<ClanMember> memberList, List<Label> labels
+ String tag, String? name, String? type, String? description, Location? location, BadgeUrls? badgeUrls, int? clanLevel, int? clanPoints, int? clanBuilderBasePoints, int? clanCapitalPoints, int? requiredTrophies, String? warFrequency, int? warWinStreak, int? warWins, int? warTies, int? warLosses, bool? isWarLogPublic, int? members, League? warLeague, League? capitalLeague, List<ClanMember> memberList, List<Label> labels
 });
 
 
-@override $LocationCopyWith<$Res>? get location;@override $BadgeUrlsCopyWith<$Res>? get badgeUrls;
+@override $LocationCopyWith<$Res>? get location;@override $BadgeUrlsCopyWith<$Res>? get badgeUrls;@override $LeagueCopyWith<$Res>? get warLeague;@override $LeagueCopyWith<$Res>? get capitalLeague;
 
 }
 /// @nodoc
@@ -696,7 +732,7 @@ class __$ClanCopyWithImpl<$Res>
 
 /// Create a copy of Clan
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? tag = null,Object? name = freezed,Object? type = freezed,Object? description = freezed,Object? location = freezed,Object? badgeUrls = freezed,Object? clanLevel = freezed,Object? clanPoints = freezed,Object? requiredTrophies = freezed,Object? warFrequency = freezed,Object? warWinStreak = freezed,Object? warWins = freezed,Object? warTies = freezed,Object? warLosses = freezed,Object? isWarLogPublic = freezed,Object? members = freezed,Object? memberList = null,Object? labels = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? tag = null,Object? name = freezed,Object? type = freezed,Object? description = freezed,Object? location = freezed,Object? badgeUrls = freezed,Object? clanLevel = freezed,Object? clanPoints = freezed,Object? clanBuilderBasePoints = freezed,Object? clanCapitalPoints = freezed,Object? requiredTrophies = freezed,Object? warFrequency = freezed,Object? warWinStreak = freezed,Object? warWins = freezed,Object? warTies = freezed,Object? warLosses = freezed,Object? isWarLogPublic = freezed,Object? members = freezed,Object? warLeague = freezed,Object? capitalLeague = freezed,Object? memberList = null,Object? labels = null,}) {
   return _then(_Clan(
 tag: null == tag ? _self.tag : tag // ignore: cast_nullable_to_non_nullable
 as String,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -706,6 +742,8 @@ as String?,location: freezed == location ? _self.location : location // ignore: 
 as Location?,badgeUrls: freezed == badgeUrls ? _self.badgeUrls : badgeUrls // ignore: cast_nullable_to_non_nullable
 as BadgeUrls?,clanLevel: freezed == clanLevel ? _self.clanLevel : clanLevel // ignore: cast_nullable_to_non_nullable
 as int?,clanPoints: freezed == clanPoints ? _self.clanPoints : clanPoints // ignore: cast_nullable_to_non_nullable
+as int?,clanBuilderBasePoints: freezed == clanBuilderBasePoints ? _self.clanBuilderBasePoints : clanBuilderBasePoints // ignore: cast_nullable_to_non_nullable
+as int?,clanCapitalPoints: freezed == clanCapitalPoints ? _self.clanCapitalPoints : clanCapitalPoints // ignore: cast_nullable_to_non_nullable
 as int?,requiredTrophies: freezed == requiredTrophies ? _self.requiredTrophies : requiredTrophies // ignore: cast_nullable_to_non_nullable
 as int?,warFrequency: freezed == warFrequency ? _self.warFrequency : warFrequency // ignore: cast_nullable_to_non_nullable
 as String?,warWinStreak: freezed == warWinStreak ? _self.warWinStreak : warWinStreak // ignore: cast_nullable_to_non_nullable
@@ -714,7 +752,9 @@ as int?,warTies: freezed == warTies ? _self.warTies : warTies // ignore: cast_nu
 as int?,warLosses: freezed == warLosses ? _self.warLosses : warLosses // ignore: cast_nullable_to_non_nullable
 as int?,isWarLogPublic: freezed == isWarLogPublic ? _self.isWarLogPublic : isWarLogPublic // ignore: cast_nullable_to_non_nullable
 as bool?,members: freezed == members ? _self.members : members // ignore: cast_nullable_to_non_nullable
-as int?,memberList: null == memberList ? _self._memberList : memberList // ignore: cast_nullable_to_non_nullable
+as int?,warLeague: freezed == warLeague ? _self.warLeague : warLeague // ignore: cast_nullable_to_non_nullable
+as League?,capitalLeague: freezed == capitalLeague ? _self.capitalLeague : capitalLeague // ignore: cast_nullable_to_non_nullable
+as League?,memberList: null == memberList ? _self._memberList : memberList // ignore: cast_nullable_to_non_nullable
 as List<ClanMember>,labels: null == labels ? _self._labels : labels // ignore: cast_nullable_to_non_nullable
 as List<Label>,
   ));
@@ -743,6 +783,30 @@ $BadgeUrlsCopyWith<$Res>? get badgeUrls {
 
   return $BadgeUrlsCopyWith<$Res>(_self.badgeUrls!, (value) {
     return _then(_self.copyWith(badgeUrls: value));
+  });
+}/// Create a copy of Clan
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get warLeague {
+    if (_self.warLeague == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.warLeague!, (value) {
+    return _then(_self.copyWith(warLeague: value));
+  });
+}/// Create a copy of Clan
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LeagueCopyWith<$Res>? get capitalLeague {
+    if (_self.capitalLeague == null) {
+    return null;
+  }
+
+  return $LeagueCopyWith<$Res>(_self.capitalLeague!, (value) {
+    return _then(_self.copyWith(capitalLeague: value));
   });
 }
 }

@@ -39,6 +39,10 @@ abstract class Clan with _$Clan {
     BadgeUrls? badgeUrls,
     int? clanLevel,
     int? clanPoints,
+    int? clanBuilderBasePoints,
+
+    /// 캐피탈 트로피.
+    int? clanCapitalPoints,
     int? requiredTrophies,
     String? warFrequency,
     int? warWinStreak,
@@ -47,6 +51,10 @@ abstract class Clan with _$Clan {
     int? warLosses,
     bool? isWarLogPublic,
     int? members,
+
+    /// 클랜전(리그전) 리그. 이름만 오고 아이콘 주소는 없다 — 이름이 같은 기존 리그(`/leagues`)의 아이콘을 쓴다.
+    League? warLeague,
+    League? capitalLeague,
     @Default(<ClanMember>[]) List<ClanMember> memberList,
     @Default(<Label>[]) List<Label> labels,
   }) = _Clan;

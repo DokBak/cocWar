@@ -176,12 +176,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statWarStars => 'War stars';
 
   @override
-  String get statAttackWins => 'Attack wins';
-
-  @override
-  String get statDefenseWins => 'Defense wins';
-
-  @override
   String get statDonations => 'Donated';
 
   @override
@@ -281,4 +275,147 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectMemberHint => 'Select a member to see their profile here.';
+
+  @override
+  String get warPageTitle => 'Clan war';
+
+  @override
+  String get warInfoButton => 'View clan war info';
+
+  @override
+  String get warStatePreparation => 'Preparation day';
+
+  @override
+  String get warStateInWar => 'Battle day';
+
+  @override
+  String get warStateEnded => 'War ended';
+
+  @override
+  String get warNone => 'There is no ongoing war.';
+
+  @override
+  String warStartsIn(String time) {
+    return 'Starts in $time';
+  }
+
+  @override
+  String warEndsIn(String time) {
+    return 'Ends in $time';
+  }
+
+  @override
+  String durationHM(int hours, int minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String durationM(int minutes) {
+    return '${minutes}m';
+  }
+
+  @override
+  String warAttacksPerMember(int count) {
+    return '$count attacks each';
+  }
+
+  @override
+  String get tabOurClan => 'Our clan';
+
+  @override
+  String get tabOpponentClan => 'Opponent';
+
+  @override
+  String warAttacksUsed(int used, int total) {
+    return 'Attacks $used/$total';
+  }
+
+  @override
+  String get warUnused => 'Unused';
+
+  @override
+  String get warDefense => 'Defense';
+
+  @override
+  String get warNoDefense => 'Not attacked';
+
+  @override
+  String get outlookTitle => 'Outlook';
+
+  @override
+  String outlookLeadingStars(int n) {
+    return 'Leading by $n stars';
+  }
+
+  @override
+  String outlookLeadingDestruction(String us, String them) {
+    return 'Tied on stars, leading on destruction ($us% vs $them%)';
+  }
+
+  @override
+  String get outlookTied => 'Tied on both stars and destruction';
+
+  @override
+  String outlookTrailingStars(int n) {
+    return '$n more stars needed to take the lead';
+  }
+
+  @override
+  String outlookTrailingDestruction(String us, String them) {
+    return 'Tied on stars, needs more than $them% destruction (now $us%)';
+  }
+
+  @override
+  String outlookRemainingAttacks(int n) {
+    return 'Remaining attacks: $n';
+  }
+
+  @override
+  String outlookAvailableStars(int n) {
+    return 'Stars still available: $n';
+  }
+
+  @override
+  String get outlookCannotWin =>
+      'The remaining stars are not enough to catch up.';
+
+  @override
+  String get outlookNote =>
+      'An estimate that does not include the opponent remaining attacks.';
+
+  @override
+  String capitalRaidCaption(String period, String state) {
+    return 'Capital Raid · $period · $state';
+  }
+
+  @override
+  String get raidStateOngoing => 'In progress';
+
+  @override
+  String get raidStateEnded => 'Ended';
+
+  @override
+  String capitalAttacksTooltip(int used, int total) {
+    return 'Capital raid attacks $used/$total';
+  }
+
+  @override
+  String historyClanSubtitle(String name) {
+    return 'Clan : $name';
+  }
+
+  @override
+  String historyPlayerSubtitle(String name) {
+    return 'Player : $name';
+  }
+
+  @override
+  String warLeagueTooltip(String name) {
+    return 'Clan war league: $name';
+  }
+
+  @override
+  String capitalLeagueTooltip(String name, String trophies) {
+    return 'Capital league: $name · $trophies capital trophies';
+  }
 }
