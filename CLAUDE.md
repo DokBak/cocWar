@@ -12,7 +12,8 @@ Dart pub workspace 모노레포: `apps/mobile`(Flutter), `server`(Dart shelf 프
 - 서버 토큰(`COC_API_TOKEN`)은 `server/.env`에만 둔다(gitignore). 허용된 IP에서만 동작. 토큰을 채팅·커밋에 노출하지 않는다
 
 ## Git·PR 규칙
-- phase마다 브랜치(`phase-N-이름`) + PR. **병합은 사용자 확인 후에만**
+- phase마다 브랜치(`phase-N-이름`) + PR. **병합은 사용자 확인 후에만**. 번호는 건너뛰거나 미리 예약하지 않고 직전 phase + 1
+- phase마다 `README.md`(한국어)와 `README.ja.md`(일본어)의 "기능"·"진행 상황"을 함께 갱신한다. 두 파일 내용은 같게 유지하고 맨 위 언어 전환 링크도 유지한다
 - 커밋 메시지와 PR 설명은 **한국어 + 일본어** 함께 작성(예: `Phase 5: 한국어 / 日本語`)
 - 공개 저장소이므로 푸시 전 `.env`·토큰·게임 이미지(`apps/mobile/assets/game/**/*.webp`)가 스테이징되지 않았는지 확인
 
