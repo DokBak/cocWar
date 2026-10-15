@@ -30,16 +30,55 @@ String _plainPercent(double v) =>
 enum _Side { ours, theirs }
 
 /// 클랜전 상세 화면 (`/clan/:tag/war`).
-class WarPage extends ConsumerStatefulWidget {
+class WarPage extends ConsumerWidget {
   const WarPage({super.key, required this.tag});
 
   final String tag;
 
   @override
-  ConsumerState<WarPage> createState() => _WarPageState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final war = ref.watch(currentWarProvider(tag));
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(war.value?.clan?.name ?? l10n.warPageTitle),
+        actions: const [LanguageButton()],
+      ),
+      body: war.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => ErrorView(
+          error: e,
+          onRetry: () => ref.invalidate(currentWarProvider(tag)),
+        ),
+        data: (w) => WarView(
+          war: w,
+          onRefresh: () async {
+            ref.invalidate(currentWarProvider(tag));
+            await ref
+                .read(currentWarProvider(tag).future)
+                .then<void>((_) {}, onError: (_) {});
+          },
+        ),
+      ),
+    );
+  }
 }
 
-class _WarPageState extends ConsumerState<WarPage> {
+/// 전쟁 한 경기의 본문(상태·점수·전망·멤버). 일반 클랜전과 리그전 경기가 함께 쓴다.
+///
+/// 우리 클랜이 `war.clan`이어야 한다(리그전 경기는 `orientTo`로 맞춘 뒤 넘긴다).
+class WarView extends StatefulWidget {
+  const WarView({super.key, required this.war, required this.onRefresh});
+
+  final CurrentWar war;
+  final Future<void> Function() onRefresh;
+
+  @override
+  State<WarView> createState() => _WarViewState();
+}
+
+class _WarViewState extends State<WarView> {
   _Side _side = _Side.ours;
   Timer? _ticker;
 
@@ -59,45 +98,20 @@ class _WarPageState extends ConsumerState<WarPage> {
     super.dispose();
   }
 
-  Future<void> _refresh() async {
-    ref.invalidate(currentWarProvider(widget.tag));
-    await ref
-        .read(currentWarProvider(widget.tag).future)
-        .then<void>((_) {}, onError: (_) {});
-  }
-
   @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final war = ref.watch(currentWarProvider(widget.tag));
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(war.value?.clan?.name ?? l10n.warPageTitle),
-        actions: const [LanguageButton()],
-      ),
-      body: war.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => ErrorView(
-          error: e,
-          onRetry: () => ref.invalidate(currentWarProvider(widget.tag)),
-        ),
-        data: (w) => RefreshIndicator(
-          onRefresh: _refresh,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: contentMaxWidth),
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(16),
-                children: _content(context, w),
-              ),
-            ),
-          ),
+  Widget build(BuildContext context) => RefreshIndicator(
+    onRefresh: widget.onRefresh,
+    child: Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: contentMaxWidth),
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(16),
+          children: _content(context, widget.war),
         ),
       ),
-    );
-  }
+    ),
+  );
 
   List<Widget> _content(BuildContext context, CurrentWar war) {
     final l10n = AppLocalizations.of(context);

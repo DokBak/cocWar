@@ -333,5 +333,56 @@
         "type": "String"
       }
     }
+  },
+  "cwlPageTitle": "リーグ戦",
+  "cwlInfoButton": "リーグ戦情報を見る",
+  "cwlNotInLeague": "現在はリーグ戦の期間ではありません。",
+  "cwlTabStandings": "順位",
+  "cwlTabRounds": "ラウンド",
+  "cwlTabMembers": "メンバー成績",
+  "cwlRound": "ラウンド{n}",
+  "@cwlRound": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlRoundUnscheduled": "対戦未定",
+  "cwlWins": "{n}勝",
+  "@cwlWins": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlStandingsNote": "星には勝利ボーナス(勝利ごとに+10)が含まれます。",
+  "cwlMemberAttacks": "攻撃 {used}/{rounds}",
+  "@cwlMemberAttacks": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "rounds": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlThreeStars": "★3 {n}",
+  "@cwlThreeStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlAvgDestruction": "平均 {percent}",
+  "@cwlAvgDestruction": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
   }
 }

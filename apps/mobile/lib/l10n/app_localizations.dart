@@ -801,6 +801,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Capital league: {name} · {trophies} capital trophies'**
   String capitalLeagueTooltip(String name, String trophies);
+
+  /// No description provided for @cwlPageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clan War League'**
+  String get cwlPageTitle;
+
+  /// No description provided for @cwlInfoButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View league war'**
+  String get cwlInfoButton;
+
+  /// No description provided for @cwlNotInLeague.
+  ///
+  /// In en, this message translates to:
+  /// **'This clan is not in a Clan War League right now.'**
+  String get cwlNotInLeague;
+
+  /// No description provided for @cwlTabStandings.
+  ///
+  /// In en, this message translates to:
+  /// **'Standings'**
+  String get cwlTabStandings;
+
+  /// No description provided for @cwlTabRounds.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounds'**
+  String get cwlTabRounds;
+
+  /// No description provided for @cwlTabMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get cwlTabMembers;
+
+  /// No description provided for @cwlRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {n}'**
+  String cwlRound(int n);
+
+  /// No description provided for @cwlRoundUnscheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Not scheduled yet'**
+  String get cwlRoundUnscheduled;
+
+  /// No description provided for @cwlWins.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} W'**
+  String cwlWins(int n);
+
+  /// No description provided for @cwlStandingsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Stars include the win bonus (+10 per win).'**
+  String get cwlStandingsNote;
+
+  /// No description provided for @cwlMemberAttacks.
+  ///
+  /// In en, this message translates to:
+  /// **'Attacks {used}/{rounds}'**
+  String cwlMemberAttacks(int used, int rounds);
+
+  /// No description provided for @cwlThreeStars.
+  ///
+  /// In en, this message translates to:
+  /// **'3★ {n}'**
+  String cwlThreeStars(int n);
+
+  /// No description provided for @cwlAvgDestruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg {percent}'**
+  String cwlAvgDestruction(String percent);
 }
 
 class _AppLocalizationsDelegate

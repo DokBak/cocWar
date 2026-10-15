@@ -14,6 +14,15 @@ class _FakeApi extends ApiClient {
   @override
   Future<Clan> getClan(String tag) async =>
       Clan(tag: tag, name: 'Test Clan', isWarLogPublic: false);
+
+  // 클랜 화면의 "클랜전/리그전 정보 보기" 버튼이 부르는 조회. 실제 요청을 보내지 않는다.
+  @override
+  Future<CurrentWar> getCurrentWar(String tag) async =>
+      const CurrentWar(state: WarState.notInWar);
+
+  @override
+  Future<ClanWarLeagueGroup> getLeagueGroup(String tag) async =>
+      throw const ApiException(ApiErrorKind.notFound, statusCode: 404);
 }
 
 Future<void> pumpApp(

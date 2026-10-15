@@ -13,6 +13,11 @@ class FakeApi extends ApiClient {
   CurrentWar? war;
   Object? warError;
   int warCalls = 0;
+  ClanWarLeagueGroup? leagueGroup;
+  Object? leagueGroupError;
+  int leagueGroupCalls = 0;
+  Map<String, CurrentWar> cwlWars = {};
+  final cwlWarCalls = <String>[];
   CapitalRaidSeasons? raid;
   Object? raidError;
   int raidCalls = 0;
@@ -44,6 +49,26 @@ class FakeApi extends ApiClient {
     warCalls++;
     if (warError != null) throw warError!;
     return war ?? const CurrentWar(state: WarState.notInWar);
+  }
+
+  @override
+  Future<ClanWarLeagueGroup> getLeagueGroup(String tag) async {
+    leagueGroupCalls++;
+    if (leagueGroupError != null) throw leagueGroupError!;
+    if (leagueGroup == null) {
+      throw const ApiException(ApiErrorKind.notFound, statusCode: 404);
+    }
+    return leagueGroup!;
+  }
+
+  @override
+  Future<CurrentWar> getCwlWar(String warTag) async {
+    cwlWarCalls.add(warTag);
+    final war = cwlWars[warTag];
+    if (war == null) {
+      throw const ApiException(ApiErrorKind.notFound, statusCode: 404);
+    }
+    return war;
   }
 
   @override

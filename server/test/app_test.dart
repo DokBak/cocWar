@@ -36,6 +36,14 @@ class FakeApi implements CocApiClient {
       _ok('currentwar $tag', {'state': 'notInWar'});
 
   @override
+  Future<Map<String, dynamic>> getLeagueGroup(String tag) =>
+      _ok('leaguegroup $tag', {'state': 'inWar', 'season': '2026-11'});
+
+  @override
+  Future<Map<String, dynamic>> getCwlWar(String warTag) =>
+      _ok('cwlwar $warTag', {'state': 'inWar'});
+
+  @override
   Future<Map<String, dynamic>> getCapitalRaidSeasons(
     String tag, {
     int? limit,
@@ -120,6 +128,32 @@ void main() {
     api.error = CocApiException(403, reason: 'accessDenied');
     final res = await get('/clans/%232PP/capitalraidseasons');
     expect(res.statusCode, 403);
+  });
+
+  test('리그 그룹: 태그를 정규화해서 전달하고 캐시한다', () async {
+    final res = await get('/clans/%232pp/currentwar/leaguegroup');
+    expect(res.statusCode, 200);
+    expect((await json(res))['season'], '2026-11');
+    await get('/clans/%232PP/currentwar/leaguegroup');
+    expect(api.calls, ['leaguegroup #2PP']);
+  });
+
+  test('리그 그룹: 리그전 기간이 아니면(404) notFound', () async {
+    api.error = CocApiException(404);
+    final res = await get('/clans/%232PP/currentwar/leaguegroup');
+    expect(res.statusCode, 404);
+    expect((await json(res))['reason'], 'notFound');
+  });
+
+  test('리그전 경기: 전쟁 태그를 정규화해서 전달하고 캐시한다', () async {
+    expect((await get('/clanwarleagues/wars/%238luc2')).statusCode, 200);
+    await get('/clanwarleagues/wars/8LUC2');
+    expect(api.calls, ['cwlwar #8LUC2']);
+  });
+
+  test('리그전 경기: 정해지지 않은 태그(#0)는 400이고 업스트림을 호출하지 않는다', () async {
+    expect((await get('/clanwarleagues/wars/%230')).statusCode, 400);
+    expect(api.calls, isEmpty);
   });
 
   test('리그 목록: 그대로 전달하고 하루 캐시 헤더를 붙인다', () async {

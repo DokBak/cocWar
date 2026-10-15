@@ -418,4 +418,54 @@ class AppLocalizationsEn extends AppLocalizations {
   String capitalLeagueTooltip(String name, String trophies) {
     return 'Capital league: $name · $trophies capital trophies';
   }
+
+  @override
+  String get cwlPageTitle => 'Clan War League';
+
+  @override
+  String get cwlInfoButton => 'View league war';
+
+  @override
+  String get cwlNotInLeague =>
+      'This clan is not in a Clan War League right now.';
+
+  @override
+  String get cwlTabStandings => 'Standings';
+
+  @override
+  String get cwlTabRounds => 'Rounds';
+
+  @override
+  String get cwlTabMembers => 'Members';
+
+  @override
+  String cwlRound(int n) {
+    return 'Round $n';
+  }
+
+  @override
+  String get cwlRoundUnscheduled => 'Not scheduled yet';
+
+  @override
+  String cwlWins(int n) {
+    return '$n W';
+  }
+
+  @override
+  String get cwlStandingsNote => 'Stars include the win bonus (+10 per win).';
+
+  @override
+  String cwlMemberAttacks(int used, int rounds) {
+    return 'Attacks $used/$rounds';
+  }
+
+  @override
+  String cwlThreeStars(int n) {
+    return '3★ $n';
+  }
+
+  @override
+  String cwlAvgDestruction(String percent) {
+    return 'Avg $percent';
+  }
 }

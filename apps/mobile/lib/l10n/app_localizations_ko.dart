@@ -416,4 +416,53 @@ class AppLocalizationsKo extends AppLocalizations {
   String capitalLeagueTooltip(String name, String trophies) {
     return '캐피탈 리그: $name · 캐피탈 트로피 $trophies';
   }
+
+  @override
+  String get cwlPageTitle => '리그전';
+
+  @override
+  String get cwlInfoButton => '리그전 정보 보기';
+
+  @override
+  String get cwlNotInLeague => '지금은 리그전 기간이 아닙니다.';
+
+  @override
+  String get cwlTabStandings => '순위';
+
+  @override
+  String get cwlTabRounds => '라운드';
+
+  @override
+  String get cwlTabMembers => '멤버 성적';
+
+  @override
+  String cwlRound(int n) {
+    return '라운드 $n';
+  }
+
+  @override
+  String get cwlRoundUnscheduled => '대진 미정';
+
+  @override
+  String cwlWins(int n) {
+    return '$n승';
+  }
+
+  @override
+  String get cwlStandingsNote => '별에는 승리 보너스(승리마다 +10)가 포함됩니다.';
+
+  @override
+  String cwlMemberAttacks(int used, int rounds) {
+    return '공격 $used/$rounds';
+  }
+
+  @override
+  String cwlThreeStars(int n) {
+    return '3성 $n';
+  }
+
+  @override
+  String cwlAvgDestruction(String percent) {
+    return '평균 $percent';
+  }
 }

@@ -1,0 +1,26 @@
+{
+  "state": "inWar",
+  "season": "2026-11",
+  "clans": [
+    {
+      "tag": "#2PP",
+      "name": "Alpha Clan",
+      "clanLevel": 20,
+      "badgeUrls": {"small": "https://example.com/a.png"},
+      "members": [
+        {"tag": "#A1", "name": "Ann", "townHallLevel": 16},
+        {"tag": "#A2", "name": "Bob", "townHallLevel": 15}
+      ]
+    },
+    {
+      "tag": "#9QQ",
+      "name": "Beta Clan",
+      "clanLevel": 18,
+      "members": [{"tag": "#B1", "name": "Cid", "townHallLevel": 16}]
+    }
+  ],
+  "rounds": [
+    {"warTags": ["#8LUC2", "#8LUC3", "#8LUC4", "#8LUC5"]},
+    {"warTags": ["#0", "#0", "#0", "#0"]}
+  ]
+}

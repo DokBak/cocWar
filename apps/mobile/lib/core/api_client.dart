@@ -53,6 +53,16 @@ class ApiClient {
   Future<CurrentWar> getCurrentWar(String tag) async =>
       CurrentWar.fromJson(await _get('/clans/${_enc(tag)}/currentwar'));
 
+  /// 클랜전 리그 그룹. 리그전 기간이 아니면 [ApiErrorKind.notFound].
+  Future<ClanWarLeagueGroup> getLeagueGroup(String tag) async =>
+      ClanWarLeagueGroup.fromJson(
+        await _get('/clans/${_enc(tag)}/currentwar/leaguegroup'),
+      );
+
+  /// 리그전 한 경기. 우리 클랜이 `clan`이 아니라 `opponent`에 있을 수도 있다.
+  Future<CurrentWar> getCwlWar(String warTag) async =>
+      CurrentWar.fromJson(await _get('/clanwarleagues/wars/${_enc(warTag)}'));
+
   /// 캐피탈 레이드 시즌 목록(최근 시즌부터). 멤버별 공격 수는 최근 시즌에만 들어 있다.
   Future<CapitalRaidSeasons> getCapitalRaidSeasons(
     String tag, {

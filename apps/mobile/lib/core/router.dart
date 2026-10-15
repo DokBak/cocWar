@@ -2,6 +2,8 @@ import 'package:coc_models/coc_models.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/clan/clan_page.dart';
+import '../features/cwl/cwl_page.dart';
+import '../features/cwl/cwl_war_page.dart';
 import '../features/home/home_page.dart';
 import '../features/player/player_page.dart';
 import '../features/settings/settings_page.dart';
@@ -16,6 +18,18 @@ GoRouter buildRouter() => GoRouter(
       path: '/clan/:tag/war',
       builder: (_, state) =>
           WarPage(tag: normalizeTag(state.pathParameters['tag']!)),
+    ),
+    GoRoute(
+      path: '/clan/:tag/cwl',
+      builder: (_, state) =>
+          CwlPage(tag: normalizeTag(state.pathParameters['tag']!)),
+    ),
+    GoRoute(
+      path: '/clan/:tag/cwl/war/:warTag',
+      builder: (_, state) => CwlWarPage(
+        clanTag: normalizeTag(state.pathParameters['tag']!),
+        warTag: normalizeTag(state.pathParameters['warTag']!),
+      ),
     ),
     GoRoute(
       path: '/clan/:tag',
