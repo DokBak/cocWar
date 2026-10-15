@@ -84,6 +84,27 @@ Handler buildHandler(
       ),
     )
     ..get(
+      '/clans/<tag>/currentwar/leaguegroup',
+      (Request r, String tag) => cached(
+        r,
+        tag,
+        'leaguegroup',
+        // 라운드 대진은 하루에 한 번 정도 바뀐다.
+        const Duration(minutes: 5),
+        api.getLeagueGroup,
+      ),
+    )
+    ..get(
+      '/clanwarleagues/wars/<warTag>',
+      (Request r, String warTag) => cached(
+        r,
+        warTag,
+        'cwlwar',
+        const Duration(minutes: 1),
+        api.getCwlWar,
+      ),
+    )
+    ..get(
       '/clans/<tag>/capitalraidseasons',
       (Request r, String tag) => cached(
         r,

@@ -333,5 +333,56 @@
         "type": "String"
       }
     }
+  },
+  "cwlPageTitle": "Clan War League",
+  "cwlInfoButton": "View league war",
+  "cwlNotInLeague": "This clan is not in a Clan War League right now.",
+  "cwlTabStandings": "Standings",
+  "cwlTabRounds": "Rounds",
+  "cwlTabMembers": "Members",
+  "cwlRound": "Round {n}",
+  "@cwlRound": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlRoundUnscheduled": "Not scheduled yet",
+  "cwlWins": "{n} W",
+  "@cwlWins": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlStandingsNote": "Stars include the win bonus (+10 per win).",
+  "cwlMemberAttacks": "Attacks {used}/{rounds}",
+  "@cwlMemberAttacks": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "rounds": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlThreeStars": "3★ {n}",
+  "@cwlThreeStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlAvgDestruction": "Avg {percent}",
+  "@cwlAvgDestruction": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
   }
 }

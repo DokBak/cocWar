@@ -148,6 +148,53 @@ void main() {
     });
   });
 
+  group('리그전', () {
+    final leagueButton = find.text('View league war');
+
+    testWidgets('일반 전쟁이 없고 리그전 전투일이면 리그전 버튼이 보인다', (tester) async {
+      final api = apiWith(war: const CurrentWar(state: WarState.notInWar))
+        ..leagueGroup = const ClanWarLeagueGroup(state: LeagueGroupState.inWar);
+      await pumpHome(tester, api, const ClanPage(tag: '#2PP'));
+      expect(leagueButton, findsOneWidget);
+      expect(button, findsNothing);
+      expect(find.text('Battle day'), findsOneWidget);
+    });
+
+    testWidgets('리그전 준비일에도 보인다', (tester) async {
+      final api = apiWith()
+        ..leagueGroup = const ClanWarLeagueGroup(
+          state: LeagueGroupState.preparation,
+        );
+      await pumpHome(tester, api, const ClanPage(tag: '#2PP'));
+      expect(leagueButton, findsOneWidget);
+      expect(find.text('Preparation day'), findsOneWidget);
+    });
+
+    testWidgets('리그전이 끝났으면 버튼이 없다', (tester) async {
+      final api = apiWith()
+        ..leagueGroup = const ClanWarLeagueGroup(state: LeagueGroupState.ended);
+      await pumpHome(tester, api, const ClanPage(tag: '#2PP'));
+      expect(leagueButton, findsNothing);
+    });
+
+    testWidgets('리그전 기간이 아니면(404) 버튼이 없고 요청을 반복하지 않는다', (tester) async {
+      final api = apiWith(); // 그룹 없음 → 404
+      await pumpHome(tester, api, const ClanPage(tag: '#2PP'));
+      expect(leagueButton, findsNothing);
+      expect(button, findsNothing);
+      expect(api.leagueGroupCalls, 1);
+    });
+
+    testWidgets('일반 전쟁 중이면 리그 그룹을 조회하지 않고 클랜전 버튼을 보인다', (tester) async {
+      final api = apiWith(war: makeWar())
+        ..leagueGroup = const ClanWarLeagueGroup(state: LeagueGroupState.inWar);
+      await pumpHome(tester, api, const ClanPage(tag: '#2PP'));
+      expect(button, findsOneWidget);
+      expect(leagueButton, findsNothing);
+      expect(api.leagueGroupCalls, 0);
+    });
+  });
+
   group('멤버(플레이어) 창', () {
     testWidgets('소속 클랜이 전쟁 중이면 버튼이 보인다', (tester) async {
       await pumpHome(

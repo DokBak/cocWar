@@ -416,4 +416,53 @@ class AppLocalizationsJa extends AppLocalizations {
   String capitalLeagueTooltip(String name, String trophies) {
     return 'キャピタルリーグ: $name · キャピタルトロフィー $trophies';
   }
+
+  @override
+  String get cwlPageTitle => 'リーグ戦';
+
+  @override
+  String get cwlInfoButton => 'リーグ戦情報を見る';
+
+  @override
+  String get cwlNotInLeague => '現在はリーグ戦の期間ではありません。';
+
+  @override
+  String get cwlTabStandings => '順位';
+
+  @override
+  String get cwlTabRounds => 'ラウンド';
+
+  @override
+  String get cwlTabMembers => 'メンバー成績';
+
+  @override
+  String cwlRound(int n) {
+    return 'ラウンド$n';
+  }
+
+  @override
+  String get cwlRoundUnscheduled => '対戦未定';
+
+  @override
+  String cwlWins(int n) {
+    return '$n勝';
+  }
+
+  @override
+  String get cwlStandingsNote => '星には勝利ボーナス(勝利ごとに+10)が含まれます。';
+
+  @override
+  String cwlMemberAttacks(int used, int rounds) {
+    return '攻撃 $used/$rounds';
+  }
+
+  @override
+  String cwlThreeStars(int n) {
+    return '★3 $n';
+  }
+
+  @override
+  String cwlAvgDestruction(String percent) {
+    return '平均 $percent';
+  }
 }

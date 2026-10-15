@@ -333,5 +333,56 @@
         "type": "String"
       }
     }
+  },
+  "cwlPageTitle": "리그전",
+  "cwlInfoButton": "리그전 정보 보기",
+  "cwlNotInLeague": "지금은 리그전 기간이 아닙니다.",
+  "cwlTabStandings": "순위",
+  "cwlTabRounds": "라운드",
+  "cwlTabMembers": "멤버 성적",
+  "cwlRound": "라운드 {n}",
+  "@cwlRound": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlRoundUnscheduled": "대진 미정",
+  "cwlWins": "{n}승",
+  "@cwlWins": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlStandingsNote": "별에는 승리 보너스(승리마다 +10)가 포함됩니다.",
+  "cwlMemberAttacks": "공격 {used}/{rounds}",
+  "@cwlMemberAttacks": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "rounds": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlThreeStars": "3성 {n}",
+  "@cwlThreeStars": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "cwlAvgDestruction": "평균 {percent}",
+  "@cwlAvgDestruction": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
   }
 }

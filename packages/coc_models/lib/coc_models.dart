@@ -6,6 +6,7 @@ export 'src/clan.dart';
 export 'src/coc_date_time.dart';
 export 'src/common.dart';
 export 'src/current_war.dart';
+export 'src/league_group.dart';
 export 'src/paging.dart';
 export 'src/player.dart';
 export 'src/tag.dart';
